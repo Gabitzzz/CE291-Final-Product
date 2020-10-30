@@ -55,18 +55,6 @@ public class Data {
         }
     }
 
-    public String getDate() { // method gets overridden in subclasses
-        return "unknown";
-    }
-
-    public long getNewToday() { // method gets overridden in subclasses
-        return 0;
-    }
-
-    public long getCumulative() { // method gets overridden in subclasses
-        return 0;
-    }
-
     public ArrayList<Deaths> getDeathsArray() { // returns the deathsArray
         return deathsArray;
     }
