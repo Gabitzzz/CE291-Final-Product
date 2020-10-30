@@ -1,12 +1,13 @@
 package assignment;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Data {
     /* Configuration Variables */
-    private static String cfg_casesFilePath = "./src/assignment/cases_data_2020-Oct-23.csv"; // path to cases csv
-    private static String cfg_deathsFilePath = "./src/assignment/deaths_data_2020-Oct-23.csv"; // path to deaths csv
+    private static String cfg_casesFilePath = "./src/assignment/cases_data_2020-Oct-30.csv"; // path to cases csv
+    private static String cfg_deathsFilePath = "./src/assignment/deaths_data_2020-Oct-30.csv"; // path to deaths csv
     private static String cfg_delimeter = ",";
     /* End of Configuration Variables */
 

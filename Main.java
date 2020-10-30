@@ -12,10 +12,10 @@ public class Main {
 
         ArrayList<Deaths> deaths = Data.getDeathsArray();
 
-        System.out.println(deaths.get(5).date);
+        System.out.println(deaths.get(45).date);
 
         ArrayList<Cases> cases = Data.getCasesArray();
 
-        System.out.println(cases.get(294).date);
+        System.out.println(cases.get(270).date);
     }
 }
