@@ -1,6 +1,6 @@
 # Team 31 - Team Project Challenge
 
-###1. Project Brief
+### 1. Project Brief
 The data analytics department of the NHS has asked you to help them analyse COVID-19 data. More precisely, to analyse the number of daily COVID-19 infections and deaths, and to build a model that forecasts infections and deaths in the coming weeks. This will help them to make appropriate preparations and ensure that the healthcare system can cope with the demand.
 
 To do this, the NHS wants you to build a computer system that reads the publicly available UK COVID-19 data from CSV files (more information on the data files below). The system should convert the raw data into a report that can be read by the NHS management and easily interpreted. The report should include visualisations of the data and/or summary statistics, which achieve the following objectives:
@@ -15,7 +15,7 @@ The clients would welcome any useful extras that your team can think of in devel
 
 ---
 
-###2. Team Members
+### 2. Team Members
 Blackman, Matthew - [mb16997@essex.ac.uk](mailto://mb16997@essex.ac.uk)  
 Cemoglu, Ferhat - [fc19274@essex.ac.uk](mailto://fc19274@essex.ac.uk)  
 Christides, Xenios - [xc19359@essex.ac.uk](mailto://xc19359@essex.ac.uk)  
