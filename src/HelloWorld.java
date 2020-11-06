@@ -4,7 +4,7 @@ public class HelloWorld {
         System.out.println("Hola, Xiaoyi sun here");
         System.out.println("Hello World, Calum McDuff");
         System.out.println("Hello World, Ferhat here");
-        System.out.println("Hello World, Gabi Litcan")
+        System.out.println("Hello World, Gabi Litcan");
         System.out.println("Hello World, Matthew Blackman");
         System.out.println("");
      
