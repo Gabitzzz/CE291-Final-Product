@@ -5,8 +5,14 @@ import java.awt.*;
 
 
 public class Frame extends JFrame {
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Predictor of Covid-19");
+    public static void main(String[] args)
+    {
+        Template frame = new Template();
+    }
+
+}
+
+/*JFrame frame = new JFrame("Predictor of Covid-19");
         frame.setSize(600,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -15,15 +21,5 @@ public class Frame extends JFrame {
         panel1.add(new JButton("Show Graphs"));
         panel1.add(new JButton("Predict"));
         frame.add(panel1, BorderLayout.SOUTH);
-
-
-
-
-
-
-
         frame.setVisible(true); // This should always be last because it will make visible every button and every feature that we do
-
-    }
-
-}
+*/
