@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// Template for our app
+// Template for our app.
 public class Template
 {
     public Template()
