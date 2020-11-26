@@ -157,6 +157,7 @@ public class Graph extends JPanel {
             casesArray.add( new Cases("1", 0, random.nextInt() * maxScore));
 
         }
+
         Graph mainPanel = new Graph(casesArray);
         mainPanel.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("DrawGraph");
@@ -165,7 +166,14 @@ public class Graph extends JPanel {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
     }
+
+    public static void main(String[] args) {
+        createAndShowGui();
+    }
+
+
 
 
     }
