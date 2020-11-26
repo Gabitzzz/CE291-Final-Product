@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.swing.JFrame;
@@ -46,7 +47,7 @@ public class Graph extends JPanel {
         List<Point> graphPoints = new ArrayList<>();
         for (int i = 0; i < casesArray.size(); i++) {
             int x1 = (int) (i * xScale + padding + labelPadding);
-            int y1 = (int) ((getMaxCase() - casesArray.get(i)) * yScale + padding);
+            int y1 = (int) ((getMaxCase() - casesArray.get(i).cumulative) * yScale + padding);
             graphPoints.add(new Point(x1, y1));
         }
 
@@ -119,28 +120,26 @@ public class Graph extends JPanel {
         }
     }
 
-    //    @Override
-//    public Dimension getPreferredSize() {
-//        return new Dimension(width, heigth);
-//    }
+
+
     private int getMinCase() {
-        int minCase = int.MAX_VALUE;
-        for (int case : casesArray) {
-            minCase = Math.min(minCase, case);
+        int minCase = Integer.MAX_VALUE;
+        for (Cases case1 : casesArray) {
+            minCase = Math.min(minCase, (int)case1.cumulative);
         }
         return minCase;
     }
 
     private double getMaxCase() {
-        int maxCase = (int) MIN_VALUE;
-        for (Integer case : casesArray) {
-            maxCase = Math.max(maxCase, case);
+        int maxCase = Integer.MAX_VALUE;
+        for (Cases case1 : casesArray) {
+            maxCase = Math.max(maxCase, (int)case1.cumulative);
         }
         return maxCase;
     }
 
     public void setCases(ArrayList<Cases> setCases) {
-        this.casesArray = cases;
+        this.casesArray = setCases;
         invalidate();
         this.repaint();
     }
@@ -155,7 +154,7 @@ public class Graph extends JPanel {
         int maxDataPoints = 40;
         int maxScore = 10;
         for (int i = 0; i < maxDataPoints; i++) {
-            casesArray.add((case) random.nextInt() * maxCase);
+            casesArray.add( new Cases("1", 0, random.nextInt() * maxScore));
 
         }
         Graph mainPanel = new Graph(casesArray);
@@ -170,9 +169,4 @@ public class Graph extends JPanel {
 
 
     }
-/* This is to be transferred to main class
-        SwingUtilities.invokeLater(new Runnable() {
-public void run() {
-        createAndShowGui();
-        }
-        });
+
