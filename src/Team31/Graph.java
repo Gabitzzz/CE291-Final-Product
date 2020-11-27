@@ -148,16 +148,15 @@ public class Graph extends JPanel {
         return casesArray;
     }
 
-    private static void createAndShowGui() {
-        ArrayList<Cases> casesArray = new ArrayList<>();
+    private static void createAndShowGui(ArrayList<Cases> casesArray) {
+        //ArrayList<Cases> casesArray = new ArrayList<>();
         Random random = new Random();
-        int maxDataPoints = 40;
+        /*int maxDataPoints = 40;
         int maxScore = 10;
         for (int i = 0; i < maxDataPoints; i++) {
             casesArray.add( new Cases("1", 0, random.nextInt() * maxScore));
 
-        }
-
+        }*/
         Graph mainPanel = new Graph(casesArray);
         mainPanel.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("DrawGraph");
@@ -170,11 +169,11 @@ public class Graph extends JPanel {
     }
 
     public static void main(String[] args) {
-        createAndShowGui();
+        Data Data = new Data();
+        Data.readFile("cases");
+
+        ArrayList<Cases> casesArray = Data.getCasesArray();
+
+        createAndShowGui(casesArray);
     }
-
-
-
-
-    }
-
+}
