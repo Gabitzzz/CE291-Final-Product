@@ -16,8 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 //-------------------------------------------------------//
-//    MADE createAndShowGui NOT STATIC TO CALL IT        //
-//    FROM TEMPLATE CLASS AND COMMENTED THE CODE IN MAIN //
+//    MADE createAndShowGui NOT STATIC TO CALL IT FROM   //
+//    TEMPLATE CLASS AND COMMENTED THE CODE IN MAIN      //
 //-------------------------------------------------------//
 
 public class Graph extends JPanel {

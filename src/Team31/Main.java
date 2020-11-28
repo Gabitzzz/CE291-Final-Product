@@ -8,6 +8,7 @@ public class Main
 
     public static void main(String[] args)
     {
+        // the GUI
         new Template();
 
         Data Data = new Data();

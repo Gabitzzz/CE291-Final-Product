@@ -17,7 +17,6 @@ public class Template
     public Template()
     {
         JFrame frame = new JFrame("Main Menu");
-        JPanel graphPanel = new JPanel();
         JPanel panel = new JPanel();
 
         JLabel deaths = new JLabel("Deaths Graph Preview");
