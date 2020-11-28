@@ -11,7 +11,7 @@ import java.util.Random;
 //    !!! DON'T DELETE ANY COMMENTED CODE YET !!!     //
 //----------------------------------------------------//
 
-// Template for our app.
+// Template for our GUI.
 public class Template
 {
     public Template()

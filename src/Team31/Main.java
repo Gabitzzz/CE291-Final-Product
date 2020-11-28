@@ -39,46 +39,46 @@ public class Main
 
     }
 
-     Main(int n)
-     {
-         if (n == 1)
-         {
-             Data Data = new Data();
-             Data.readFile("deaths");
-             ArrayList<Deaths> deaths = Data.getDeathsArray();
+    Main(int n)
+    {
+        if (n == 1)
+        {
+            Data Data = new Data();
+            Data.readFile("deaths");
+            ArrayList<Deaths> deaths = Data.getDeathsArray();
 
-             System.out.println("-------------------------------------");
-             System.out.println("|      Deaths Data Report           |");
-             System.out.println("-------------------------------------");
-             System.out.println("| Date     | New Today | Cumulative |");
-             System.out.println("-------------------------------------");
+            System.out.println("-------------------------------------");
+            System.out.println("|      Deaths Data Report           |");
+            System.out.println("-------------------------------------");
+            System.out.println("| Date     | New Today | Cumulative |");
+            System.out.println("-------------------------------------");
 
-             for (int i = 0; i < deaths.size(); i++)
-             {
-                 System.out.print("|" + deaths.get(i).date + " |");
-                 System.out.print(" " + deaths.get(i).newToday + "         |");
-                 System.out.print( " " + deaths.get(i).cumulative + "   |\n");
-             }
-             System.out.println("---------------------------------");
-         }else if (n == 2)
-         {
-             Data Data = new Data();
-             Data.readFile("cases");
-             ArrayList<Cases> cases = Data.getCasesArray();
+            for (int i = 0; i < deaths.size(); i++)
+            {
+                System.out.print("|" + deaths.get(i).date + " |");
+                System.out.print(" " + deaths.get(i).newToday + "         |");
+                System.out.print( " " + deaths.get(i).cumulative + "   |\n");
+            }
+            System.out.println("---------------------------------");
+        }else if (n == 2)
+        {
+            Data Data = new Data();
+            Data.readFile("cases");
+            ArrayList<Cases> cases = Data.getCasesArray();
 
-             System.out.println("---------------------------------------");
-             System.out.println("|      Cases Data Report              |");
-             System.out.println("---------------------------------------");
-             System.out.println("| Date     | New Today |  Cumulative  |");
-             System.out.println("---------------------------------------");
+            System.out.println("---------------------------------------");
+            System.out.println("|      Cases Data Report              |");
+            System.out.println("---------------------------------------");
+            System.out.println("| Date     | New Today |  Cumulative  |");
+            System.out.println("---------------------------------------");
 
-             for (int i = 0; i < cases.size(); i++)
-             {
-                 System.out.print("|" + cases.get(i).date + " |");
-                 System.out.print(" " + cases.get(i).newToday + "         |");
-                 System.out.print( " " + cases.get(i).cumulative + "   |\n");
-             }
-             System.out.println("-----------------------------------");
-         }
-     }
+            for (int i = 0; i < cases.size(); i++)
+            {
+                System.out.print("|" + cases.get(i).date + " |");
+                System.out.print(" " + cases.get(i).newToday + "         |");
+                System.out.print( " " + cases.get(i).cumulative + "   |\n");
+            }
+            System.out.println("-----------------------------------");
+        }
+    }
 }

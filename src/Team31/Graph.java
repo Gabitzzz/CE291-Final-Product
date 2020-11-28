@@ -175,5 +175,5 @@ public class Graph extends JPanel {
     public static void main(String[] args) {
         //createAndShowGui();
     }
-    }
+}
 
