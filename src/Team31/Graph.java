@@ -10,12 +10,15 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+
+//-------------------------------------------------------//
+//    MADE createAndShowGui NOT STATIC TO CALL IT        //
+//    FROM TEMPLATE CLASS AND COMMENTED THE CODE IN MAIN //
+//-------------------------------------------------------//
 
 public class Graph extends JPanel {
 
@@ -148,7 +151,7 @@ public class Graph extends JPanel {
         return casesArray;
     }
 
-    private static void createAndShowGui() {
+    public void createAndShowGui() {
         ArrayList<Cases> casesArray = new ArrayList<>();
         Random random = new Random();
         int maxDataPoints = 40;
@@ -161,7 +164,7 @@ public class Graph extends JPanel {
         Graph mainPanel = new Graph(casesArray);
         mainPanel.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("DrawGraph");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(mainPanel);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -170,11 +173,7 @@ public class Graph extends JPanel {
     }
 
     public static void main(String[] args) {
-        createAndShowGui();
+        //createAndShowGui();
     }
-
-
-
-
     }
 

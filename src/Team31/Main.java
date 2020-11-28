@@ -8,6 +8,8 @@ public class Main
 
     public static void main(String[] args)
     {
+        new Template();
+
         Data Data = new Data();
         Scanner input = new Scanner(System.in);
 

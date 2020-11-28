@@ -4,6 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Random;
+
+//----------------------------------------------------//
+//    !!! DON'T DELETE ANY COMMENTED CODE YET !!!     //
+//----------------------------------------------------//
 
 // Template for our app.
 public class Template
@@ -11,12 +17,8 @@ public class Template
     public Template()
     {
         JFrame frame = new JFrame("Main Menu");
-        JPanel panel = new JPanel(){
-            public void paintComponent( Graphics graph ) {
-                draw( graph );
-            }
-
-        };
+        JPanel graphPanel = new JPanel();
+        JPanel panel = new JPanel();
 
         JLabel deaths = new JLabel("Deaths Graph Preview");
         JLabel cases = new JLabel("Cases Graph Preview");
@@ -26,14 +28,22 @@ public class Template
 
         deathB.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 NewFrame(1);
+
             }
         });
         casesB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NewFrame(2);
+                //NewFrame(2);
+                Data Data = new Data();
+                Data.readFile("cases");
+                ArrayList<Cases> cases = Data.getCasesArray();
+
+                Graph graph = new Graph(cases);
+                graph.createAndShowGui();
             }
         });
 
@@ -42,23 +52,37 @@ public class Template
         panel.setLayout(null);
 
         deaths.setBounds(200, 50, 200, 50);
-        cases.setBounds(600, 50, 200, 50);
+        cases.setBounds(800, 50, 200, 50);
         deathB.setBounds(200, 400, 200, 50);
-        casesB.setBounds(600, 400, 200, 50);
+        casesB.setBounds(800, 400, 200, 50);
 
         panel.add(deaths);
         panel.add(cases);
         panel.add(deathB);
         panel.add(casesB);
 
-        frame.setSize(new Dimension(1000, 600));
+        ArrayList<Cases> casesArray = new ArrayList<>();
+        Random random = new Random();
+        int maxDataPoints = 40;
+        int maxScore = 10;
+        for (int i = 0; i < maxDataPoints; i++)
+        {
+            casesArray.add( new Cases("1", 0, random.nextInt() * maxScore));
+        }
+        Graph graph = new Graph(casesArray);
+        graph.setBounds(700, 100, 500, 300);
+        panel.add(graph);
+
+        frame.setSize(new Dimension(1200, 600));
         frame.add(panel,BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 
-    public static void draw( Graphics g ) {
+    /*public static void draw( Graphics g ) {
+
+
         g.setColor(Color.BLUE);
         g.fillRect(200, 180, 200, 200);
 
@@ -66,7 +90,8 @@ public class Template
         g.fillRect(600, 180, 200, 200);
     }
 
-    public static void draw2( Graphics g, int n ) {
+    public static void draw2( Graphics g, int n )
+    {
         if (n == 1)
         {
             g.setColor(Color.BLUE);
@@ -74,8 +99,8 @@ public class Template
         {
             g.setColor(Color.RED);
         }
-        g.fillRect(400, 200, 400, 400);
-    }
+        //g.fillRect(400, 200, 400, 400);
+    }*/
 
     public static void NewFrame(int n)
     {
@@ -99,9 +124,9 @@ public class Template
 
                 JFrame frame = new JFrame(m);
                 JPanel panel = new JPanel(){
-                    public void paintComponent( Graphics graph ) {
+                    /*public void paintComponent( Graphics graph ) {
                         draw2( graph, n);
-                    }
+                    }*/
 
                 };
 
