@@ -114,7 +114,7 @@ public class Template
                 if (n == 1)
                 {
                     s = "Cases Graph";
-                    m = "Cases Manu";
+                    m = "Cases Menu";
                 }else if (n == 2)
                 {
                     s = "Deaths Graph";
