@@ -163,7 +163,7 @@ public class Graph extends JPanel {
 
         Graph mainPanel = new Graph(casesArray);
         mainPanel.setPreferredSize(new Dimension(800, 600));
-        JFrame frame = new JFrame("DrawGraph");
+        JFrame frame = new JFrame("Cases Graph");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(mainPanel);
         frame.pack();
