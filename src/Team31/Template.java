@@ -75,7 +75,7 @@ public class Template
         cases.setBounds(800, 50, 200, 50);
         deathB.setBounds(200, 400, 200, 50);
         casesB.setBounds(800, 400, 200, 50);
-       // Predictcases.setBounds(800, 50, 200, 50);
+        // Predictcases.setBounds(800, 50, 200, 50);
         //Predictdeaths.setBounds(800,50,200,50);
 
         panel.add(deaths);
