@@ -17,11 +17,11 @@ public class Main
         Data.readFile("deaths");
         Data.readFile("cases");
 
-        ArrayList<Deaths> deaths = Data.getDeathsArray();
+        ArrayList<DataStore> deaths = Data.getDataArray();
 
         System.out.println(deaths.get(45).date);
 
-        ArrayList<Cases> cases = Data.getCasesArray();
+        ArrayList<DataStore> cases = Data.getDataArray();
 
         System.out.println(cases.get(270).date);
 
@@ -45,7 +45,7 @@ public class Main
         {
             Data Data = new Data();
             Data.readFile("deaths");
-            ArrayList<Deaths> deaths = Data.getDeathsArray();
+            ArrayList<DataStore> deaths = Data.getDataArray();
 
             System.out.println("-------------------------------------");
             System.out.println("|      Deaths Data Report           |");
@@ -64,7 +64,7 @@ public class Main
         {
             Data Data = new Data();
             Data.readFile("cases");
-            ArrayList<Cases> cases = Data.getCasesArray();
+            ArrayList<DataStore> cases = Data.getDataArray();
 
             System.out.println("---------------------------------------");
             System.out.println("|      Cases Data Report              |");

@@ -13,7 +13,7 @@ import javax.swing.*;
 
 public class Graph extends JPanel {
 
-    private static ArrayList<Cases> casesArray;
+    private static ArrayList<DataStore> casesArray;
     private int width = 800;
     private int heigth = 400;
     private int padding = 25;
@@ -25,7 +25,7 @@ public class Graph extends JPanel {
     private int pointWidth = 4;
     private int numberYDivisions = 10;
 
-    public Graph(ArrayList<Cases> casesArray) {
+    public Graph(ArrayList<DataStore> casesArray) {
         this.casesArray = casesArray;
     }
 
@@ -123,7 +123,7 @@ public class Graph extends JPanel {
     private int getMinCase() {
         int minCase = Integer.MAX_VALUE;
         //long minCase = Long.MAX_VALUE;
-        for (Cases case1 : casesArray) {
+        for (DataStore case1 : casesArray) {
             //System.out.println(case1.g());
             //System.out.println(case1.cumulative);
             minCase = Math.min(minCase, (int)case1.cumulative);
@@ -134,7 +134,7 @@ public class Graph extends JPanel {
 
     private int getMaxCase() {
         int maxCase = Integer.MIN_VALUE;
-        for (Cases case1 : casesArray) {
+        for (DataStore case1 : casesArray) {
             maxCase = Math.max(maxCase, (int)case1.cumulative);
 
         }
@@ -143,7 +143,7 @@ public class Graph extends JPanel {
 
     private int getMinNew() {
         int minCase = Integer.MAX_VALUE;
-        for (Cases case1 : casesArray) {
+        for (DataStore case1 : casesArray) {
             minCase = Math.min(minCase, (int)case1.newToday);
         }
         return minCase;
@@ -151,28 +151,28 @@ public class Graph extends JPanel {
 
     private int getMaxNew() {
         int maxCase = Integer.MIN_VALUE;
-        for (Cases case1 : casesArray) {
+        for (DataStore case1 : casesArray) {
             maxCase = Math.max(maxCase, (int)case1.newToday);
         }
         return maxCase;
     }
 
-    public void setCases(ArrayList<Cases> setCases) {
+    public void setCases(ArrayList<DataStore> setCases) {
         this.casesArray = setCases;
         invalidate();
         this.repaint();
     }
 
-    public ArrayList<Cases> getCases() {
+    public ArrayList<DataStore> getCases() {
         return casesArray;
     }
 
     public void createAndShowGui()
     {
-        ArrayList<Cases> casesArray = new ArrayList<>();
+        ArrayList<DataStore> casesArray = new ArrayList<>();
         Data Data = new Data();
         Data.readFile("cases");
-        ArrayList<Cases> cases = Data.getCasesArray();
+        ArrayList<DataStore> cases = Data.getDataArray();
 
         for (int i = 0; i < cases.size(); i++)
         {
@@ -181,7 +181,7 @@ public class Graph extends JPanel {
             long newToday = cases.get(temp).newToday;
             long cumulative = cases.get(temp).cumulative;
            // System.out.println(cumulative);
-            casesArray.add( new Cases(date, newToday, cumulative));
+            casesArray.add( new DataStore(date, newToday, cumulative));
         }
 
         Graph mainGraph = new Graph(casesArray);

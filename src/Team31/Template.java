@@ -60,7 +60,7 @@ public class Template
                 //NewFrame(2);
                 Data Data = new Data();
                 Data.readFile("cases");
-                ArrayList<Cases> cases = Data.getCasesArray();
+                ArrayList<DataStore> cases = Data.getDataArray();
 
                 Graph graph = new Graph(cases);
                 graph.createAndShowGui();
@@ -85,10 +85,10 @@ public class Template
         //panel.add(Predictcases);
         //panel.add(Predictdeaths);
 
-        ArrayList<Cases> casesArray = new ArrayList<>();
+        ArrayList<DataStore> casesArray = new ArrayList<>();
         Data Data = new Data();
         Data.readFile("cases");
-        ArrayList<Cases> casesTemp = Data.getCasesArray();
+        ArrayList<DataStore> casesTemp = Data.getDataArray();
 
         for (int i = 0; i < casesTemp.size(); i++)
         {
@@ -96,7 +96,7 @@ public class Template
             String date = casesTemp.get(temp).date;
             long newToday = casesTemp.get(temp).newToday;
             long cumulative = casesTemp.get(temp).cumulative;
-            casesArray.add( new Cases(date, newToday, cumulative ));
+            casesArray.add( new DataStore(date, newToday, cumulative));
         }
         Graph graph = new Graph(casesArray);
         graph.setBounds(700, 100, 500, 300);
