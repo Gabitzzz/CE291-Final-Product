@@ -57,13 +57,16 @@ public class Graph extends JPanel {
             int x0 = padding + labelPadding;
             int x1 = pointWidth + padding + labelPadding;
             int y0 = getHeight() - ((i * (getHeight() - padding * 2 - labelPadding)) / numberYDivisions + padding + labelPadding);
+            System.out.println("y0 : " + y0);
             int y1 = y0;
             if (casesArray.size() > 0) {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
                 String yLabel = ((int) ((getMinCase() + (getMaxCase() - getMinCase()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
+                System.out.println("check : " + yLabel);
                 yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Used that to remove the long characters and I converted it to integers.
+                System.out.println("yaleb" + yLabel);
                 FontMetrics metrics = g2.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
                 g2.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
@@ -119,16 +122,21 @@ public class Graph extends JPanel {
 
     private int getMinCase() {
         int minCase = Integer.MAX_VALUE;
+        //long minCase = Long.MAX_VALUE;
         for (Cases case1 : casesArray) {
+            //System.out.println(case1.g());
+            //System.out.println(case1.cumulative);
             minCase = Math.min(minCase, (int)case1.cumulative);
+            //minCase = Integer.valueOf(Math.round(double.parseDouble(minCase)));
         }
         return minCase;
     }
 
-    private double getMaxCase() {
-        int maxCase = Integer.MAX_VALUE;
+    private int getMaxCase() {
+        int maxCase = Integer.MIN_VALUE;
         for (Cases case1 : casesArray) {
             maxCase = Math.max(maxCase, (int)case1.cumulative);
+
         }
         return maxCase;
     }
@@ -141,8 +149,8 @@ public class Graph extends JPanel {
         return minCase;
     }
 
-    private double getMaxNew() {
-        int maxCase = Integer.MAX_VALUE;
+    private int getMaxNew() {
+        int maxCase = Integer.MIN_VALUE;
         for (Cases case1 : casesArray) {
             maxCase = Math.max(maxCase, (int)case1.newToday);
         }
@@ -172,7 +180,8 @@ public class Graph extends JPanel {
             String date = cases.get(temp).date;
             long newToday = cases.get(temp).newToday;
             long cumulative = cases.get(temp).cumulative;
-            casesArray.add( new Cases(date, newToday, cumulative * 1000));
+           // System.out.println(cumulative);
+            casesArray.add( new Cases(date, newToday, cumulative));
         }
 
         Graph mainGraph = new Graph(casesArray);
@@ -181,10 +190,13 @@ public class Graph extends JPanel {
         frame.setPreferredSize(new Dimension(1000, 800));
         JPanel labelPanel = new JPanel();
 
+
         JLabel peakCases = new JLabel("-Peak Value of Cases: " + getMaxCase());
         peakCases.setBounds(100, 100, 10, 10);
         JLabel minCases = new JLabel("-Minimum Value of Cases: " + getMinCase());
         minCases.setBounds(100, 200, 10, 10);
+
+
 
         JLabel maxNew = new JLabel("-Maximum Cases in  One Day: " + getMaxNew());
         peakCases.setBounds(100, 300, 10, 10);
