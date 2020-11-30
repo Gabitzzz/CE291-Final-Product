@@ -96,7 +96,7 @@ public class Template
             String date = casesTemp.get(temp).date;
             long newToday = casesTemp.get(temp).newToday;
             long cumulative = casesTemp.get(temp).cumulative;
-            casesArray.add( new Cases(date, newToday, cumulative * 1000));
+            casesArray.add( new Cases(date, newToday, cumulative ));
         }
         Graph graph = new Graph(casesArray);
         graph.setBounds(700, 100, 500, 300);
