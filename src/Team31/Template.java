@@ -86,19 +86,24 @@ public class Template
         //panel.add(Predictdeaths);
 
         ArrayList<Cases> casesArray = new ArrayList<>();
-        Random random = new Random();
-        int maxDataPoints = 40;
-        int maxScore = 10;
-        for (int i = 0; i < maxDataPoints; i++)
+        Data Data = new Data();
+        Data.readFile("cases");
+        ArrayList<Cases> casesTemp = Data.getCasesArray();
+
+        for (int i = 0; i < casesTemp.size(); i++)
         {
-            casesArray.add( new Cases("1", 0, random.nextInt() * maxScore));
+            int temp = (casesTemp.size() - 1) - i;
+            String date = casesTemp.get(temp).date;
+            long newToday = casesTemp.get(temp).newToday;
+            long cumulative = casesTemp.get(temp).cumulative;
+            casesArray.add( new Cases(date, newToday, cumulative * 1000));
         }
         Graph graph = new Graph(casesArray);
         graph.setBounds(700, 100, 500, 300);
         panel.add(graph);
 
         frame.setSize(new Dimension(1200, 600));
-        frame.add(panel,BorderLayout.CENTER);
+        frame.add(panel, BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
