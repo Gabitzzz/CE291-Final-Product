@@ -163,40 +163,56 @@ public class Graph extends JPanel {
         return casesArray;
     }
 
-    public void createAndShowGui(){
-        {
-            ArrayList<DataStore> casesArray = new ArrayList<>();
-            Data Data = new Data();
-            Data.readFile("cases");
-            ArrayList<DataStore> cases = Data.getDataArray();
+    public void createAndShowGui(String selection)
+    {
+        ArrayList<DataStore> array = new ArrayList<>();
+        ArrayList<DataStore> data = new ArrayList<>();
+        Data data1 = new Data();
+        String label = "";
 
-            for (int i = 0; i < cases.size(); i++)
+            switch (selection)
             {
-                int temp = (cases.size() - 1) - i;
-                String date = cases.get(temp).date;
-                long newToday = cases.get(temp).newToday;
-                long cumulative = cases.get(temp).cumulative;
-                // System.out.println(cumulative);
-                casesArray.add( new DataStore(date, newToday, cumulative));
+                case "cases":
+
+                    data1.readFile("cases");
+                    data = data1.getDataArray();
+                    label = "Cases Graph";
+                    break;
+
+                case "deaths":
+                    data1.readFile("deaths");
+                    data = data1.getDataArray();
+                    label = "Deaths Graph";
+                    break;
             }
 
-            Graph mainGraph = new Graph(casesArray);
+            for (int i = 0; i < data.size(); i++)
+            {
+                int temp = (data.size() - 1) - i;
+                String date = data.get(temp).date;
+                long newToday = data.get(temp).newToday;
+                long cumulative = data.get(temp).cumulative;
+                // System.out.println(cumulative);
+                array.add( new DataStore(date, newToday, cumulative));
+            }
+
+            Graph mainGraph = new Graph(array);
             mainGraph.setPreferredSize(new Dimension(800, 600));
-            JFrame frame = new JFrame("Cases Graph");
+            JFrame frame = new JFrame(label);
             frame.setPreferredSize(new Dimension(1000, 800));
             JPanel labelPanel = new JPanel();
 
 
-            JLabel peakCases = new JLabel("-Peak Value of Cases: " + getMaxCase());
+            JLabel peakCases = new JLabel("---PEAK VALUE: " + getMaxCase() + " ---");
             peakCases.setBounds(100, 100, 10, 10);
-            JLabel minCases = new JLabel("-Minimum Value of Cases: " + getMinCase());
+            JLabel minCases = new JLabel("---MINIMUM VALUE: " + getMinCase() + " ---");
             minCases.setBounds(100, 200, 10, 10);
 
 
 
-            JLabel maxNew = new JLabel("-Maximum Cases in  One Day: " + getMaxNew());
+            JLabel maxNew = new JLabel("---MAXIMUM IN ONE DAY: " + getMaxNew() + " ---");
             peakCases.setBounds(100, 300, 10, 10);
-            JLabel minNew = new JLabel("-Minimum Cases in One Day: " + getMinNew());
+            JLabel minNew = new JLabel("---MINIMUM IN ONE DAY: " + getMinNew() + " ---");
             minCases.setBounds(100, 400, 10, 10);
 
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -210,8 +226,6 @@ public class Graph extends JPanel {
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
-
-        }
     }
 }
 

@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Random;
 
 //----------------------------------------------------//
 //    !!! DON'T DELETE ANY COMMENTED CODE YET !!!     //
@@ -14,6 +13,9 @@ import java.util.Random;
 // Template for our GUI.
 public class Template
 {
+    private static final String DEATHS = "deaths";
+    private static final String CASES = "cases";
+
     public Template()
     {
         JFrame frame = new JFrame("Main Menu");
@@ -50,8 +52,13 @@ public class Template
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                NewFrame(1);
+                //NewFrame(1);
+                Data Data = new Data();
+                Data.readFile(DEATHS);
+                ArrayList<DataStore> deaths = Data.getDataArray();
 
+                Graph graph = new Graph(deaths);
+                graph.createAndShowGui(DEATHS);
             }
         });
         casesB.addActionListener(new ActionListener() {
@@ -59,11 +66,11 @@ public class Template
             public void actionPerformed(ActionEvent e) {
                 //NewFrame(2);
                 Data Data = new Data();
-                Data.readFile("cases");
+                Data.readFile(CASES);
                 ArrayList<DataStore> cases = Data.getDataArray();
 
                 Graph graph = new Graph(cases);
-                graph.createAndShowGui();
+                graph.createAndShowGui(CASES);
             }
         });
 
@@ -85,22 +92,12 @@ public class Template
         //panel.add(Predictcases);
         //panel.add(Predictdeaths);
 
-        ArrayList<DataStore> casesArray = new ArrayList<>();
-        Data Data = new Data();
-        Data.readFile("cases");
-        ArrayList<DataStore> casesTemp = Data.getDataArray();
-
-        for (int i = 0; i < casesTemp.size(); i++)
-        {
-            int temp = (casesTemp.size() - 1) - i;
-            String date = casesTemp.get(temp).date;
-            long newToday = casesTemp.get(temp).newToday;
-            long cumulative = casesTemp.get(temp).cumulative;
-            casesArray.add( new DataStore(date, newToday, cumulative));
-        }
-        Graph graph = new Graph(casesArray);
-        graph.setBounds(700, 100, 500, 300);
-        panel.add(graph);
+        Graph casesGraph = new Graph(getData(CASES));
+        casesGraph.setBounds(700, 100, 500, 300);
+        panel.add(casesGraph);
+        Graph deathsGraph = new Graph(getData(DEATHS));
+        deathsGraph.setBounds(100, 100, 500, 300);
+        panel.add(deathsGraph);
 
         frame.setSize(new Dimension(1200, 600));
         frame.add(panel, BorderLayout.CENTER);
@@ -109,74 +106,34 @@ public class Template
         frame.setVisible(true);
     }
 
-    /*public static void draw( Graphics g ) {
-
-
-        g.setColor(Color.BLUE);
-        g.fillRect(200, 180, 200, 200);
-
-        g.setColor(Color.RED);
-        g.fillRect(600, 180, 200, 200);
-    }
-
-    public static void draw2( Graphics g, int n )
+    private ArrayList<DataStore> getData(String selection)
     {
-        if (n == 1)
+        ArrayList<DataStore> array = new ArrayList<>();
+        ArrayList<DataStore> data = new ArrayList<>();
+        Data data1 = new Data();
+
+        switch (selection)
         {
-            g.setColor(Color.BLUE);
-        }else if (n == 2)
-        {
-            g.setColor(Color.RED);
+            case "cases":
+
+                data1.readFile("cases");
+                data = data1.getDataArray();
+                break;
+
+            case "deaths":
+                data1.readFile("deaths");
+                data = data1.getDataArray();
+                break;
         }
-        //g.fillRect(400, 200, 400, 400);
-    }*/
 
-    public static void NewFrame(int n)
-    {
-        EventQueue.invokeLater(new Runnable()
+        for (int i = 0; i < data.size(); i++)
         {
-            @Override
-            public void run()
-            {
-                String s = " ";
-                String m = " ";
-
-                if (n == 1)
-                {
-                    s = "Cases Graph";
-                    m = "Cases Menu";
-                }else if (n == 2)
-                {
-                    s = "Deaths Graph";
-                    m = "Deaths Menu";
-                }
-
-                JFrame frame = new JFrame(m);
-                JPanel panel = new JPanel(){
-                    /*public void paintComponent( Graphics graph ) {
-                        draw2( graph, n);
-                    }*/
-
-                };
-
-                JLabel label = new JLabel(s);
-                JButton button = new JButton("Full PDF Report");
-
-                panel.setSize(new Dimension(1000, 1000));
-                panel.setLayout(null);
-
-                label.setBounds(400, 100, 400, 50);
-                button.setBounds(400, 700, 400, 50);
-
-                panel.add(label);
-                panel.add(button);
-
-                frame.setSize(new Dimension(1000, 1000));
-                frame.add(panel, BorderLayout.CENTER);
-
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.setVisible(true);
-            }
-        });
+            int temp = (data.size() - 1) - i;
+            String date = data.get(temp).date;
+            long newToday = data.get(temp).newToday;
+            long cumulative = data.get(temp).cumulative;
+            array.add( new DataStore(date, newToday, cumulative));
+        }
+        return array;
     }
 }
