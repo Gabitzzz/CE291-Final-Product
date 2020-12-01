@@ -3,29 +3,25 @@ package Team31;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main
-{
 
-    public static void main(String[] args)
-    {
-        // the GUI
-        new Template();
-
+public class predict {
+    public static void main(String[] args) {
         Data Data = new Data();
         Scanner input = new Scanner(System.in);
 
         Data.readFile("deaths");
         Data.readFile("cases");
 
-        ArrayList<DataStore> deaths = Data.getDataArray();
+        ArrayList<Deaths> deaths = Data.getDeathsArray();
 
-        System.out.println(deaths.get(45).date);
+        ArrayList<Cases> cases = Data.getCasesArray();
 
-        ArrayList<DataStore> cases = Data.getDataArray();
+        new Template();
 
-        System.out.println(cases.get(270).date);
+    }
+}
 
-        System.out.println("---------- TYPE THE NUMBER TO SHOW ---------");
+ /*       System.out.println("---------- TYPE THE NUMBER TO SHOW ---------");
         System.out.println("1- Deaths Data Report\t2- Cases Data Report");
         System.out.println("--------------------------------------------\n");
         try
@@ -82,4 +78,4 @@ public class Main
         }
     }
 }
-
+*/

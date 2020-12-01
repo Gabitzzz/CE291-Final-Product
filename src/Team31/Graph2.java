@@ -11,9 +11,9 @@ import javax.swing.*;
 //    TEMPLATE CLASS AND COMMENTED THE CODE IN MAIN      //
 //-------------------------------------------------------//
 
-public class Graph extends JPanel {
+public class Graph2 extends JPanel {
 
-    private static ArrayList<Cases> casesArray;
+    private static ArrayList<Deaths> deathsArray;
     private int width = 800;
     private int height = 400;
     private int padding = 25;
@@ -25,8 +25,8 @@ public class Graph extends JPanel {
     private int pointWidth = 4;
     private int numberYDivisions = 10;
 
-    public Graph(ArrayList<Cases> casesArray) {
-        this.casesArray = casesArray;
+    public Graph2(ArrayList<Deaths> deathsArray) {
+        this.deathsArray = deathsArray;
     }
 
 
@@ -36,14 +36,14 @@ public class Graph extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        double xScale = ((int) getWidth() - (2 * padding) - labelPadding) / (casesArray.size() - 1);
-        double yScale = ((int) getHeight() - 2 * padding - labelPadding) / (getMaxCase() - getMinCase());
+        double xScale = ((int) getWidth() - (2 * padding) - labelPadding) / (deathsArray.size() - 1);
+        double yScale = ((int) getHeight() - 2 * padding - labelPadding) / (getMaxDeath() - getMinDeath());
 
         List<Point> graphPoints = new ArrayList<>();
-        for (int i = 0; i < casesArray.size(); i++)
+        for (int i = 0; i < deathsArray.size(); i++)
         {
             int x1 = (int) (i * xScale + padding + labelPadding);
-            int y1 = (int) ((getMaxCase() - casesArray.get(i).cumulative) * yScale + padding);
+            int y1 = (int) ((getMaxDeath() - deathsArray.get(i).cumulative) * yScale + padding);
             System.out.println(y1);
             graphPoints.add(new Point(x1, y1));
         }
@@ -60,11 +60,11 @@ public class Graph extends JPanel {
             int x1 = pointWidth + padding + labelPadding;
             int y0 = getHeight() - ((i * (getHeight() - padding * 2 - labelPadding)) / numberYDivisions + padding + labelPadding);
             int y1 = y0;
-            if (casesArray.size() > 0) {
+            if (deathsArray.size() > 0) {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
-                String yLabel = ((int) ((getMinCase() + (getMaxCase() - getMinCase()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
+                String yLabel = ((int) ((getMinDeath() + (getMaxDeath() - getMinDeath()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
                 yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Used that to remove the long characters and I converted it to integers.
                 FontMetrics metrics = g2.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
@@ -74,13 +74,13 @@ public class Graph extends JPanel {
         }
 
         // and for x axis
-        for (int i = 0; i < casesArray.size(); i++) {
-            if (casesArray.size() > 1) {
-                int x0 = i * (getWidth() - padding * 2 - labelPadding) / (casesArray.size() - 1) + padding + labelPadding;
+        for (int i = 0; i < deathsArray.size(); i++) {
+            if (deathsArray.size() > 1) {
+                int x0 = i * (getWidth() - padding * 2 - labelPadding) / (deathsArray.size() - 1) + padding + labelPadding;
                 int x1 = x0;
                 int y0 = getHeight() - padding - labelPadding;
                 int y1 = y0 - pointWidth;
-                if ((i % ((int) ((casesArray.size() / 20.0)) + 1)) == 0) {
+                if ((i % ((int) ((deathsArray.size() / 20.0)) + 1)) == 0) {
                     g2.setColor(gridColor);
                     g2.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
                     g2.setColor(Color.BLACK);
@@ -119,120 +119,103 @@ public class Graph extends JPanel {
         }
     }
 
-    private double getMinCase() {
-        double minCase = Double.MAX_VALUE;
+    private double getMinDeath() {
+        int minDeath = Integer.MAX_VALUE;
         //long minCase = Long.MAX_VALUE;
-        for (Cases case1 : casesArray) {
+        for (Deaths death1 : deathsArray) {
             //System.out.println(case1.g());
             //System.out.println(case1.cumulative);
-            minCase = Math.min(minCase, (int)case1.cumulative);
+            minDeath = Math.min(minDeath, (int)death1.cumulative);
             //minCase = Integer.valueOf(Math.round(double.parseDouble(minCase)));
         }
-        return minCase;
+        return minDeath;
     }
 
-    private int getMaxCase() {
-        int maxCase = Integer.MIN_VALUE;
-        for (Cases case1 : casesArray) {
-            maxCase = Math.max(maxCase, (int) case1.cumulative);
+    private int getMaxDeath() {
+        int maxDeath = Integer.MIN_VALUE;
+        for (Deaths death1 : deathsArray) {
+            maxDeath = Math.max(maxDeath, (int) death1.cumulative);
 
         }
-        return maxCase;
+        return maxDeath;
     }
 
     private int getMinNew() {
-        int minCase = Integer.MAX_VALUE;
-        for (Cases case1 : casesArray) {
-            minCase = Math.min(minCase, (int)case1.newToday);
+        int minDeaths = Integer.MAX_VALUE;
+        for (Deaths death1 : deathsArray) {
+            minDeaths = Math.min(minDeaths, (int)death1.newToday);
         }
-        return minCase;
+        return minDeaths;
     }
 
     private int getMaxNew() {
-        int maxCase = Integer.MIN_VALUE;
-        for (Cases case1 : casesArray) {
-            maxCase = Math.max(maxCase, (int)case1.newToday);
+        int maxDeaths = Integer.MIN_VALUE;
+        for (Deaths death1 : deathsArray) {
+            maxDeaths = Math.max(maxDeaths, (int)death1.newToday);
         }
-        return maxCase;
+        return maxDeaths;
     }
 
-    public void setCases(ArrayList<Cases> setCases) {
-        this.casesArray = setCases;
+    public void setDeaths(ArrayList<Deaths> setDeaths) {
+        this.deathsArray = setDeaths;
         invalidate();
         this.repaint();
     }
 
-    public ArrayList<Cases> getCases() {
-        return casesArray;
+    public ArrayList<Deaths> getDeaths() {
+        return deathsArray;
     }
 
     public void createAndShowGui(){
-    {
-        ArrayList<Cases> casesArray = new ArrayList<>();
-        Data Data = new Data();
-        Data.readFile("cases");
-        ArrayList<Cases> cases = Data.getCasesArray();
-
-        for (int i = 0; i < cases.size(); i++)
         {
-            int temp = (cases.size() - 1) - i;
-            String date = cases.get(temp).date;
-            long newToday = cases.get(temp).newToday;
-            long cumulative = cases.get(temp).cumulative;
-            // System.out.println(cumulative);
-            casesArray.add( new Cases(date, newToday, cumulative));
+            ArrayList<Deaths> deathsArray = new ArrayList<>();
+            Data Data = new Data();
+            Data.readFile("deaths");
+            ArrayList<Deaths> deaths = Data.getDeathsArray();
+
+            for (int i = 0; i < deaths.size(); i++)
+            {
+                int temp = (deaths.size() - 1) - i;
+                String date = deaths.get(temp).date;
+                long newToday = deaths.get(temp).newToday;
+                long cumulative = deaths.get(temp).cumulative;
+                // System.out.println(cumulative);
+                deathsArray.add( new Deaths(date, newToday, cumulative));
+            }
+
+            Graph2 mainGraph = new Graph2(deathsArray);
+            mainGraph.setPreferredSize(new Dimension(800, 600));
+            JFrame frame = new JFrame("Deaths Graph");
+            frame.setPreferredSize(new Dimension(1000, 800));
+            JPanel labelPanel = new JPanel();
+
+
+            JLabel peakDeaths = new JLabel("-Peak Value of Deaths: " + getMaxDeath());
+            peakDeaths.setBounds(100, 100, 10, 10);
+            JLabel minDeaths = new JLabel("-Minimum Value of Deaths: " + getMinDeath());
+            minDeaths.setBounds(100, 200, 10, 10);
+
+
+
+            JLabel maxNew = new JLabel("-Maximum Deaths in  One Day: " + getMaxNew());
+            peakDeaths.setBounds(100, 300, 10, 10);
+            JLabel minNew = new JLabel("-Minimum Deaths in One Day: " + getMinNew());
+            minDeaths.setBounds(100, 400, 10, 10);
+
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            labelPanel.add(peakDeaths);
+            labelPanel.add(minDeaths);
+            labelPanel.add(maxNew);
+            labelPanel.add(minNew);
+            frame.add(mainGraph, BorderLayout.NORTH);
+            frame.add(labelPanel, BorderLayout.WEST);
+
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+
         }
-
-        Graph mainGraph = new Graph(casesArray);
-        mainGraph.setPreferredSize(new Dimension(800, 600));
-        JFrame frame = new JFrame("Cases Graph");
-        frame.setPreferredSize(new Dimension(1000, 800));
-        JPanel labelPanel = new JPanel();
-
-
-        JLabel peakCases = new JLabel("-Peak Value of Cases: " + getMaxCase());
-        peakCases.setBounds(100, 100, 10, 10);
-        JLabel minCases = new JLabel("-Minimum Value of Cases: " + getMinCase());
-        minCases.setBounds(100, 200, 10, 10);
-
-
-
-        JLabel maxNew = new JLabel("-Maximum Cases in  One Day: " + getMaxNew());
-        peakCases.setBounds(100, 300, 10, 10);
-        JLabel minNew = new JLabel("-Minimum Cases in One Day: " + getMinNew());
-        minCases.setBounds(100, 400, 10, 10);
-
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        labelPanel.add(peakCases);
-        labelPanel.add(minCases);
-        labelPanel.add(maxNew);
-        labelPanel.add(minNew);
-        frame.add(mainGraph, BorderLayout.NORTH);
-        frame.add(labelPanel, BorderLayout.WEST);
-
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-    }
     }
 }
 
-/*ArrayList<Cases> casesArray = new ArrayList<>();
-    Data Data = new Data();
-        Data.readFile("cases");
-    ArrayList<Cases> cases = Data.getCasesArray();
-        for (int i = 0; i < cases.size(); i++)
-    {
-        casesArray.add( new Cases("1", 0, cases.get(i).cumulative));
-        System.out.println(cases.get(i).cumulative);
-    }*/
 
-
-    /*Random random = new Random();
-    int maxDataPoints = 40;
-    int maxScore = 10;
-        for (int i = 0; i < maxDataPoints; i++) {
-        casesArray.add( new Cases("1", 0, random.nextInt() * maxScore));
-
-        }*/
