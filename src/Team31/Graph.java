@@ -117,7 +117,7 @@ public class Graph extends JPanel {
     }
 
     private double getMinCase() {
-        double minCase = Double.MAX_VALUE;
+        int minCase = Integer.MAX_VALUE;
         //long minCase = Long.MAX_VALUE;
         for (DataStore case1 : casesArray) {
             //System.out.println(case1.g());
