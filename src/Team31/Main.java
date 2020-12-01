@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class predict {
+public class Main {
     public static void main(String[] args) {
         Data Data = new Data();
         Scanner input = new Scanner(System.in);
