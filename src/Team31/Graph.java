@@ -44,7 +44,7 @@ public class Graph extends JPanel {
         {
             int x1 = (int) (i * xScale + padding + labelPadding);
             int y1 = (int) ((getMaxCase() - casesArray.get(i).cumulative) * yScale + padding);
-            System.out.println(y1);
+            //System.out.println(y1);
             graphPoints.add(new Point(x1, y1));
         }
 
@@ -190,16 +190,16 @@ public class Graph extends JPanel {
         JPanel labelPanel = new JPanel();
 
 
-        JLabel peakCases = new JLabel("-Peak Value of Cases: " + getMaxCase());
+        JLabel peakCases = new JLabel("---PEAK VALUE OF CASES: " + getMaxCase() + "---");
         peakCases.setBounds(100, 100, 10, 10);
-        JLabel minCases = new JLabel("-Minimum Value of Cases: " + getMinCase());
+        JLabel minCases = new JLabel("----MINIMUM VALUE OF CASES: " + getMinCase() + "---");
         minCases.setBounds(100, 200, 10, 10);
 
 
 
-        JLabel maxNew = new JLabel("-Maximum Cases in  One Day: " + getMaxNew());
+        JLabel maxNew = new JLabel("-MAXIMUM CASES IN ONE DAY: " + getMaxNew() + "---");
         peakCases.setBounds(100, 300, 10, 10);
-        JLabel minNew = new JLabel("-Minimum Cases in One Day: " + getMinNew());
+        JLabel minNew = new JLabel("-MINIMUM CASES IN ONE DAY: " + getMinNew() + "---");
         minCases.setBounds(100, 400, 10, 10);
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Data {
     /* Configuration Variables */
-    private static String cfg_casesFilePath = "./src/prediction/cases_data_2020-Oct-30.csv"; // path to cases csv
-    private static String cfg_deathsFilePath = "./src/prediction/deaths_data_2020-Oct-30.csv"; // path to deaths csv
+    private static String cfg_casesFilePath = "./src/Team31/cases_data_2020-Oct-30.csv"; // path to cases csv
+    private static String cfg_deathsFilePath = "./src/Team31/deaths_data_2020-Oct-30.csv"; // path to deaths csv
     private static String cfg_delimeter = ",";
     /* End of Configuration Variables */
 

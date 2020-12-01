@@ -44,7 +44,7 @@ public class Graph2 extends JPanel {
         {
             int x1 = (int) (i * xScale + padding + labelPadding);
             int y1 = (int) ((getMaxDeath() - deathsArray.get(i).cumulative) * yScale + padding);
-            System.out.println(y1);
+            //System.out.println(y1);
             graphPoints.add(new Point(x1, y1));
         }
 
@@ -190,16 +190,16 @@ public class Graph2 extends JPanel {
             JPanel labelPanel = new JPanel();
 
 
-            JLabel peakDeaths = new JLabel("-Peak Value of Deaths: " + getMaxDeath());
+            JLabel peakDeaths = new JLabel("---PEAK VALUE OF DEATHS: " + getMaxDeath() + "---");
             peakDeaths.setBounds(100, 100, 10, 10);
-            JLabel minDeaths = new JLabel("-Minimum Value of Deaths: " + getMinDeath());
+            JLabel minDeaths = new JLabel("---MINIMUM VALUE OF DEATHS: " + getMinDeath() + "---");
             minDeaths.setBounds(100, 200, 10, 10);
 
 
 
-            JLabel maxNew = new JLabel("-Maximum Deaths in  One Day: " + getMaxNew());
+            JLabel maxNew = new JLabel("---MAXIMUM DEATHS IN ONE DAY: " + getMaxNew() + "---");
             peakDeaths.setBounds(100, 300, 10, 10);
-            JLabel minNew = new JLabel("-Minimum Deaths in One Day: " + getMinNew());
+            JLabel minNew = new JLabel("---MINIMUM DEATHS IN ONE DAY: " + getMinNew() + "---");
             minDeaths.setBounds(100, 400, 10, 10);
 
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
