@@ -187,9 +187,9 @@ public class Graph2 extends JPanel {
             }
 
             Graph2 mainGraph = new Graph2(deathsArray);
-            mainGraph.setPreferredSize(new Dimension(800, 600));
+            mainGraph.setPreferredSize(new Dimension(1000, 700));
             JFrame frame = new JFrame("Deaths Graph");
-            frame.setPreferredSize(new Dimension(1000, 800));
+            frame.setPreferredSize(new Dimension(1200, 900));
             JPanel labelPanel = new JPanel();
 
 

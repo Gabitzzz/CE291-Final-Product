@@ -187,9 +187,9 @@ public class Graph extends JPanel {
         }
 
         Graph mainGraph = new Graph(casesArray);
-        mainGraph.setPreferredSize(new Dimension(800, 600));
+        mainGraph.setPreferredSize(new Dimension(1000, 700));
         JFrame frame = new JFrame("Cases Graph");
-        frame.setPreferredSize(new Dimension(1000, 800));
+        frame.setPreferredSize(new Dimension(1200, 900));
         JPanel labelPanel = new JPanel();
 
 

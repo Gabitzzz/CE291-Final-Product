@@ -23,8 +23,8 @@ public class Template
 
         JButton deathB = new JButton("Deaths Full Report");
         JButton casesB = new JButton("Cases Full Report");
-        //JButton Predictcases = new JButton("Predict cases");
-        //JButton Predictdeaths = new JButton("Predict deaths");
+        JButton PredictCases = new JButton("Predict Cases");
+        JButton PredictDeaths = new JButton("Predict Deaths");
 
         /*Predictdeaths.addActionListener(new ActionListener() {
             @Override
@@ -72,25 +72,41 @@ public class Template
         });
 
 
-        panel.setSize(new Dimension(1000, 600));
+        panel.setSize(new Dimension(1200, 600));
         panel.setLayout(null);
 
-        deaths.setBounds(200, 50, 200, 50);
-        cases.setBounds(800, 50, 200, 50);
-        deathB.setBounds(200, 400, 200, 50);
-        casesB.setBounds(800, 400, 200, 50);
-        // Predictcases.setBounds(800, 50, 200, 50);
-        //Predictdeaths.setBounds(800,50,200,50);
+        deaths.setBounds(150, 50, 200, 50);
+        cases.setBounds(700, 50, 200, 50);
+        deathB.setBounds(150, 400, 200, 50);
+        casesB.setBounds(700, 400, 200, 50);
+        PredictCases.setBounds(700, 480, 200, 50);
+        PredictDeaths.setBounds(150,480,200,50);
 
         panel.add(deaths);
         panel.add(cases);
         panel.add(deathB);
         panel.add(casesB);
-        //panel.add(Predictcases);
-        //panel.add(Predictdeaths);
+        panel.add(PredictCases);
+        panel.add(PredictDeaths);
+
+        Graph graph = new Graph(getCasesData());
+        Graph2 graph2 = new Graph2(getDeathsData());
+
+        graph.setBounds(600, 100, 500, 300);
+        panel.add(graph);
+        graph2.setBounds(50, 100, 500, 300);
+        panel.add(graph2);
 
 
+        frame.setSize(new Dimension(1200, 600));
+        frame.add(panel, BorderLayout.CENTER);
 
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    private ArrayList<Cases> getCasesData()
+    {
         ArrayList<Cases> casesArray = new ArrayList<>();
         Data Data = new Data();
         Data.readFile("cases");
@@ -107,8 +123,11 @@ public class Template
                 casesArray.add( new Cases(date, newToday, cumulative));
             }
         }
-        Graph graph = new Graph(casesArray);
+        return casesArray;
+    }
 
+    private ArrayList<Deaths> getDeathsData()
+    {
         ArrayList<Deaths> deathsArray = new ArrayList<>();
         Data Data2 = new Data();
         Data2.readFile("deaths");
@@ -125,19 +144,6 @@ public class Template
                 deathsArray.add( new Deaths(date, newToday, cumulative));
             }
         }
-
-        Graph2 graph2 = new Graph2(deathsArray);
-
-        graph.setBounds(700, 100, 500, 300);
-        panel.add(graph);
-        graph2.setBounds(100, 100, 500, 300);
-        panel.add(graph2);
-
-
-        frame.setSize(new Dimension(1200, 600));
-        frame.add(panel, BorderLayout.CENTER);
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        return deathsArray;
     }
 }
