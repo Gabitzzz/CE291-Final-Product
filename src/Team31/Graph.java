@@ -1,10 +1,9 @@
 package Team31;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import javax.swing.*;
 
 //-------------------------------------------------------//
 //    MADE createAndShowGui NOT STATIC TO CALL IT FROM   //
@@ -15,7 +14,7 @@ public class Graph extends JPanel {
 
     private static ArrayList<DataStore> casesArray;
     private int width = 800;
-    private int heigth = 400;
+    private int height = 400;
     private int padding = 25;
     private int labelPadding = 25;
     private Color lineColor = new Color(44, 102, 230, 180);
@@ -57,16 +56,13 @@ public class Graph extends JPanel {
             int x0 = padding + labelPadding;
             int x1 = pointWidth + padding + labelPadding;
             int y0 = getHeight() - ((i * (getHeight() - padding * 2 - labelPadding)) / numberYDivisions + padding + labelPadding);
-            System.out.println("y0 : " + y0);
             int y1 = y0;
             if (casesArray.size() > 0) {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
                 String yLabel = ((int) ((getMinCase() + (getMaxCase() - getMinCase()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
-                System.out.println("check : " + yLabel);
                 yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Used that to remove the long characters and I converted it to integers.
-                System.out.println("yaleb" + yLabel);
                 FontMetrics metrics = g2.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
                 g2.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
@@ -120,8 +116,8 @@ public class Graph extends JPanel {
         }
     }
 
-    private int getMinCase() {
-        int minCase = Integer.MAX_VALUE;
+    private double getMinCase() {
+        double minCase = Double.MAX_VALUE;
         //long minCase = Long.MAX_VALUE;
         for (DataStore case1 : casesArray) {
             //System.out.println(case1.g());
@@ -135,7 +131,7 @@ public class Graph extends JPanel {
     private int getMaxCase() {
         int maxCase = Integer.MIN_VALUE;
         for (DataStore case1 : casesArray) {
-            maxCase = Math.max(maxCase, (int)case1.cumulative);
+            maxCase = Math.max(maxCase, (int) case1.cumulative);
 
         }
         return maxCase;
@@ -167,59 +163,55 @@ public class Graph extends JPanel {
         return casesArray;
     }
 
-    public void createAndShowGui()
-    {
-        ArrayList<DataStore> casesArray = new ArrayList<>();
-        Data Data = new Data();
-        Data.readFile("cases");
-        ArrayList<DataStore> cases = Data.getDataArray();
-
-        for (int i = 0; i < cases.size(); i++)
+    public void createAndShowGui(){
         {
-            int temp = (cases.size() - 1) - i;
-            String date = cases.get(temp).date;
-            long newToday = cases.get(temp).newToday;
-            long cumulative = cases.get(temp).cumulative;
-           // System.out.println(cumulative);
-            casesArray.add( new DataStore(date, newToday, cumulative));
+            ArrayList<DataStore> casesArray = new ArrayList<>();
+            Data Data = new Data();
+            Data.readFile("cases");
+            ArrayList<DataStore> cases = Data.getDataArray();
+
+            for (int i = 0; i < cases.size(); i++)
+            {
+                int temp = (cases.size() - 1) - i;
+                String date = cases.get(temp).date;
+                long newToday = cases.get(temp).newToday;
+                long cumulative = cases.get(temp).cumulative;
+                // System.out.println(cumulative);
+                casesArray.add( new DataStore(date, newToday, cumulative));
+            }
+
+            Graph mainGraph = new Graph(casesArray);
+            mainGraph.setPreferredSize(new Dimension(800, 600));
+            JFrame frame = new JFrame("Cases Graph");
+            frame.setPreferredSize(new Dimension(1000, 800));
+            JPanel labelPanel = new JPanel();
+
+
+            JLabel peakCases = new JLabel("-Peak Value of Cases: " + getMaxCase());
+            peakCases.setBounds(100, 100, 10, 10);
+            JLabel minCases = new JLabel("-Minimum Value of Cases: " + getMinCase());
+            minCases.setBounds(100, 200, 10, 10);
+
+
+
+            JLabel maxNew = new JLabel("-Maximum Cases in  One Day: " + getMaxNew());
+            peakCases.setBounds(100, 300, 10, 10);
+            JLabel minNew = new JLabel("-Minimum Cases in One Day: " + getMinNew());
+            minCases.setBounds(100, 400, 10, 10);
+
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            labelPanel.add(peakCases);
+            labelPanel.add(minCases);
+            labelPanel.add(maxNew);
+            labelPanel.add(minNew);
+            frame.add(mainGraph, BorderLayout.NORTH);
+            frame.add(labelPanel, BorderLayout.WEST);
+
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+
         }
-
-        Graph mainGraph = new Graph(casesArray);
-        mainGraph.setPreferredSize(new Dimension(800, 600));
-        JFrame frame = new JFrame("Cases Graph");
-        frame.setPreferredSize(new Dimension(1000, 800));
-        JPanel labelPanel = new JPanel();
-
-
-        JLabel peakCases = new JLabel("-Peak Value of Cases: " + getMaxCase());
-        peakCases.setBounds(100, 100, 10, 10);
-        JLabel minCases = new JLabel("-Minimum Value of Cases: " + getMinCase());
-        minCases.setBounds(100, 200, 10, 10);
-
-
-
-        JLabel maxNew = new JLabel("-Maximum Cases in  One Day: " + getMaxNew());
-        peakCases.setBounds(100, 300, 10, 10);
-        JLabel minNew = new JLabel("-Minimum Cases in One Day: " + getMinNew());
-        minCases.setBounds(100, 400, 10, 10);
-
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        labelPanel.add(peakCases);
-        labelPanel.add(minCases);
-        labelPanel.add(maxNew);
-        labelPanel.add(minNew);
-        frame.add(mainGraph, BorderLayout.NORTH);
-        frame.add(labelPanel, BorderLayout.WEST);
-
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-    }
-
-    public static void main(String[] args)
-    {
-        //createAndShowGui();
     }
 }
 
