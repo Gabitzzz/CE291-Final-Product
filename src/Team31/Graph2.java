@@ -180,7 +180,10 @@ public class Graph2 extends JPanel {
                 long newToday = deaths.get(temp).newToday;
                 long cumulative = deaths.get(temp).cumulative;
                 // System.out.println(cumulative);
-                deathsArray.add( new Deaths(date, newToday, cumulative));
+                if (temp % 7 == 0)
+                {
+                    deathsArray.add( new Deaths(date, newToday, cumulative));
+                }
             }
 
             Graph2 mainGraph = new Graph2(deathsArray);
