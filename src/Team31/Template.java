@@ -149,6 +149,7 @@ public class Template
         return deathsArray;
     }
 
+    // Generates and shows the graph of predicted deaths
     private void makePredictedDeathsGraph()
     {
         // Getting the original deaths data
@@ -210,6 +211,7 @@ public class Template
         frame.setVisible(true);
     }
 
+    // Generates and shows the graph of predicted cases
     private void makePredictedCasesGraph()
     {
         Data Data = new Data();
