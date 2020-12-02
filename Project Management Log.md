@@ -39,6 +39,7 @@ The burn-down charts show the amount of work that has been completed in the spri
 We can improve our velocity ability in future sprints by making the tasks clearer and give a reasonable estimate of time.
 
 ### Product Backlog
+![alt text](/img/backlog.png "Backlog")
 
 
 
