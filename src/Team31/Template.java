@@ -179,7 +179,7 @@ public class Template
             }
         }
 
-        // Adding the training data
+        // Adding the training data.
         for (int i = 0; i < deathsForGraph.size(); i++)
         {
             long cumulative = deathsForGraph.get(i).cumulative;
@@ -240,7 +240,7 @@ public class Template
             }
         }
 
-        // Adding the training data
+        // Adding the training data.
         for (int i = 0; i < casesForGraph.size(); i++)
         {
             long cumulative = casesForGraph.get(i).cumulative;
