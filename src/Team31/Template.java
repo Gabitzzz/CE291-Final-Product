@@ -163,15 +163,8 @@ public class Template
         ArrayList<Integer> xTime = new ArrayList<>();
         ArrayList<Long> yDeaths = new ArrayList<>();
 
-        // Adding the training data
-        for (int i = 0; i < deaths.size(); i++)
-        {
-            int temp = (deaths.size() - 1) - i;
-            long cumulative = deaths.get(temp).cumulative;
 
-            xTime.add(temp);
-            yDeaths.add(cumulative);
-        }
+
 
         // Reverting the original data and prepare the data for graph
         for (int i = 0; i < deaths.size(); i++)
@@ -183,6 +176,18 @@ public class Template
             if (temp % 7 == 0)
             {
                 deathsForGraph.add( new Deaths(date, newToday, cumulative));
+            }
+        }
+
+        // Adding the training data
+        for (int i = 0; i < deathsForGraph.size(); i++)
+        {
+            long cumulative = deathsForGraph.get(i).cumulative;
+
+            if (i >= 31)
+            {
+                xTime.add(i);
+                yDeaths.add(cumulative);
             }
         }
 
@@ -226,21 +231,24 @@ public class Template
         for (int i = 0; i < cases.size(); i++)
         {
             int temp = (cases.size() - 1) - i;
-            long cumulative = cases.get(temp).cumulative;
-
-            xTime.add(temp);
-            yDeaths.add(cumulative);
-        }
-
-        for (int i = 0; i < cases.size(); i++)
-        {
-            int temp = (cases.size() - 1) - i;
             String date = cases.get(temp).date;
             long newToday = cases.get(temp).newToday;
             long cumulative = cases.get(temp).cumulative;
             if (temp % 7 == 0)
             {
                 casesForGraph.add( new Cases(date, newToday, cumulative));
+            }
+        }
+
+        // Adding the training data
+        for (int i = 0; i < casesForGraph.size(); i++)
+        {
+            long cumulative = casesForGraph.get(i).cumulative;
+
+            if (i >= 34)
+            {
+                xTime.add(i);
+                yDeaths.add(cumulative);
             }
         }
 

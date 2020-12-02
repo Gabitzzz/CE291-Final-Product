@@ -149,17 +149,6 @@ public class Graph extends JPanel {
         return maxDeaths;
     }
 
-    /*
-    public void setCases(ArrayList<Cases> setCases) {
-        this.casesArray = setCases;
-        invalidate();
-        this.repaint();
-    }
-
-    public ArrayList<Cases> getCases() {
-        return casesArray;
-    }*/
-
     public void createAndShowGui(){
         {
             ArrayList<Cases> casesArray = new ArrayList<>();

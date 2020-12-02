@@ -149,16 +149,6 @@ public class Graph2 extends JPanel {
         return maxDeaths;
     }
 
-   /* public void setDeaths(ArrayList<Deaths> setDeaths) {
-        this.deathsArray = setDeaths;
-        invalidate();
-        this.repaint();
-    }
-
-    public ArrayList<Deaths> getDeaths() {
-        return deathsArray;
-    }*/
-
     public void createAndShowGui(){
         {
             ArrayList<Deaths> deathsArray = new ArrayList<>();
