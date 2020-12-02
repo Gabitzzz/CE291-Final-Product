@@ -5,23 +5,14 @@ import java.util.Scanner;
 
 
 public class Main {
+
     public static void main(String[] args) {
-        Data Data = new Data();
         Scanner input = new Scanner(System.in);
-
-        Data.readFile("deaths");
-        Data.readFile("cases");
-
-        ArrayList<Deaths> deaths = Data.getDeathsArray();
-
-        ArrayList<Cases> cases = Data.getCasesArray();
 
         new Template();
 
-    }
-}
-
- /*       System.out.println("---------- TYPE THE NUMBER TO SHOW ---------");
+        System.out.println("\n");
+        System.out.println("---------- TYPE THE NUMBER TO SHOW ---------");
         System.out.println("1- Deaths Data Report\t2- Cases Data Report");
         System.out.println("--------------------------------------------\n");
         try
@@ -32,7 +23,6 @@ public class Main {
         {
             System.out.println("Invalid Input");
         }
-
     }
 
     Main(int n)
@@ -41,7 +31,7 @@ public class Main {
         {
             Data Data = new Data();
             Data.readFile("deaths");
-            ArrayList<DataStore> deaths = Data.getDataArray();
+            ArrayList<Deaths> deaths = Data.getDeathsArray();
 
             System.out.println("-------------------------------------");
             System.out.println("|      Deaths Data Report           |");
@@ -60,7 +50,7 @@ public class Main {
         {
             Data Data = new Data();
             Data.readFile("cases");
-            ArrayList<DataStore> cases = Data.getDataArray();
+            ArrayList<Cases> cases = Data.getCasesArray();
 
             System.out.println("---------------------------------------");
             System.out.println("|      Cases Data Report              |");
@@ -78,4 +68,5 @@ public class Main {
         }
     }
 }
-*/
+
+

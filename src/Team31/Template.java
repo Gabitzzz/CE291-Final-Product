@@ -26,26 +26,26 @@ public class Template
         JButton PredictCases = new JButton("Predict Cases");
         JButton PredictDeaths = new JButton("Predict Deaths");
 
-        /*Predictdeaths.addActionListener(new ActionListener() {
+        PredictDeaths.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                NewFrame(1);
-
+            public void actionPerformed(ActionEvent e)
+            {
+                makePredictedDeathsGraph();
             }
-        });*/
+        });
 
-       /* Predictcases.addActionListener(new ActionListener() {
+       PredictCases.addActionListener(new ActionListener()
+       {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                Data Data = new Data();
-                Data.readFile("cases");
-                ArrayList<Cases> cases = Data.getCasesArray();
-               // Graph graph = new Graph(cases);
-                //graph.createAndShowGui();
+            public void actionPerformed(ActionEvent e)
+            {
+               makePredictedCasesGraph();
             }
-        });*/
+        });
 
-        deathB.addActionListener(new ActionListener() {
+        deathB.addActionListener(new ActionListener()
+        {
             @Override
             public void actionPerformed(ActionEvent e)
             {
@@ -58,9 +58,11 @@ public class Template
 
             }
         });
-        casesB.addActionListener(new ActionListener() {
+        casesB.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 //NewFrame(2);
                 Data Data = new Data();
                 Data.readFile("cases");
@@ -145,5 +147,121 @@ public class Template
             }
         }
         return deathsArray;
+    }
+
+    private void makePredictedDeathsGraph()
+    {
+        // Getting the original deaths data
+        Data Data = new Data();
+        Data.readFile("deaths");
+        ArrayList<Deaths> deaths = Data.getDeathsArray();
+        ArrayList<Deaths> deathsForGraph = new ArrayList<>();
+
+        // ArrayLists for training data
+        ArrayList<Integer> xTime = new ArrayList<>();
+        ArrayList<Long> yDeaths = new ArrayList<>();
+
+        // Adding the training data
+        for (int i = 0; i < deaths.size(); i++)
+        {
+            int temp = (deaths.size() - 1) - i;
+            long cumulative = deaths.get(temp).cumulative;
+
+            xTime.add(temp);
+            yDeaths.add(cumulative);
+        }
+
+        // Reverting the original data and prepare the data for graph
+        for (int i = 0; i < deaths.size(); i++)
+        {
+            int temp = (deaths.size() - 1) - i;
+            String date = deaths.get(temp).date;
+            long newToday = deaths.get(temp).newToday;
+            long cumulative = deaths.get(temp).cumulative;
+            if (temp % 7 == 0)
+            {
+                deathsForGraph.add( new Deaths(date, newToday, cumulative));
+            }
+        }
+
+        // Adding prediction values to the graph data
+        LinearRegression deathsPrediction = new LinearRegression(xTime, yDeaths);
+        long step = 34;
+        for (int i = 0; i < 10; i++)
+        {
+            long result = deathsPrediction.predictCumulatives(step);
+            step++;
+            String date = i + " weeks after last death";
+
+            deathsForGraph.add(new Deaths(date, 0, result));
+        }
+
+        // Making the graph and generating the frame
+        Graph2 predictedDeathGraph = new Graph2(deathsForGraph);
+        predictedDeathGraph.setPreferredSize(new Dimension(1000, 700));
+        JFrame frame = new JFrame("Deaths Prediction");
+        frame.setPreferredSize(new Dimension(1200, 900));
+
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.add(predictedDeathGraph, BorderLayout.NORTH);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    private void makePredictedCasesGraph()
+    {
+        Data Data = new Data();
+        Data.readFile("cases");
+        ArrayList<Cases> cases = Data.getCasesArray();
+        ArrayList<Cases> casesForGraph = new ArrayList<>();
+
+        ArrayList<Integer> xTime = new ArrayList<>();
+        ArrayList<Long> yDeaths = new ArrayList<>();
+
+        for (int i = 0; i < cases.size(); i++)
+        {
+            int temp = (cases.size() - 1) - i;
+            long cumulative = cases.get(temp).cumulative;
+
+            xTime.add(temp);
+            yDeaths.add(cumulative);
+        }
+
+        for (int i = 0; i < cases.size(); i++)
+        {
+            int temp = (cases.size() - 1) - i;
+            String date = cases.get(temp).date;
+            long newToday = cases.get(temp).newToday;
+            long cumulative = cases.get(temp).cumulative;
+            if (temp % 7 == 0)
+            {
+                casesForGraph.add( new Cases(date, newToday, cumulative));
+            }
+        }
+
+        LinearRegression deathsPrediction = new LinearRegression(xTime, yDeaths);
+        long step = 39;
+        for (int i = 0; i < 10; i++)
+        {
+            long result = deathsPrediction.predictCumulatives(step);
+            step++;
+            String date = i + " weeks after last death";
+
+            casesForGraph.add(new Cases(date, 0, result));
+        }
+
+        Graph predictedDeathGraph = new Graph(casesForGraph);
+        predictedDeathGraph.setPreferredSize(new Dimension(1000, 700));
+        JFrame frame = new JFrame("Cases Prediction");
+        frame.setPreferredSize(new Dimension(1200, 900));
+
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.add(predictedDeathGraph, BorderLayout.NORTH);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }
