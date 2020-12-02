@@ -10,4 +10,10 @@ public class Deaths extends Data {
         this.newToday = newToday;
         this.cumulative = cumulative;
     }
+
+
+    Deaths(String date, long newToday) {//another constructor to fit the weekly deaths
+        this.date = date;
+        this.newToday = newToday;
+    }
 }
