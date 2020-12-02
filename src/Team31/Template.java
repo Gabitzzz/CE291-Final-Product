@@ -15,6 +15,7 @@ public class Template
 {
     public Template()
     {
+        // Main frame and panel for the GUI
         JFrame frame = new JFrame("Main Menu");
         JPanel panel = new JPanel();
 
