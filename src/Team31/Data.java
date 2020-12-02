@@ -4,6 +4,10 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+//---------------------------------------------------------------------------//
+//    Reads and Puts the original Deaths and Cases data into an ArrayList    //
+//---------------------------------------------------------------------------//
+
 public class Data {
     /* Configuration Variables */
     private static String cfg_casesFilePath = "./src/Team31/cases_data_2020-Oct-30.csv"; // path to cases csv
@@ -56,7 +60,7 @@ public class Data {
                     firstLine = false; // sets variable to false after the first loop, therefore skipping first line
                 }
             }
-        } catch (IOException e) { // catches exception so program dont crash
+        } catch (IOException e) { // catches exception so program don't crash
             e.printStackTrace();
         }
     }
@@ -64,14 +68,8 @@ public class Data {
     public ArrayList<Deaths> getDeathsArray() { // returns the deathsArray
         return deathsArray;
     }
-    public ArrayList<Deaths> getDeaths2Array() { // returns the deathsArray
-        return deathsArray;
-    }
 
     public ArrayList<Cases> getCasesArray() { // returns the casesArray
-        return casesArray;
-    }
-    public ArrayList<Cases> getCases2Array() { // returns the casesArray
         return casesArray;
     }
 }

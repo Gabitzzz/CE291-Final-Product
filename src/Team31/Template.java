@@ -6,9 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-//----------------------------------------------------//
-//    !!! DON'T DELETE ANY COMMENTED CODE YET !!!     //
-//----------------------------------------------------//
+//---------------------------------------------------------------------------//
+//    Generates the Main Menu Frame and Includes the Button Functionality    //
+//---------------------------------------------------------------------------//
 
 // Template for our GUI.
 public class Template
@@ -19,9 +19,11 @@ public class Template
         JFrame frame = new JFrame("Main Menu");
         JPanel panel = new JPanel();
 
+        // Headings of the graphs
         JLabel deaths = new JLabel("Deaths Graph Preview");
         JLabel cases = new JLabel("Cases Graph Preview");
 
+        // All functional buttons
         JButton deathB = new JButton("Deaths Full Report");
         JButton casesB = new JButton("Cases Full Report");
         JButton PredictCases = new JButton("Predict Cases");
@@ -29,7 +31,7 @@ public class Template
 
         PredictDeaths.addActionListener(new ActionListener()
         {
-            @Override
+            @Override   // Calls the method which creates a new frame with predicted death values
             public void actionPerformed(ActionEvent e)
             {
                 makePredictedDeathsGraph();
@@ -38,7 +40,7 @@ public class Template
 
        PredictCases.addActionListener(new ActionListener()
        {
-            @Override
+            @Override   // Calls the method which creates a new frame with predicted cases values
             public void actionPerformed(ActionEvent e)
             {
                makePredictedCasesGraph();
@@ -47,10 +49,9 @@ public class Template
 
         deathB.addActionListener(new ActionListener()
         {
-            @Override
+            @Override   // Generates the detailed version of deaths graph
             public void actionPerformed(ActionEvent e)
             {
-                //NewFrame(1);
                 Data Data2 = new Data();
                 Data2.readFile("deaths");
                 ArrayList<Deaths> deaths = Data2.getDeathsArray();
@@ -61,10 +62,9 @@ public class Template
         });
         casesB.addActionListener(new ActionListener()
         {
-            @Override
+            @Override   // Generates the detailed version of the cases graph
             public void actionPerformed(ActionEvent e)
             {
-                //NewFrame(2);
                 Data Data = new Data();
                 Data.readFile("cases");
                 ArrayList<Cases> cases = Data.getCasesArray();
@@ -78,6 +78,7 @@ public class Template
         panel.setSize(new Dimension(1200, 600));
         panel.setLayout(null);
 
+        // Setting the position and size of the GUI elements
         deaths.setBounds(150, 50, 200, 50);
         cases.setBounds(700, 50, 200, 50);
         deathB.setBounds(150, 400, 200, 50);
@@ -85,6 +86,7 @@ public class Template
         PredictCases.setBounds(700, 480, 200, 50);
         PredictDeaths.setBounds(150,480,200,50);
 
+        // Adding the GUI elements to the panel
         panel.add(deaths);
         panel.add(cases);
         panel.add(deathB);
@@ -92,14 +94,15 @@ public class Template
         panel.add(PredictCases);
         panel.add(PredictDeaths);
 
+        // Generating the smaller previews of the both graphs
         Graph graph = new Graph(getCasesData());
         Graph2 graph2 = new Graph2(getDeathsData());
 
+        // Setting the position and size of the graphs
         graph.setBounds(600, 100, 500, 300);
         panel.add(graph);
         graph2.setBounds(50, 100, 500, 300);
         panel.add(graph2);
-
 
         frame.setSize(new Dimension(1200, 600));
         frame.add(panel, BorderLayout.CENTER);
@@ -108,13 +111,14 @@ public class Template
         frame.setVisible(true);
     }
 
-    private ArrayList<Cases> getCasesData()
+    private ArrayList<Cases> getCasesData()   // Gets the original cases data
     {
         ArrayList<Cases> casesArray = new ArrayList<>();
         Data Data = new Data();
         Data.readFile("cases");
         ArrayList<Cases> casesTemp = Data.getCasesArray();
 
+        // Reverting the original data
         for (int i = 0; i < casesTemp.size(); i++)
         {
             int temp = (casesTemp.size() - 1) - i;
@@ -129,13 +133,14 @@ public class Template
         return casesArray;
     }
 
-    private ArrayList<Deaths> getDeathsData()
+    private ArrayList<Deaths> getDeathsData()   // Getting the original deaths data
     {
         ArrayList<Deaths> deathsArray = new ArrayList<>();
         Data Data2 = new Data();
         Data2.readFile("deaths");
         ArrayList<Deaths> deathsTemp = Data2.getDeathsArray();
 
+        // Reverting the original data
         for (int i = 0; i < deathsTemp.size(); i++)
         {
             int temp = (deathsTemp.size() - 1) - i;
@@ -163,9 +168,6 @@ public class Template
         ArrayList<Integer> xTime = new ArrayList<>();
         ArrayList<Long> yDeaths = new ArrayList<>();
 
-
-
-
         // Reverting the original data and prepare the data for graph
         for (int i = 0; i < deaths.size(); i++)
         {
@@ -184,16 +186,18 @@ public class Template
         {
             long cumulative = deathsForGraph.get(i).cumulative;
 
-            if (i >= 31)
+            if (i >= 31)   // Training the system after week 31
             {
                 xTime.add(i);
                 yDeaths.add(cumulative);
             }
         }
 
-        // Adding prediction values to the graph data
+        // Calculating the predictions
         LinearRegression deathsPrediction = new LinearRegression(xTime, yDeaths);
-        long step = 34;
+        long step = 34;   // Last week of the original data
+
+        // Adding prediction values to the graph data
         for (int i = 0; i < 10; i++)
         {
             long result = deathsPrediction.predictCumulatives(step);
@@ -220,14 +224,18 @@ public class Template
     // Generates and shows the graph of predicted cases
     private void makePredictedCasesGraph()
     {
+        // Getting the original deaths data
         Data Data = new Data();
         Data.readFile("cases");
+
+        // ArrayLists for training data
         ArrayList<Cases> cases = Data.getCasesArray();
         ArrayList<Cases> casesForGraph = new ArrayList<>();
 
         ArrayList<Integer> xTime = new ArrayList<>();
         ArrayList<Long> yDeaths = new ArrayList<>();
 
+        // Reverting the original data and prepare the data for graph
         for (int i = 0; i < cases.size(); i++)
         {
             int temp = (cases.size() - 1) - i;
@@ -245,15 +253,18 @@ public class Template
         {
             long cumulative = casesForGraph.get(i).cumulative;
 
-            if (i >= 34)
+            if (i >= 34)   // Training the system after week 34
             {
                 xTime.add(i);
                 yDeaths.add(cumulative);
             }
         }
 
+        // Calculating the predictions
         LinearRegression deathsPrediction = new LinearRegression(xTime, yDeaths);
-        long step = 39;
+        long step = 39;   // Last week of the original data
+
+        // Adding prediction values to the graph data
         for (int i = 0; i < 10; i++)
         {
             long result = deathsPrediction.predictCumulatives(step);

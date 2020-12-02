@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
+//------------------------------------------------------------//
+//    Configures and Generates a Line Graph for Cases Data    //
+//------------------------------------------------------------//
 
 public class Graph extends JPanel {
 
     private static ArrayList<Cases> casesArray;
     private int padding = 25;
-    private int labelPadding = 25;
+    private int labelPadding = 30;
     private Color lineColor = new Color(44, 102, 230, 180);
     private Color pointColor = new Color(100, 100, 100, 180);
     private Color gridColor = new Color(200, 200, 200, 200);

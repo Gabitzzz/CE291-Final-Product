@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
+//------------------------------------------------------------//
+//   Configures and Generates a Line Graph for Deaths Data    //
+//------------------------------------------------------------//
 
 public class Graph2 extends JPanel {
 

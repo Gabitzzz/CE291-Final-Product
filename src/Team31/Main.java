@@ -3,6 +3,9 @@ package Team31;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//---------------------------------------------------------------------------//
+//   Initiates the Main Graphical User Interface and Shows the Main Frame    //
+//---------------------------------------------------------------------------//
 
 public class Main {
 
@@ -12,6 +15,7 @@ public class Main {
         // The GUI
         new Template();
 
+        // Simple report interface through the console
         System.out.println("\n");
         System.out.println("---------- TYPE THE NUMBER TO SHOW ---------");
         System.out.println("1- Deaths Data Report\t2- Cases Data Report");
