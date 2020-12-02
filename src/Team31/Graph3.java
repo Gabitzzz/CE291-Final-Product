@@ -7,6 +7,7 @@ import javax.swing.*;
 
 
 public class Graph3 extends JPanel {
+    /*
 
     private static ArrayList<Cases> cases2Array;
     private int padding = 25;
@@ -149,16 +150,7 @@ public class Graph3 extends JPanel {
         return maxDeaths;
     }
 
-    /*
-    public void setCases(ArrayList<Cases> setCases) {
-        this.casesArray = setCases;
-        invalidate();
-        this.repaint();
-    }
 
-    public ArrayList<Cases> getCases() {
-        return casesArray;
-    }*/
 
     public void createAndShowGui(){
         {
@@ -211,6 +203,7 @@ public class Graph3 extends JPanel {
 
         }
     }
+    */
 }
 
 

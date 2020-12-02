@@ -1,8 +1,5 @@
 package Team31;
 
-import Team31.Data;
-import Team31.Deaths;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +7,7 @@ import javax.swing.*;
 
 
 public class Graph4 extends JPanel {
+    /*
 
     private static ArrayList<Deaths> deaths2Array;
     private int padding = 25;
@@ -204,4 +202,6 @@ public class Graph4 extends JPanel {
 
         }
     }
+
+     */
 }

@@ -30,13 +30,13 @@ public class Template
 
         JLabel deaths = new JLabel("Deaths Graph Preview");
         JLabel cases = new JLabel("Cases Graph Preview");
-        JLabel deaths2 = new JLabel("WeeklyDeaths Graph Preview");
-        JLabel cases2 = new JLabel("Weekly Cases Graph Preview");
+       // JLabel deaths2 = new JLabel("WeeklyDeaths Graph Preview");
+        //JLabel cases2 = new JLabel("Weekly Cases Graph Preview");
 
         JButton deathB = new JButton("Deaths Full Report");
         JButton casesB = new JButton("Cases Full Report");
-        JButton deathA = new JButton("Deaths weekly Report");
-        JButton casesA = new JButton("Cases Weekly Report");
+        //JButton deathA = new JButton("Deaths weekly Report");
+        //JButton casesA = new JButton("Cases Weekly Report");
         JButton PredictCases = new JButton("Predict Cases");
         JButton PredictDeaths = new JButton("Predict Deaths");
 
@@ -84,7 +84,7 @@ public class Template
                 graph.createAndShowGui();
             }
         });
-
+/*
         casesA.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,6 +97,7 @@ public class Template
                 graph3.createAndShowGui();
             }
         });
+
 
         deathA.addActionListener(new ActionListener() {
             @Override
@@ -112,6 +113,8 @@ public class Template
             }
         });
 
+ */
+
 
         panel.setLayout(null);
 
@@ -119,10 +122,10 @@ public class Template
         cases.setBounds(700, 50, 200, 50);
         deathB.setBounds(150, 400, 200, 50);
         casesB.setBounds(700, 400, 200, 50);
-        deaths2.setBounds(150, 530, 200, 50);
-        cases2.setBounds(700, 530, 200, 50);
-        deathA.setBounds(150, 700, 200, 50);
-        casesA.setBounds(700, 700, 200, 50);
+        //deaths2.setBounds(150, 530, 200, 50);
+        //cases2.setBounds(700, 530, 200, 50);
+        //deathA.setBounds(150, 700, 200, 50);
+        //casesA.setBounds(700, 700, 200, 50);
         PredictCases.setBounds(700, 480, 200, 50);
         PredictDeaths.setBounds(150,480,200,50);
 
@@ -130,26 +133,26 @@ public class Template
         panel.add(cases);
         panel.add(deathB);
         panel.add(casesB);
-        panel.add(deaths2);
-        panel.add(cases2);
-        panel.add(deathA);
-        panel.add(casesA);
+        //panel.add(deaths2);
+       // panel.add(cases2);
+        //panel.add(deathA);
+       //panel.add(casesA);
         panel.add(PredictCases);
         panel.add(PredictDeaths);
 
         Graph graph = new Graph(getCasesData());
         Graph2 graph2 = new Graph2(getDeathsData());
-        Graph3 graph3 = new Graph3(getCases2Data());
-        Graph4 graph4 = new Graph4(getDeaths2Data());
+        //Graph3 graph3 = new Graph3(getCases2Data());
+        //Graph4 graph4 = new Graph4(getDeaths2Data());
 
         graph.setBounds(600, 100, 500, 300);
         panel.add(graph);
         graph2.setBounds(50, 100, 500, 300);
         panel.add(graph2);
-        graph3.setBounds(600, 500, 500, 300);
-        panel.add(graph3);
-        graph4.setBounds(50, 500, 500, 300);
-        panel.add(graph4);
+        //graph3.setBounds(600, 500, 500, 300);
+       // panel.add(graph3);
+        //graph4.setBounds(50, 500, 500, 300);
+        //panel.add(graph4);
 
 
 
@@ -203,7 +206,7 @@ public class Template
         return deathsArray;
     }
 
-
+/*
     private ArrayList<Cases> getCases2Data()
     {
         ArrayList<Cases> cases2Array = new ArrayList<>();
@@ -243,4 +246,6 @@ public class Template
         }
         return deaths2Array;
     }
+
+ */
 }
