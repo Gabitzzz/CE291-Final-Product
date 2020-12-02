@@ -10,5 +10,10 @@ public class Cases extends Data {
         this.newToday = newToday;
         this.cumulative = cumulative;
     }
+
+    Cases(String date, long newToday) {//another constructor to fit the weekly deaths
+        this.date = date;
+        this.newToday = newToday;
+    }
 }
 

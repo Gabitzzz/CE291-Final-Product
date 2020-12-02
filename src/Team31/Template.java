@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+
 //----------------------------------------------------//
 //    !!! DON'T DELETE ANY COMMENTED CODE YET !!!     //
 //----------------------------------------------------//
@@ -18,11 +19,24 @@ public class Template
         JFrame frame = new JFrame("Main Menu");
         JPanel panel = new JPanel();
 
+        JScrollPane jScrollPane = new JScrollPane(panel);
+// only a configuration to the jScrollPane...
+        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+// Then, add the jScrollPane to your frame
+        frame.getContentPane().add(jScrollPane);
+
+
         JLabel deaths = new JLabel("Deaths Graph Preview");
         JLabel cases = new JLabel("Cases Graph Preview");
+        JLabel deaths2 = new JLabel("WeeklyDeaths Graph Preview");
+        JLabel cases2 = new JLabel("Weekly Cases Graph Preview");
 
         JButton deathB = new JButton("Deaths Full Report");
         JButton casesB = new JButton("Cases Full Report");
+        JButton deathA = new JButton("Deaths weekly Report");
+        JButton casesA = new JButton("Cases Weekly Report");
         JButton PredictCases = new JButton("Predict Cases");
         JButton PredictDeaths = new JButton("Predict Deaths");
 
@@ -71,14 +85,44 @@ public class Template
             }
         });
 
+        casesA.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //NewFrame(2);
+                Data Data3 = new Data();
+                Data3.readFile("cases");
+                ArrayList<Cases> cases2 = Data3.getCases2Array();
 
-        panel.setSize(new Dimension(1200, 600));
+                Graph3 graph3 = new Graph3(cases2);
+                graph3.createAndShowGui();
+            }
+        });
+
+        deathA.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                //NewFrame(1);
+                Data Data4 = new Data();
+                Data4.readFile("deaths");
+                ArrayList<Deaths> deaths2 = Data4.getDeaths2Array();
+                Graph4 graphs4 = new Graph4(deaths2);
+                graphs4.createAndShowGui();
+
+            }
+        });
+
+
         panel.setLayout(null);
 
         deaths.setBounds(150, 50, 200, 50);
         cases.setBounds(700, 50, 200, 50);
         deathB.setBounds(150, 400, 200, 50);
         casesB.setBounds(700, 400, 200, 50);
+        deaths2.setBounds(150, 530, 200, 50);
+        cases2.setBounds(700, 530, 200, 50);
+        deathA.setBounds(150, 700, 200, 50);
+        casesA.setBounds(700, 700, 200, 50);
         PredictCases.setBounds(700, 480, 200, 50);
         PredictDeaths.setBounds(150,480,200,50);
 
@@ -86,20 +130,32 @@ public class Template
         panel.add(cases);
         panel.add(deathB);
         panel.add(casesB);
+        panel.add(deaths2);
+        panel.add(cases2);
+        panel.add(deathA);
+        panel.add(casesA);
         panel.add(PredictCases);
         panel.add(PredictDeaths);
 
         Graph graph = new Graph(getCasesData());
         Graph2 graph2 = new Graph2(getDeathsData());
+        Graph3 graph3 = new Graph3(getCasesData());
+        Graph4 graph4 = new Graph4(getDeathsData());
 
         graph.setBounds(600, 100, 500, 300);
         panel.add(graph);
         graph2.setBounds(50, 100, 500, 300);
         panel.add(graph2);
+        graph3.setBounds(600, 500, 500, 300);
+        panel.add(graph3);
+        graph4.setBounds(50, 500, 500, 300);
+        panel.add(graph4);
 
 
-        frame.setSize(new Dimension(1200, 600));
+
+        frame.setSize(new Dimension(1600, 1600));
         frame.add(panel, BorderLayout.CENTER);
+
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

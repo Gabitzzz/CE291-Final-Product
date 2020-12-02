@@ -6,9 +6,9 @@ import java.util.List;
 import javax.swing.*;
 
 
-public class Graph extends JPanel {
+public class Graph3 extends JPanel {
 
-    private static ArrayList<Cases> casesArray;
+    private static ArrayList<Cases> cases2Array;
     private int padding = 25;
     private int labelPadding = 25;
     private Color lineColor = new Color(44, 102, 230, 180);
@@ -18,33 +18,33 @@ public class Graph extends JPanel {
     private int pointWidth = 4;
     private int numberYDivisions = 10;
 
-    public Graph(ArrayList<Cases> casesArray) {
-        this.casesArray = casesArray;
+    public Graph3(ArrayList<Cases> cases2Array) {
+        this.cases2Array = cases2Array;
     }
 
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g3 = (Graphics2D) g;
-        g3.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        Graphics2D g4 = (Graphics2D) g;
+        g4.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        double xScale = ((int) getWidth() - (2 * padding) - labelPadding) / (casesArray.size() - 1);
+        double xScale = ((int) getWidth() - (2 * padding) - labelPadding) / (cases2Array.size() - 1);
         double yScale = ((int) getHeight() - 2 * padding - labelPadding) / (getMaxCase() - getMinCase());
 
         List<Point> graphPoints = new ArrayList<>();
-        for (int i = 0; i < casesArray.size(); i++)
+        for (int i = 0; i < cases2Array.size(); i++)
         {
             int x1 = (int) (i * xScale + padding + labelPadding);
-            int y1 = (int) ((getMaxCase() - casesArray.get(i).cumulative) * yScale + padding);
+            int y1 = (int) ((getMaxCase() - cases2Array.get(i).cumulative) * yScale + padding);
             //System.out.println(y1);
             graphPoints.add(new Point(x1, y1));
         }
 
         // draw white background
-        g3.setColor(Color.WHITE);
-        g3.fillRect(padding + labelPadding, padding, getWidth() - (2 * padding) - labelPadding, getHeight() - 2 * padding - labelPadding);
-        g3.setColor(Color.BLACK);
+        g4.setColor(Color.WHITE);
+        g4.fillRect(padding + labelPadding, padding, getWidth() - (2 * padding) - labelPadding, getHeight() - 2 * padding - labelPadding);
+        g4.setColor(Color.BLACK);
 
         // create hatch marks and grid lines for y axis.
         for (int i = 0; i < numberYDivisions + 1; i++)
@@ -53,72 +53,72 @@ public class Graph extends JPanel {
             int x1 = pointWidth + padding + labelPadding;
             int y0 = getHeight() - ((i * (getHeight() - padding * 2 - labelPadding)) / numberYDivisions + padding + labelPadding);
             int y1 = y0;
-            if (casesArray.size() > 0) {
-                g3.setColor(gridColor);
-                g3.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
-                g3.setColor(Color.BLACK);
+            if (cases2Array.size() > 0) {
+                g4.setColor(gridColor);
+                g4.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
+                g4.setColor(Color.BLACK);
                 String yLabel = ((int) ((getMinCase() + (getMaxCase() - getMinCase()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
                 yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Used that to remove the long characters and I converted it to integers.
-                FontMetrics metrics = g3.getFontMetrics();
+                FontMetrics metrics = g4.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
-                g3.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
+                g4.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
             }
-            g3.drawLine(x0, y0, x1, y1);
+            g4.drawLine(x0, y0, x1, y1);
         }
 
         // and for x axis
-        for (int i = 0; i < casesArray.size(); i++) {
-            if (casesArray.size() > 1) {
-                int x0 = i * (getWidth() - padding * 2 - labelPadding) / (casesArray.size() - 1) + padding + labelPadding;
+        for (int i = 0; i < cases2Array.size(); i++) {
+            if (cases2Array.size() > 1) {
+                int x0 = i * (getWidth() - padding * 2 - labelPadding) / (cases2Array.size() - 1) + padding + labelPadding;
                 int x1 = x0;
                 int y0 = getHeight() - padding - labelPadding;
                 int y1 = y0 - pointWidth;
-                if ((i % ((int) ((casesArray.size() / 20.0)) + 1)) == 0) {
-                    g3.setColor(gridColor);
-                    g3.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
-                    g3.setColor(Color.BLACK);
+                if ((i % ((int) ((cases2Array.size() / 20.0)) + 1)) == 0) {
+                    g4.setColor(gridColor);
+                    g4.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
+                    g4.setColor(Color.BLACK);
                     String xLabel = i + "";
-                    FontMetrics metrics = g3.getFontMetrics();
+                    FontMetrics metrics = g4.getFontMetrics();
                     int labelWidth = metrics.stringWidth(xLabel);
-                    g3.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
+                    g4.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
                 }
-                g.drawLine(x0, y0, x1, y1);
+                g4.drawLine(x0, y0, x1, y1);
             }
         }
 
         // create x and y axes
-        g3.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, padding + labelPadding, padding);
-        g3.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
+        g4.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, padding + labelPadding, padding);
+        g4.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
 
-        Stroke oldStroke = g3.getStroke();
-        g3.setColor(lineColor);
-        g3.setStroke(GRAPH_STROKE);
+        Stroke oldStroke = g4.getStroke();
+        g4.setColor(lineColor);
+        g4.setStroke(GRAPH_STROKE);
         for (int i = 0; i < graphPoints.size() - 1; i++) {
             int x1 = graphPoints.get(i).x;
             int y1 = graphPoints.get(i).y;
             int x2 = graphPoints.get(i + 1).x;
             int y2 = graphPoints.get(i + 1).y;
-            g3.drawLine(x1, y1, x2, y2);
+            g4.drawLine(x1, y1, x2, y2);
         }
 
-        g3.setStroke(oldStroke);
-        g3.setColor(pointColor);
+        g4.setStroke(oldStroke);
+        g4.setColor(pointColor);
         for (int i = 0; i < graphPoints.size(); i++) {
             int x = graphPoints.get(i).x - pointWidth / 2;
             int y = graphPoints.get(i).y - pointWidth / 2;
             int ovalW = pointWidth;
             int ovalH = pointWidth;
-            g3.fillOval(x, y, ovalW, ovalH);
+            g4.fillOval(x, y, ovalW, ovalH);
         }
     }
 
     private double getMinCase() {
         int minCase = Integer.MAX_VALUE;
         //long minCase = Long.MAX_VALUE;
-        for (Cases case1 : casesArray) {
+        for (Cases case1 : cases2Array) {
             //System.out.println(case1.g());
             //System.out.println(case1.cumulative);
-            minCase = Math.min(minCase, (int)case1.cumulative);
+            minCase = Math.min(minCase, (int)case1.newToday);
             //minCase = Integer.valueOf(Math.round(double.parseDouble(minCase)));
         }
         return minCase;
@@ -126,8 +126,8 @@ public class Graph extends JPanel {
 
     private int getMaxCase() {
         int maxCase = Integer.MIN_VALUE;
-        for (Cases case1 : casesArray) {
-            maxCase = Math.max(maxCase, (int) case1.cumulative);
+        for (Cases case1 : cases2Array) {
+            maxCase = Math.max(maxCase, (int) case1.newToday);
 
         }
         return maxCase;
@@ -135,7 +135,7 @@ public class Graph extends JPanel {
 
     private int getMinNew() {
         int minCases = Integer.MAX_VALUE;
-        for (Cases case1 : casesArray) {
+        for (Cases case1 : cases2Array) {
             minCases = Math.min(minCases, (int)case1.newToday);
         }
         return minCases;
@@ -143,7 +143,7 @@ public class Graph extends JPanel {
 
     private int getMaxNew() {
         int maxDeaths = Integer.MIN_VALUE;
-        for (Cases case1 : casesArray) {
+        for (Cases case1 : cases2Array) {
             maxDeaths = Math.max(maxDeaths, (int)case1.newToday);
         }
         return maxDeaths;
@@ -165,18 +165,16 @@ public class Graph extends JPanel {
             ArrayList<Cases> casesArray = new ArrayList<>();
             Data Data = new Data();
             Data.readFile("cases");
-            ArrayList<Cases> cases = Data.getCasesArray();
+            ArrayList<Cases> cases2 = Data.getCasesArray();
 
-            for (int i = 0; i < cases.size(); i++)
+            for (int i = 0; i < cases2.size(); i++)
             {
-                int temp = (cases.size() - 1) - i;
-                String date = cases.get(temp).date;
-                long newToday = cases.get(temp).newToday;
-                long cumulative = cases.get(temp).cumulative;
-                // System.out.println(cumulative);
+                int temp = (cases2.size() - 1) - i;
+                String date = cases2.get(temp).date;
+                long newToday = cases2.get(temp).newToday;
                 if (temp % 7 == 0)
                 {
-                    casesArray.add( new Cases(date, newToday, cumulative));
+                    cases2Array.add( new Cases(date, newToday));
                 }
             }
 
@@ -214,3 +212,7 @@ public class Graph extends JPanel {
         }
     }
 }
+
+
+
+

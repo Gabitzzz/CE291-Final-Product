@@ -13,8 +13,10 @@ public class Main {
         Data.readFile("cases");
 
         ArrayList<Deaths> deaths = Data.getDeathsArray();
+        ArrayList<Deaths> deaths2 = Data.getDeathsArray();
 
         ArrayList<Cases> cases = Data.getCasesArray();
+        ArrayList<Cases> cases2 = Data.getCasesArray();
 
         new Template();
 
