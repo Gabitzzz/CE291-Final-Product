@@ -2,7 +2,7 @@ package Team31;
 
 import java.util.ArrayList;
 
-// Linear Regression Model..
+// Linear Regression Model.
 public class LinearRegression
 {
     private ArrayList<Integer> xTime ;
