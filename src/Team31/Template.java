@@ -139,8 +139,8 @@ public class Template
 
         Graph graph = new Graph(getCasesData());
         Graph2 graph2 = new Graph2(getDeathsData());
-        Graph3 graph3 = new Graph3(getCasesData());
-        Graph4 graph4 = new Graph4(getDeathsData());
+        Graph3 graph3 = new Graph3(getCases2Data());
+        Graph4 graph4 = new Graph4(getDeaths2Data());
 
         graph.setBounds(600, 100, 500, 300);
         panel.add(graph);
@@ -201,5 +201,46 @@ public class Template
             }
         }
         return deathsArray;
+    }
+
+
+    private ArrayList<Cases> getCases2Data()
+    {
+        ArrayList<Cases> cases2Array = new ArrayList<>();
+        Data Data3 = new Data();
+        Data3.readFile("cases");
+        ArrayList<Cases> cases2Temp = Data3.getCases2Array();
+
+        for (int i = 0; i < cases2Temp.size(); i++)
+        {
+            int temp2 = (cases2Temp.size() - 1) - i;
+            String date = cases2Temp.get(temp2).date;
+            long newToday = cases2Temp.get(temp2).newToday;
+            if (temp2 % 7 == 0)
+            {
+                cases2Array.add( new Cases(date, newToday));
+            }
+        }
+        return cases2Array;
+    }
+
+    private ArrayList<Deaths> getDeaths2Data()
+    {
+        ArrayList<Deaths> deaths2Array = new ArrayList<>();
+        Data Data4 = new Data();
+        Data4.readFile("deaths");
+        ArrayList<Deaths> deaths2Temp = Data4.getDeathsArray();
+
+        for (int i = 0; i < deaths2Temp.size(); i++)
+        {
+            int temp2 = (deaths2Temp.size() - 1) - i;
+            String date = deaths2Temp.get(temp2).date;
+            long newToday = deaths2Temp.get(temp2).newToday;
+            if (temp2 % 7 == 0)
+            {
+                deaths2Array.add( new Deaths(date, newToday));
+            }
+        }
+        return deaths2Array;
     }
 }

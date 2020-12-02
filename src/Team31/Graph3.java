@@ -162,10 +162,10 @@ public class Graph3 extends JPanel {
 
     public void createAndShowGui(){
         {
-            ArrayList<Cases> casesArray = new ArrayList<>();
+            ArrayList<Cases> cases2Array = new ArrayList<>();
             Data Data = new Data();
             Data.readFile("cases");
-            ArrayList<Cases> cases2 = Data.getCasesArray();
+            ArrayList<Cases> cases2 = Data.getCases2Array();
 
             for (int i = 0; i < cases2.size(); i++)
             {
@@ -178,7 +178,7 @@ public class Graph3 extends JPanel {
                 }
             }
 
-            Graph mainGraph = new Graph(casesArray);
+            Graph mainGraph = new Graph(cases2Array);
             mainGraph.setPreferredSize(new Dimension(800, 600));
             JFrame frame = new JFrame("Cases Graph");
             frame.setPreferredSize(new Dimension(1000, 800));
