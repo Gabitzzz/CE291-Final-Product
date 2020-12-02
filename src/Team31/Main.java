@@ -26,7 +26,7 @@ public class Main {
         }
     }
 
-    // Simple report menu
+    // Simple report menu.
     Main(int n)
     {
         if (n == 1)
