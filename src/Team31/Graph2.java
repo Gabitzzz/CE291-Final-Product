@@ -37,16 +37,15 @@ public class Graph2 extends JPanel {
         {
             int x1 = (int) (i * xScale + padding + labelPadding);
             int y1 = (int) ((getMaxDeath() - deathsArray.get(i).cumulative) * yScale + padding);
-            //System.out.println(y1);
             graphPoints.add(new Point(x1, y1));
         }
 
-        // draw white background
+        //Sketching the background of the graph
         g2.setColor(Color.WHITE);
         g2.fillRect(padding + labelPadding, padding, getWidth() - (2 * padding) - labelPadding, getHeight() - 2 * padding - labelPadding);
-        g2.setColor(Color.BLACK);
 
-        // create hatch marks and grid lines for y axis.
+
+        // Creating Y-Axis
         for (int i = 0; i < numberYDivisions + 1; i++)
         {
             int x0 = padding + labelPadding;
@@ -58,7 +57,8 @@ public class Graph2 extends JPanel {
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
                 String yLabel = ((int) ((getMinDeath() + (getMaxDeath() - getMinDeath()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
-                yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Used that to remove the long characters and I converted it to integers.
+                yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Round the numbers to integers as they are presented to the csv
+                //Implement Y-axis numbers
                 FontMetrics metrics = g2.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
                 g2.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
@@ -66,7 +66,7 @@ public class Graph2 extends JPanel {
             g2.drawLine(x0, y0, x1, y1);
         }
 
-        // and for x axis
+        // Creating X-Axis
         for (int i = 0; i < deathsArray.size(); i++) {
             if (deathsArray.size() > 1) {
                 int x0 = i * (getWidth() - padding * 2 - labelPadding) / (deathsArray.size() - 1) + padding + labelPadding;
@@ -78,6 +78,7 @@ public class Graph2 extends JPanel {
                     g2.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
                     g2.setColor(Color.BLACK);
                     String xLabel = i + "";
+                    //Implement X-axis numbers
                     FontMetrics metrics = g2.getFontMetrics();
                     int labelWidth = metrics.stringWidth(xLabel);
                     g2.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
@@ -86,7 +87,7 @@ public class Graph2 extends JPanel {
             }
         }
 
-        // create x and y axes
+        // Creating Both AXES
         g2.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, padding + labelPadding, padding);
         g2.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
 
@@ -112,14 +113,14 @@ public class Graph2 extends JPanel {
         }
     }
 
+    //Using functions to be displayed below the graphs to show a better statistic report
+    //For example it will be displayed the minimum of deaths that were on that range of days.
+
     private double getMinDeath() {
         int minDeath = Integer.MAX_VALUE;
-        //long minCase = Long.MAX_VALUE;
         for (Deaths death1 : deathsArray) {
-            //System.out.println(case1.g());
-            //System.out.println(case1.cumulative);
             minDeath = Math.min(minDeath, (int)death1.cumulative);
-            //minCase = Integer.valueOf(Math.round(double.parseDouble(minCase)));
+
         }
         return minDeath;
     }
@@ -162,7 +163,6 @@ public class Graph2 extends JPanel {
                 String date = deaths.get(temp).date;
                 long newToday = deaths.get(temp).newToday;
                 long cumulative = deaths.get(temp).cumulative;
-                // System.out.println(cumulative);
                 if (temp % 7 == 0)
                 {
                     deathsArray.add( new Deaths(date, newToday, cumulative));

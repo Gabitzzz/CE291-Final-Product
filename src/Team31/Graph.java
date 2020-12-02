@@ -37,16 +37,16 @@ public class Graph extends JPanel {
         {
             int x1 = (int) (i * xScale + padding + labelPadding);
             int y1 = (int) ((getMaxCase() - casesArray.get(i).cumulative) * yScale + padding);
-            //System.out.println(y1);
+
             graphPoints.add(new Point(x1, y1));
         }
 
-        // draw white background
+        //Sketching the background of the graph
         g3.setColor(Color.WHITE);
         g3.fillRect(padding + labelPadding, padding, getWidth() - (2 * padding) - labelPadding, getHeight() - 2 * padding - labelPadding);
-        g3.setColor(Color.BLACK);
 
-        // create hatch marks and grid lines for y axis.
+
+        // Creating Y-Axis
         for (int i = 0; i < numberYDivisions + 1; i++)
         {
             int x0 = padding + labelPadding;
@@ -58,7 +58,8 @@ public class Graph extends JPanel {
                 g3.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g3.setColor(Color.BLACK);
                 String yLabel = ((int) ((getMinCase() + (getMaxCase() - getMinCase()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
-                yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Used that to remove the long characters and I converted it to integers.
+                yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Round the numbers to integers as they are presented to the csv
+                //Implement Y-axis numbers
                 FontMetrics metrics = g3.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
                 g3.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
@@ -66,7 +67,7 @@ public class Graph extends JPanel {
             g3.drawLine(x0, y0, x1, y1);
         }
 
-        // and for x axis
+        // Creating X-Axis
         for (int i = 0; i < casesArray.size(); i++) {
             if (casesArray.size() > 1) {
                 int x0 = i * (getWidth() - padding * 2 - labelPadding) / (casesArray.size() - 1) + padding + labelPadding;
@@ -78,6 +79,7 @@ public class Graph extends JPanel {
                     g3.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
                     g3.setColor(Color.BLACK);
                     String xLabel = i + "";
+                    //Implement X-axis numbers
                     FontMetrics metrics = g3.getFontMetrics();
                     int labelWidth = metrics.stringWidth(xLabel);
                     g3.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
@@ -86,7 +88,7 @@ public class Graph extends JPanel {
             }
         }
 
-        // create x and y axes
+        // Creating Both AXES
         g3.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, padding + labelPadding, padding);
         g3.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
 
@@ -111,15 +113,15 @@ public class Graph extends JPanel {
             g3.fillOval(x, y, ovalW, ovalH);
         }
     }
-
+    //Using functions to be displayed below the graphs to show a better statistic report
+    //For example it will be displayed the minimum of cases that were on that range of days.
     private double getMinCase() {
         int minCase = Integer.MAX_VALUE;
-        //long minCase = Long.MAX_VALUE;
+
         for (Cases case1 : casesArray) {
-            //System.out.println(case1.g());
-            //System.out.println(case1.cumulative);
+
             minCase = Math.min(minCase, (int)case1.cumulative);
-            //minCase = Integer.valueOf(Math.round(double.parseDouble(minCase)));
+
         }
         return minCase;
     }
@@ -162,7 +164,7 @@ public class Graph extends JPanel {
                 String date = cases.get(temp).date;
                 long newToday = cases.get(temp).newToday;
                 long cumulative = cases.get(temp).cumulative;
-                // System.out.println(cumulative);
+
                 if (temp % 7 == 0)
                 {
                     casesArray.add( new Cases(date, newToday, cumulative));
