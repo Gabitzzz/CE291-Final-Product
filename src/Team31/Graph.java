@@ -11,9 +11,9 @@ public class Graph extends JPanel {
     private static ArrayList<Cases> casesArray;
     private int padding = 25;
     private int labelPadding = 25;
-    private Color lineColor = new Color(44, 102, 230, 180);
+    private Color lineColor = new Color(255, 50, 50, 255);
     private Color pointColor = new Color(100, 100, 100, 180);
-    private Color gridColor = new Color(200, 200, 200, 200);
+    private Color gridColor = new Color(100, 100, 255, 150);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
     private int pointWidth = 4;
     private int numberYDivisions = 10;
@@ -37,16 +37,16 @@ public class Graph extends JPanel {
         {
             int x1 = (int) (i * xScale + padding + labelPadding);
             int y1 = (int) ((getMaxCase() - casesArray.get(i).cumulative) * yScale + padding);
-            //System.out.println(y1);
+
             graphPoints.add(new Point(x1, y1));
         }
 
-        // draw white background
+        //Sketching the color of the background, and the gridlines for the axes
         g3.setColor(Color.WHITE);
         g3.fillRect(padding + labelPadding, padding, getWidth() - (2 * padding) - labelPadding, getHeight() - 2 * padding - labelPadding);
-        g3.setColor(Color.BLACK);
 
-        // create hatch marks and grid lines for y axis.
+
+        //Sketching the design of the Y-axis
         for (int i = 0; i < numberYDivisions + 1; i++)
         {
             int x0 = padding + labelPadding;
@@ -58,7 +58,9 @@ public class Graph extends JPanel {
                 g3.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g3.setColor(Color.BLACK);
                 String yLabel = ((int) ((getMinCase() + (getMaxCase() - getMinCase()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
-                yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Used that to remove the long characters and I converted it to integers.
+                yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Round the integers numbers and they are displayed as they are on the csv
+
+                //Modifying the y-axis values to be displayed
                 FontMetrics metrics = g3.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
                 g3.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
@@ -66,7 +68,7 @@ public class Graph extends JPanel {
             g3.drawLine(x0, y0, x1, y1);
         }
 
-        // and for x axis
+        //Sketching the design of the X-axis
         for (int i = 0; i < casesArray.size(); i++) {
             if (casesArray.size() > 1) {
                 int x0 = i * (getWidth() - padding * 2 - labelPadding) / (casesArray.size() - 1) + padding + labelPadding;
@@ -78,6 +80,8 @@ public class Graph extends JPanel {
                     g3.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
                     g3.setColor(Color.BLACK);
                     String xLabel = i + "";
+
+                    //Modifying the y-axis values to be displayed
                     FontMetrics metrics = g3.getFontMetrics();
                     int labelWidth = metrics.stringWidth(xLabel);
                     g3.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
@@ -86,7 +90,7 @@ public class Graph extends JPanel {
             }
         }
 
-        // create x and y axes
+        //Creating both AXES.
         g3.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, padding + labelPadding, padding);
         g3.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
 
@@ -112,14 +116,15 @@ public class Graph extends JPanel {
         }
     }
 
+    //Using Functions to display below the graphs a better statistical report based on the graph.
+    //For example it will represent the day that there was the minimum number of cases from the first day to the last day of the csv.
     private double getMinCase() {
         int minCase = Integer.MAX_VALUE;
-        //long minCase = Long.MAX_VALUE;
+
         for (Cases case1 : casesArray) {
-            //System.out.println(case1.g());
-            //System.out.println(case1.cumulative);
+
             minCase = Math.min(minCase, (int)case1.cumulative);
-            //minCase = Integer.valueOf(Math.round(double.parseDouble(minCase)));
+
         }
         return minCase;
     }
@@ -149,16 +154,7 @@ public class Graph extends JPanel {
         return maxDeaths;
     }
 
-    /*
-    public void setCases(ArrayList<Cases> setCases) {
-        this.casesArray = setCases;
-        invalidate();
-        this.repaint();
-    }
 
-    public ArrayList<Cases> getCases() {
-        return casesArray;
-    }*/
 
     public void createAndShowGui(){
         {

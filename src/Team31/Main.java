@@ -27,6 +27,7 @@ public class Main {
     }
 
     // Simple report menu.
+    //Show's report about deaths and cases based on the csv file.
     Main(int n)
     {
         if (n == 1)
