@@ -15,22 +15,22 @@
 ### Sprint Burndown Charts
 
 Srpint 1:
-![alt text](/img/sprint1.png "Sprint_1")
+![alt text](MVP/img/sprint1.png "Sprint_1")
 
 Sprint 2: 
-![alt text](/img/sprint2.png "Sprint_2")
+![alt text](MVP/img/sprint2.png "Sprint_2")
 
 Sprint 3:
-![alt text](/img/sprint3.png "Sprint_3")
+![alt text](MVP/img/sprint3.png "Sprint_3")
 
 Sprint 4:
-![alt text](/img/sprint4.png "Sprint_4")
+![alt text](MVP/img/sprint4.png "Sprint_4")
 
 Sprint 5:
-![alt text](/img/sprint5.png "Sprint_5")
+![alt text](MVP/img/sprint5.png "Sprint_5")
 
 MVP Sprint:
-![alt text](/img/mvp_sprint.png "MVP_Sprint")
+![alt text](MVP/img/mvp_sprint.png "MVP_Sprint")
 
 ### Burndown-Charts Discussion
 
@@ -39,4 +39,4 @@ The burn-down charts show the amount of work that has been completed in the spri
 We can improve our velocity ability in future sprints by making the tasks clearer and give a reasonable estimate of time.
 
 ### Product Backlog
-![alt text](/img/backlog.png "Backlog")
+![alt text](MVP/img/backlog.png "Backlog")
