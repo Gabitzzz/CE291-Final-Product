@@ -54,7 +54,7 @@ public class Template
             {
                 Data Data2 = new Data();
                 Data2.readFile("deaths");
-                ArrayList<Deaths> deaths = Data2.getDeathsArray();
+                ArrayList<DataStore> deaths = Data2.getDeathsArray();
                 Graph2 graphs2 = new Graph2(deaths);
                 graphs2.createAndShowGui();
 
@@ -67,7 +67,7 @@ public class Template
             {
                 Data Data = new Data();
                 Data.readFile("cases");
-                ArrayList<Cases> cases = Data.getCasesArray();
+                ArrayList<DataStore> cases = Data.getCasesArray();
 
                 Graph graph = new Graph(cases);
                 graph.createAndShowGui();
@@ -111,12 +111,12 @@ public class Template
         frame.setVisible(true);
     }
 
-    private ArrayList<Cases> getCasesData()   // Gets the original cases data
+    private ArrayList<DataStore> getCasesData()   // Gets the original cases data
     {
-        ArrayList<Cases> casesArray = new ArrayList<>();
+        ArrayList<DataStore> casesArray = new ArrayList<>();
         Data Data = new Data();
         Data.readFile("cases");
-        ArrayList<Cases> casesTemp = Data.getCasesArray();
+        ArrayList<DataStore> casesTemp = Data.getCasesArray();
 
         // Reverting the original data
         for (int i = 0; i < casesTemp.size(); i++)
@@ -127,18 +127,18 @@ public class Template
             long cumulative = casesTemp.get(temp).cumulative;
             if (temp % 7 == 0)
             {
-                casesArray.add( new Cases(date, newToday, cumulative));
+                casesArray.add( new DataStore(date, newToday, cumulative));
             }
         }
         return casesArray;
     }
 
-    private ArrayList<Deaths> getDeathsData()   // Getting the original deaths data
+    private ArrayList<DataStore> getDeathsData()   // Getting the original deaths data
     {
-        ArrayList<Deaths> deathsArray = new ArrayList<>();
+        ArrayList<DataStore> deathsArray = new ArrayList<>();
         Data Data2 = new Data();
         Data2.readFile("deaths");
-        ArrayList<Deaths> deathsTemp = Data2.getDeathsArray();
+        ArrayList<DataStore> deathsTemp = Data2.getDeathsArray();
 
         // Reverting the original data
         for (int i = 0; i < deathsTemp.size(); i++)
@@ -149,7 +149,7 @@ public class Template
             long cumulative = deathsTemp.get(temp).cumulative;
             if (temp % 7 == 0)
             {
-                deathsArray.add( new Deaths(date, newToday, cumulative));
+                deathsArray.add( new DataStore(date, newToday, cumulative));
             }
         }
         return deathsArray;
@@ -161,8 +161,8 @@ public class Template
         // Getting the original deaths data
         Data Data = new Data();
         Data.readFile("deaths");
-        ArrayList<Deaths> deaths = Data.getDeathsArray();
-        ArrayList<Deaths> deathsForGraph = new ArrayList<>();
+        ArrayList<DataStore> deaths = Data.getDeathsArray();
+        ArrayList<DataStore> deathsForGraph = new ArrayList<>();
 
         // ArrayLists for training data
         ArrayList<Integer> xTime = new ArrayList<>();
@@ -177,7 +177,7 @@ public class Template
             long cumulative = deaths.get(temp).cumulative;
             if (temp % 7 == 0)
             {
-                deathsForGraph.add( new Deaths(date, newToday, cumulative));
+                deathsForGraph.add( new DataStore(date, newToday, cumulative));
             }
         }
 
@@ -204,7 +204,7 @@ public class Template
             step++;
             String date = i + " weeks after last death";
 
-            deathsForGraph.add(new Deaths(date, 0, result));
+            deathsForGraph.add(new DataStore(date, 0, result));
         }
 
         // Making the graph and generating the frame
@@ -229,8 +229,8 @@ public class Template
         Data.readFile("cases");
 
         // ArrayLists for training data
-        ArrayList<Cases> cases = Data.getCasesArray();
-        ArrayList<Cases> casesForGraph = new ArrayList<>();
+        ArrayList<DataStore> cases = Data.getCasesArray();
+        ArrayList<DataStore> casesForGraph = new ArrayList<>();
 
         ArrayList<Integer> xTime = new ArrayList<>();
         ArrayList<Long> yDeaths = new ArrayList<>();
@@ -244,7 +244,7 @@ public class Template
             long cumulative = cases.get(temp).cumulative;
             if (temp % 7 == 0)
             {
-                casesForGraph.add( new Cases(date, newToday, cumulative));
+                casesForGraph.add( new DataStore(date, newToday, cumulative));
             }
         }
 
@@ -271,7 +271,7 @@ public class Template
             step++;
             String date = i + " weeks after last death";
 
-            casesForGraph.add(new Cases(date, 0, result));
+            casesForGraph.add(new DataStore(date, 0, result));
         }
 
         Graph predictedDeathGraph = new Graph(casesForGraph);

@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class Graph2 extends JPanel {
 
-    private static ArrayList<Deaths> deathsArray;
+    private static ArrayList<DataStore> deathsArray;
     private int padding = 25;
     private int labelPadding = 25;
     private Color lineColor = new Color(44, 102, 230, 180);
@@ -21,7 +21,7 @@ public class Graph2 extends JPanel {
     private int pointWidth = 4;
     private int numberYDivisions = 10;
 
-    public Graph2(ArrayList<Deaths> deathsArray) {
+    public Graph2(ArrayList<DataStore> deathsArray) {
         this.deathsArray = deathsArray;
     }
 
@@ -121,7 +121,7 @@ public class Graph2 extends JPanel {
 
     private double getMinDeath() {
         int minDeath = Integer.MAX_VALUE;
-        for (Deaths death1 : deathsArray) {
+        for (DataStore death1 : deathsArray) {
             minDeath = Math.min(minDeath, (int)death1.cumulative);
 
         }
@@ -130,7 +130,7 @@ public class Graph2 extends JPanel {
 
     private int getMaxDeath() {
         int maxDeath = Integer.MIN_VALUE;
-        for (Deaths death1 : deathsArray) {
+        for (DataStore death1 : deathsArray) {
             maxDeath = Math.max(maxDeath, (int) death1.cumulative);
 
         }
@@ -139,7 +139,7 @@ public class Graph2 extends JPanel {
 
     private int getMinNew() {
         int minDeaths = Integer.MAX_VALUE;
-        for (Deaths death1 : deathsArray) {
+        for (DataStore death1 : deathsArray) {
             minDeaths = Math.min(minDeaths, (int)death1.newToday);
         }
         return minDeaths;
@@ -147,7 +147,7 @@ public class Graph2 extends JPanel {
 
     private int getMaxNew() {
         int maxDeaths = Integer.MIN_VALUE;
-        for (Deaths death1 : deathsArray) {
+        for (DataStore death1 : deathsArray) {
             maxDeaths = Math.max(maxDeaths, (int)death1.newToday);
         }
         return maxDeaths;
@@ -155,10 +155,10 @@ public class Graph2 extends JPanel {
 
     public void createAndShowGui(){
         {
-            ArrayList<Deaths> deathsArray = new ArrayList<>();
+            ArrayList<DataStore> deathsArray = new ArrayList<>();
             Data Data = new Data();
             Data.readFile("deaths");
-            ArrayList<Deaths> deaths = Data.getDeathsArray();
+            ArrayList<DataStore> deaths = Data.getDeathsArray();
 
             for (int i = 0; i < deaths.size(); i++)
             {
@@ -168,7 +168,7 @@ public class Graph2 extends JPanel {
                 long cumulative = deaths.get(temp).cumulative;
                 if (temp % 7 == 0)
                 {
-                    deathsArray.add( new Deaths(date, newToday, cumulative));
+                    deathsArray.add( new DataStore(date, newToday, cumulative));
                 }
             }
 

@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class Graph extends JPanel {
 
-    private static ArrayList<Cases> casesArray;
+    private static ArrayList<DataStore> casesArray;
     private int padding = 25;
     private int labelPadding = 30;
     private Color lineColor = new Color(44, 102, 230, 180);
@@ -21,7 +21,7 @@ public class Graph extends JPanel {
     private int pointWidth = 4;
     private int numberYDivisions = 10;
 
-    public Graph(ArrayList<Cases> casesArray) {
+    public Graph(ArrayList<DataStore> casesArray) {
         this.casesArray = casesArray;
     }
 
@@ -121,7 +121,7 @@ public class Graph extends JPanel {
     private double getMinCase() {
         int minCase = Integer.MAX_VALUE;
 
-        for (Cases case1 : casesArray) {
+        for (DataStore case1 : casesArray) {
 
             minCase = Math.min(minCase, (int)case1.cumulative);
 
@@ -131,7 +131,7 @@ public class Graph extends JPanel {
 
     private int getMaxCase() {
         int maxCase = Integer.MIN_VALUE;
-        for (Cases case1 : casesArray) {
+        for (DataStore case1 : casesArray) {
             maxCase = Math.max(maxCase, (int) case1.cumulative);
 
         }
@@ -140,7 +140,7 @@ public class Graph extends JPanel {
 
     private int getMinNew() {
         int minCases = Integer.MAX_VALUE;
-        for (Cases case1 : casesArray) {
+        for (DataStore case1 : casesArray) {
             minCases = Math.min(minCases, (int)case1.newToday);
         }
         return minCases;
@@ -148,7 +148,7 @@ public class Graph extends JPanel {
 
     private int getMaxNew() {
         int maxDeaths = Integer.MIN_VALUE;
-        for (Cases case1 : casesArray) {
+        for (DataStore case1 : casesArray) {
             maxDeaths = Math.max(maxDeaths, (int)case1.newToday);
         }
         return maxDeaths;
@@ -156,10 +156,10 @@ public class Graph extends JPanel {
 
     public void createAndShowGui(){
         {
-            ArrayList<Cases> casesArray = new ArrayList<>();
+            ArrayList<DataStore> casesArray = new ArrayList<>();
             Data Data = new Data();
             Data.readFile("cases");
-            ArrayList<Cases> cases = Data.getCasesArray();
+            ArrayList<DataStore> cases = Data.getCasesArray();
 
             for (int i = 0; i < cases.size(); i++)
             {
@@ -170,7 +170,7 @@ public class Graph extends JPanel {
 
                 if (temp % 7 == 0)
                 {
-                    casesArray.add( new Cases(date, newToday, cumulative));
+                    casesArray.add( new DataStore(date, newToday, cumulative));
                 }
             }
 
