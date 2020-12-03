@@ -275,9 +275,9 @@ public class Template
         }
 
         Graph predictedDeathGraph = new Graph(casesForGraph);
-        predictedDeathGraph.setPreferredSize(new Dimension(1000, 700));
+        predictedDeathGraph.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("Cases Prediction");
-        frame.setPreferredSize(new Dimension(1200, 900));
+        frame.setPreferredSize(new Dimension(1000, 800));
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(predictedDeathGraph, BorderLayout.NORTH);

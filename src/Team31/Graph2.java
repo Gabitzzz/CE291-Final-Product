@@ -114,6 +114,7 @@ public class Graph2 extends JPanel {
             int ovalH = pointWidth;
             g2.fillOval(x, y, ovalW, ovalH);
         }
+        g2.drawString("Weeks After First Death", 50, 680);
     }
 
     //Using functions to be displayed below the graphs to show a better statistic report
@@ -178,13 +179,8 @@ public class Graph2 extends JPanel {
             frame.setPreferredSize(new Dimension(1200, 900));
             JPanel labelPanel = new JPanel();
 
-
             JLabel peakDeaths = new JLabel("---PEAK VALUE OF DEATHS: " + getMaxDeath() + "---");
-            peakDeaths.setBounds(100, 100, 10, 10);
             JLabel minDeaths = new JLabel("---MINIMUM VALUE OF DEATHS: " + getMinDeath() + "---");
-            minDeaths.setBounds(100, 200, 10, 10);
-
-
 
             JLabel maxNew = new JLabel("---MAXIMUM DEATHS IN ONE DAY: " + getMaxNew() + "---");
             peakDeaths.setBounds(100, 300, 10, 10);
@@ -197,7 +193,7 @@ public class Graph2 extends JPanel {
             labelPanel.add(maxNew);
             labelPanel.add(minNew);
             frame.add(mainGraph, BorderLayout.NORTH);
-            frame.add(labelPanel, BorderLayout.WEST);
+            frame.add(labelPanel, FlowLayout.CENTER);
 
             frame.pack();
             frame.setLocationRelativeTo(null);

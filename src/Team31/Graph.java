@@ -115,6 +115,8 @@ public class Graph extends JPanel {
             int ovalH = pointWidth;
             g3.fillOval(x, y, ovalW, ovalH);
         }
+
+        g3.drawString("Weeks After First Case", 50, 580);
     }
     //Using functions to be displayed below the graphs to show a better statistic report
     //For example it will be displayed the minimum of cases that were on that range of days.
@@ -180,13 +182,8 @@ public class Graph extends JPanel {
             frame.setPreferredSize(new Dimension(1000, 800));
             JPanel labelPanel = new JPanel();
 
-
             JLabel peakCases = new JLabel("---PEAK VALUE OF CASES: " + getMaxCase() + "---");
-            peakCases.setBounds(100, 100, 10, 10);
             JLabel minCases = new JLabel("---MINIMUM VALUE OF CASES: " + getMinCase() + "---");
-            minCases.setBounds(100, 200, 10, 10);
-
-
 
             JLabel maxNew = new JLabel("---MAXIMUM CASES IN ONE DAY: " + getMaxNew() + "---");
             peakCases.setBounds(100, 300, 10, 10);
@@ -199,7 +196,7 @@ public class Graph extends JPanel {
             labelPanel.add(maxNew);
             labelPanel.add(minNew);
             frame.add(mainGraph, BorderLayout.NORTH);
-            frame.add(labelPanel, BorderLayout.WEST);
+            frame.add(labelPanel, FlowLayout.CENTER);
 
             frame.pack();
             frame.setLocationRelativeTo(null);
