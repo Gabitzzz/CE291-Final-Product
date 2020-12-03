@@ -37,7 +37,7 @@ URL link to the Jira user-story issue: https://cseejira.essex.ac.uk/browse/A2910
 
 - The reports should be in .PDF format;
 
-- Data should should be visualized in weekly periods.
+- Data should be visualized in weekly periods.
 
 
 
