@@ -65,4 +65,14 @@ https://cseejira.essex.ac.uk/browse/A291040-34
 
   4. Litcan, Nicolae-Gabriel
   
-  - Read and tried to understand the project instructions so I could take part to the project
+  - Sprint 1 - Read the project idea and followed the instructions so I could take part to the project  
+  https://cseejira.essex.ac.uk/browse/A291040-9
+
+  - Sprint 2 - Linked Intellij with GitLab and added my name to the HelloWorld.java program  
+  https://cseejira.essex.ac.uk/browse/A291040-21
+
+  - Sprint 3 - Absent due to flight
+
+  - Sprint 4
+
+  
