@@ -40,7 +40,3 @@ We can improve our velocity ability in future sprints by making the tasks cleare
 
 ### Product Backlog
 ![alt text](/img/backlog.png "Backlog")
-
-
-
-
