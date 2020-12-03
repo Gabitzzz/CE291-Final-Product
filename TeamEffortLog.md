@@ -63,16 +63,57 @@ https://cseejira.essex.ac.uk/browse/A291040-34
 
   ----
 
-  4. Litcan, Nicolae-Gabriel
+4. Litcan, Nicolae-Gabriel
   
-  - Sprint 1 - Read the project idea and followed the instructions so I could take part to the project  
-  https://cseejira.essex.ac.uk/browse/A291040-9
+- Sprint 1 - Read the project idea and followed the instructions so I could take part to the project  
+https://cseejira.essex.ac.uk/browse/A291040-9
 
-  - Sprint 2 - Linked Intellij with GitLab and added my name to the HelloWorld.java program  
-  https://cseejira.essex.ac.uk/browse/A291040-21
+- Sprint 2 - Linked Intellij with GitLab and added my name to the HelloWorld.java program  
+https://cseejira.essex.ac.uk/browse/A291040-21
 
-  - Sprint 3 - Absent due to flight
+- Sprint 3 - Absent due to flight
 
-  - Sprint 4
+- Sprint 4 - Tried to find an alternative way for Linear Regression, but I forgot to submit it.
 
-  
+- Sprint 5 - Absent due to heavy working for other 3 assignments.
+
+- MVP Sprint - Wrote the technical documentation for the MVP.  
+https://cseejira.essex.ac.uk/browse/A291040-39
+
+----
+
+5. McDuff, Calum 
+
+- Sprint 1 -
+
+- Sprint 2 -
+
+- Sprint 3 -
+
+- Sprint 4 -
+
+- Sprint 5 - Absent due to heavy working for other 3 assignments.
+
+- MVP Sprint - 
+
+----
+
+6. Sun, Xiaoyi
+
+- Sprint 1 - To use git commands from CMD line I tried to do it on my own machine. Needed to download the CMD developer tool which is 11 GB then failed to install it due to the extraction tool. Then I used VMware but failed to open README.md by default text-editor, eventually got some information from online and managed to do it. Took 2 hours to do it.  
+https://cseejira.essex.ac.uk/browse/A291040-3
+
+- Sprint 2 - Learned how to use IntelliJ to update and commit changes, took 1 hour to accomplish the task.  
+https://cseejira.essex.ac.uk/browse/A291040-17
+
+- Sprint 3 - Summarized and documented basic functional requirements and some extra functions needed for the product, made it clearly what are the tasks we need to complete. It took two hours.  
+https://cseejira.essex.ac.uk/browse/A291040-27
+
+- Sprint 4 - Made a rough line chart with x, y axis and random y values and points due to difficulty on having to read file to arrays then plot the array values in the chart.
+https://cseejira.essex.ac.uk/browse/A291040-31
+
+- Sprint 5 - Absent due to three other assignments due in the week
+
+- MVP Sprint - The lines for cumulative total cases line chart was horizontally lined above the highest y value, having worked through, it shows correctly the cumulative values for both charts.   
+https://cseejira.essex.ac.uk/browse/A291040-37
+
