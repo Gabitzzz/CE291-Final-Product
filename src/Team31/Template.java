@@ -2,8 +2,6 @@ package Team31;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 //---------------------------------------------------------------------------//
@@ -29,49 +27,29 @@ public class Template
         JButton PredictCases = new JButton("Predict Cases");
         JButton PredictDeaths = new JButton("Predict Deaths");
 
-        PredictDeaths.addActionListener(new ActionListener()
-        {
-            @Override   // Calls the method which creates a new frame with predicted death values
-            public void actionPerformed(ActionEvent e)
-            {
-                makePredictedDeathsGraph();
-            }
+        // Calls the method which creates a new frame with predicted death values
+        PredictDeaths.addActionListener(e -> makePredictedDeathsGraph());
+
+        // Calls the method which creates a new frame with predicted cases values
+        PredictCases.addActionListener(e -> makePredictedCasesGraph());
+
+        // Generates the detailed version of deaths graph
+        deathB.addActionListener(e -> {
+            Data Data2 = new Data();
+            Data2.readFile("deaths");
+            ArrayList<DataStore> deaths1 = Data2.getDeathsArray();
+            Graph2 graphs2 = new Graph2(deaths1);
+            graphs2.createAndShowGui();
+
         });
+        // Generates the detailed version of the cases graph
+        casesB.addActionListener(e -> {
+            Data Data = new Data();
+            Data.readFile("cases");
+            ArrayList<DataStore> cases1 = Data.getCasesArray();
 
-       PredictCases.addActionListener(new ActionListener()
-       {
-            @Override   // Calls the method which creates a new frame with predicted cases values
-            public void actionPerformed(ActionEvent e)
-            {
-               makePredictedCasesGraph();
-            }
-        });
-
-        deathB.addActionListener(new ActionListener()
-        {
-            @Override   // Generates the detailed version of deaths graph
-            public void actionPerformed(ActionEvent e)
-            {
-                Data Data2 = new Data();
-                Data2.readFile("deaths");
-                ArrayList<DataStore> deaths = Data2.getDeathsArray();
-                Graph2 graphs2 = new Graph2(deaths);
-                graphs2.createAndShowGui();
-
-            }
-        });
-        casesB.addActionListener(new ActionListener()
-        {
-            @Override   // Generates the detailed version of the cases graph
-            public void actionPerformed(ActionEvent e)
-            {
-                Data Data = new Data();
-                Data.readFile("cases");
-                ArrayList<DataStore> cases = Data.getCasesArray();
-
-                Graph graph = new Graph(cases);
-                graph.createAndShowGui();
-            }
+            Graph graph = new Graph(cases1);
+            graph.createAndShowGui();
         });
 
 
