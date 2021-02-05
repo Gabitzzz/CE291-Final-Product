@@ -64,7 +64,6 @@ public class LinearRegression
         long Ymean= getYmean(yCumulative);
         long lineslope = getGradient(Xmean, Ymean, x1,y1);
         long YIntercept = getYIntercept(Xmean,Ymean,lineslope);
-        long prediction = (lineslope * input) + YIntercept;
-        return prediction;
+        return (lineslope * input) + YIntercept;
     }
 }

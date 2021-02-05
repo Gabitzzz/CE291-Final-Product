@@ -46,11 +46,10 @@ public class Main {
             System.out.println("| Date     | New Today | Cumulative |");
             System.out.println("-------------------------------------");
 
-            for (int i = 0; i < deaths.size(); i++)
-            {
-                System.out.print("|" + deaths.get(i).date + " |");
-                System.out.print(" " + deaths.get(i).newToday + "         |");
-                System.out.print( " " + deaths.get(i).cumulative + "   |\n");
+            for (DataStore death : deaths) {
+                System.out.print("|" + death.date + " |");
+                System.out.print(" " + death.newToday + "         |");
+                System.out.print(" " + death.cumulative + "   |\n");
             }
             System.out.println("---------------------------------");
         }else if (n == 2)
@@ -65,11 +64,10 @@ public class Main {
             System.out.println("| Date     | New Today |  Cumulative  |");
             System.out.println("---------------------------------------");
 
-            for (int i = 0; i < cases.size(); i++)
-            {
-                System.out.print("|" + cases.get(i).date + " |");
-                System.out.print(" " + cases.get(i).newToday + "         |");
-                System.out.print( " " + cases.get(i).cumulative + "   |\n");
+            for (DataStore aCase : cases) {
+                System.out.print("|" + aCase.date + " |");
+                System.out.print(" " + aCase.newToday + "         |");
+                System.out.print(" " + aCase.cumulative + "   |\n");
             }
             System.out.println("-----------------------------------");
         }
