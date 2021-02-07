@@ -160,7 +160,7 @@ public class Graph extends JPanel {
         {
             ArrayList<DataStore> casesArray = new ArrayList<>();
             Data Data = new Data();
-            Data.readFile("cases");
+            Data.readFile(Config.CASES_FILE);
             ArrayList<DataStore> cases = Data.getCasesArray();
 
             for (int i = 0; i < cases.size(); i++)

@@ -37,7 +37,7 @@ public class Main {
         if (n == 1)
         {
             Data Data = new Data();
-            Data.readFile("deaths");
+            Data.readFile(Config.DEATHS_FILE);
             ArrayList<DataStore> deaths = Data.getDeathsArray();
 
             System.out.println("-------------------------------------");
@@ -55,7 +55,7 @@ public class Main {
         }else if (n == 2)
         {
             Data Data = new Data();
-            Data.readFile("cases");
+            Data.readFile(Config.CASES_FILE);
             ArrayList<DataStore> cases = Data.getCasesArray();
 
             System.out.println("---------------------------------------");

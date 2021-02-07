@@ -36,7 +36,7 @@ public class Template
         // Generates the detailed version of deaths graph
         deathB.addActionListener(e -> {
             Data Data2 = new Data();
-            Data2.readFile("deaths");
+            Data2.readFile(Config.DEATHS_FILE);
             ArrayList<DataStore> deaths1 = Data2.getDeathsArray();
             Graph2 graphs2 = new Graph2(deaths1);
             graphs2.createAndShowGui();
@@ -45,7 +45,7 @@ public class Template
         // Generates the detailed version of the cases graph
         casesB.addActionListener(e -> {
             Data Data = new Data();
-            Data.readFile("cases");
+            Data.readFile(Config.CASES_FILE);
             ArrayList<DataStore> cases1 = Data.getCasesArray();
 
             Graph graph = new Graph(cases1);
@@ -94,7 +94,7 @@ public class Template
     {
         ArrayList<DataStore> casesArray = new ArrayList<>();
         Data Data = new Data();
-        Data.readFile("cases");
+        Data.readFile(Config.CASES_FILE);
         ArrayList<DataStore> casesTemp = Data.getCasesArray();
 
         // Reverting the original data
@@ -116,7 +116,7 @@ public class Template
     {
         ArrayList<DataStore> deathsArray = new ArrayList<>();
         Data Data2 = new Data();
-        Data2.readFile("deaths");
+        Data2.readFile(Config.DEATHS_FILE);
         ArrayList<DataStore> deathsTemp = Data2.getDeathsArray();
 
         // Reverting the original data
@@ -139,7 +139,7 @@ public class Template
     {
         // Getting the original deaths data
         Data Data = new Data();
-        Data.readFile("deaths");
+        Data.readFile(Config.DEATHS_FILE);
         ArrayList<DataStore> deaths = Data.getDeathsArray();
         ArrayList<DataStore> deathsForGraph = new ArrayList<>();
 
@@ -205,7 +205,7 @@ public class Template
     {
         // Getting the original deaths data
         Data Data = new Data();
-        Data.readFile("cases");
+        Data.readFile(Config.CASES_FILE);
 
         // ArrayLists for training data
         ArrayList<DataStore> cases = Data.getCasesArray();

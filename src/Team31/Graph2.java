@@ -158,7 +158,7 @@ public class Graph2 extends JPanel {
         {
             ArrayList<DataStore> deathsArray = new ArrayList<>();
             Data Data = new Data();
-            Data.readFile("deaths");
+            Data.readFile(Config.DEATHS_FILE);
             ArrayList<DataStore> deaths = Data.getDeathsArray();
 
             for (int i = 0; i < deaths.size(); i++)
