@@ -27,6 +27,9 @@ public class Template
         JButton PredictCases = new JButton("Predict Cases");
         JButton PredictDeaths = new JButton("Predict Deaths");
 
+        JButton dailyA = new JButton("Daily case Report");
+        JButton dailyB = new JButton("Daily death Report");
+
         // Calls the method which creates a new frame with predicted death values
         PredictDeaths.addActionListener(e -> makePredictedDeathsGraph());
 
@@ -52,6 +55,24 @@ public class Template
             graph.createAndShowGui();
         });
 
+        dailyA.addActionListener(e -> {
+            Data Data3 = new Data();
+            Data3.readFile(Config.CASES_FILE);
+            ArrayList<DailyDataStore> cases3 = Data3.getDailyCaseArray();
+
+            Graph3 graph3 = new Graph3(cases3);
+            graph3.createAndShowGui();
+        });
+
+        dailyB.addActionListener(e -> {
+            Data Data4 = new Data();
+            Data4.readFile(Config.CASES_FILE);
+            ArrayList<DailyDataStore> deaths4 = Data4.getDailyDeathArray();
+
+            Graph4 graph4 = new Graph4(deaths4);
+            graph4.createAndShowGui();
+        });
+
 
         panel.setSize(new Dimension(1200, 600));
         panel.setLayout(null);
@@ -64,6 +85,9 @@ public class Template
         PredictCases.setBounds(700, 480, 200, 50);
         PredictDeaths.setBounds(150,480,200,50);
 
+        dailyA.setBounds(900,400,200,50);
+        dailyB.setBounds(350,400,200,50);
+
         // Adding the GUI elements to the panel
         panel.add(deaths);
         panel.add(cases);
@@ -71,6 +95,9 @@ public class Template
         panel.add(casesB);
         panel.add(PredictCases);
         panel.add(PredictDeaths);
+
+        panel.add(dailyA);
+        panel.add(dailyB);
 
         // Generating the smaller previews of the both graphs
         Graph graph = new Graph(getCasesData());
@@ -81,6 +108,7 @@ public class Template
         panel.add(graph);
         graph2.setBounds(50, 100, 500, 300);
         panel.add(graph2);
+
 
         frame.setSize(new Dimension(1200, 600));
         frame.add(panel, BorderLayout.CENTER);
@@ -111,6 +139,7 @@ public class Template
         }
         return casesArray;
     }
+
 
     private ArrayList<DataStore> getDeathsData()   // Getting the original deaths data
     {
