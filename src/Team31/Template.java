@@ -7,7 +7,7 @@ import java.util.ArrayList;
 //---------------------------------------------------------------------------//
 //    Generates the Main Menu Frame and Includes the Button Functionality    //
 //---------------------------------------------------------------------------//
-
+//hello
 // Template for our GUI.
 public class Template
 {
@@ -102,12 +102,18 @@ public class Template
         // Generating the smaller previews of the both graphs
         Graph graph = new Graph(getCasesData());
         Graph2 graph2 = new Graph2(getDeathsData());
+        Graph3 graph3 = new Graph3(getDailyCaseData());
+        Graph4 graph4 = new Graph4(getDailyDeathData());
 
         // Setting the position and size of the graphs
         graph.setBounds(600, 100, 500, 300);
         panel.add(graph);
         graph2.setBounds(50, 100, 500, 300);
         panel.add(graph2);
+        graph3.setBounds(800, 100, 500, 300);
+        panel.add(graph3);
+        graph4.setBounds(250, 100, 500, 300);
+        panel.add(graph4);
 
 
         frame.setSize(new Dimension(1200, 600));
@@ -116,6 +122,25 @@ public class Template
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private ArrayList<DailyDataStore> getDailyCaseData()   // Gets the original cases data
+    {
+        ArrayList<DailyDataStore> dailyCaseArray = new ArrayList<>();
+        Data Data = new Data();
+        Data.readFile(Config.CASES_FILE);
+        ArrayList<DailyDataStore> casesTemp = Data.getDailyCaseArray();
+
+        // Reverting the original data
+        for (int i = 0; i < casesTemp.size(); i++)
+        {
+            int temp = (casesTemp.size() - 1) - i;
+            String date = casesTemp.get(temp).date;
+            long newToday = casesTemp.get(temp).newToday;
+
+            dailyCaseArray.add( new DailyDataStore(date, newToday));
+        }
+        return dailyCaseArray;
     }
 
     private ArrayList<DataStore> getCasesData()   // Gets the original cases data
@@ -140,6 +165,25 @@ public class Template
         return casesArray;
     }
 
+
+    private ArrayList<DailyDataStore> getDailyDeathData()   // Getting the original deaths data
+    {
+        ArrayList<DailyDataStore> dailyDeathArray = new ArrayList<>();
+        Data Data2 = new Data();
+        Data2.readFile(Config.DEATHS_FILE);
+        ArrayList<DailyDataStore> deathsTemp = Data2.getDailyDeathArray();
+
+        // Reverting the original data
+        for (int i = 0; i < deathsTemp.size(); i++)
+        {
+            int temp = (deathsTemp.size() - 1) - i;
+            String date = deathsTemp.get(temp).date;
+            long newToday = deathsTemp.get(temp).newToday;
+
+            dailyDeathArray.add( new DailyDataStore(date, newToday));
+        }
+        return dailyDeathArray;
+    }
 
     private ArrayList<DataStore> getDeathsData()   // Getting the original deaths data
     {
