@@ -16,6 +16,7 @@ public class Template
         // Main frame and panel for the GUI.
         JFrame frame = new JFrame("Main Menu");
         JPanel panel = new JPanel();
+        JScrollPane scrollBar = new JScrollPane (panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         // Headings of the graphs
         JLabel deaths = new JLabel("Deaths Graph Preview");
@@ -110,14 +111,15 @@ public class Template
         panel.add(graph);
         graph2.setBounds(50, 100, 500, 300);
         panel.add(graph2);
-        graph3.setBounds(800, 100, 500, 300);
+        graph3.setBounds(600, 500, 500, 300);
         panel.add(graph3);
-        graph4.setBounds(250, 100, 500, 300);
+        graph4.setBounds(50, 500, 500, 300);
         panel.add(graph4);
 
 
         frame.setSize(new Dimension(1200, 600));
-        frame.add(panel, BorderLayout.CENTER);
+        //frame.add(panel, BorderLayout.CENTER);
+        frame.add(scrollBar, BorderLayout.CENTER);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
