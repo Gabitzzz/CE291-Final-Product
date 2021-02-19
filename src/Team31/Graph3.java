@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class Graph3 extends JPanel {
 
-    private static ArrayList<DailyDataStore> dailyCaseArray;
+    private static ArrayList<DataStore> dailyCaseArray;
     private int padding = 25;
     private int labelPadding = 30;
     private Color lineColor = new Color(44, 102, 230, 180);
@@ -19,7 +19,7 @@ public class Graph3 extends JPanel {
     private int pointWidth = 4;
     private int numberYDivisions = 10;
 
-    public Graph3(ArrayList<DailyDataStore> dailyCaseArray) {
+    public Graph3(ArrayList<DataStore> dailyCaseArray) {
         this.dailyCaseArray = dailyCaseArray;
     }
 
@@ -122,7 +122,7 @@ public class Graph3 extends JPanel {
 
     private int getMinNew() {
         int minCases = Integer.MAX_VALUE;
-        for (DailyDataStore case1 : dailyCaseArray) {
+        for (DataStore case1 : dailyCaseArray) {
             minCases = Math.min(minCases, (int)case1.newToday);
         }
         return minCases;
@@ -130,7 +130,7 @@ public class Graph3 extends JPanel {
 
     private int getMaxNew() {
         int maxDeaths = Integer.MIN_VALUE;
-        for (DailyDataStore case1 : dailyCaseArray) {
+        for (DataStore case1 : dailyCaseArray) {
             maxDeaths = Math.max(maxDeaths, (int)case1.newToday);
         }
         return maxDeaths;
@@ -138,17 +138,18 @@ public class Graph3 extends JPanel {
 
     public void createAndShowGui(){
         {
-            ArrayList<DailyDataStore> dailyCaseArray = new ArrayList<>();
+            ArrayList<DataStore> dailyCaseArray = new ArrayList<>();
             Data Data = new Data();
             Data.readFile(Config.CASES_FILE);
-            ArrayList<DailyDataStore> cases3 = Data.getDailyCaseArray();
+            ArrayList<DataStore> cases3 = Data.getCasesArray();
 
             for (int i = 0; i < cases3.size(); i++)
             {
                 int temp = (cases3.size() - 1) - i;
                 String date = cases3.get(temp).date;
                 long newToday = cases3.get(temp).newToday;
-                dailyCaseArray.add(new DailyDataStore(date, newToday));
+                long cumulative = cases3.get(temp).newToday;
+                dailyCaseArray.add(new DataStore(date, newToday, cumulative));
             }
 
             Graph3 mainGraph = new Graph3(dailyCaseArray);

@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class Graph4 extends JPanel {
 
-    private static ArrayList<DailyDataStore> dailyDeathArray;
+    private static ArrayList<DataStore> dailyDeathArray;
     private int padding = 25;
     private int labelPadding = 25;
     private Color lineColor = new Color(44, 102, 230, 180);
@@ -18,7 +18,7 @@ public class Graph4 extends JPanel {
     private int pointWidth = 4;
     private int numberYDivisions = 10;
 
-    public Graph4(ArrayList<DailyDataStore> dailyDeathArray) {
+    public Graph4(ArrayList<DataStore> dailyDeathArray) {
         this.dailyDeathArray = dailyDeathArray;
     }
 
@@ -121,7 +121,7 @@ public class Graph4 extends JPanel {
 
     private int getMinNew() {
         int minDeaths = Integer.MAX_VALUE;
-        for (DailyDataStore death2 : dailyDeathArray) {
+        for (DataStore death2 : dailyDeathArray) {
             minDeaths = Math.min(minDeaths, (int)death2.newToday);
         }
         return minDeaths;
@@ -129,7 +129,7 @@ public class Graph4 extends JPanel {
 
     private int getMaxNew() {
         int maxDeaths = Integer.MIN_VALUE;
-        for (DailyDataStore death1 : dailyDeathArray) {
+        for (DataStore death1 : dailyDeathArray) {
             maxDeaths = Math.max(maxDeaths, (int)death1.newToday);
         }
         return maxDeaths;
@@ -137,18 +137,19 @@ public class Graph4 extends JPanel {
 
     public void createAndShowGui(){
         {
-            ArrayList<DailyDataStore> dailyDeathArray = new ArrayList<>();
+            ArrayList<DataStore> dailyDeathArray = new ArrayList<>();
             Data Data = new Data();
             Data.readFile(Config.DEATHS_FILE);
-            ArrayList<DailyDataStore> deaths = Data.getDailyDeathArray();
+            ArrayList<DataStore> deaths = Data.getDeathsArray();
 
             for (int i = 0; i < deaths.size(); i++)
             {
                 int temp = (deaths.size() - 1) - i;
                 String date = deaths.get(temp).date;
                 long newToday = deaths.get(temp).newToday;
+                long cumulative = deaths.get(temp).newToday;
 
-                    dailyDeathArray.add( new DailyDataStore(date, newToday));
+                    dailyDeathArray.add( new DataStore(date, newToday, cumulative));
             }
 
             Graph4 mainGraph = new Graph4(dailyDeathArray);
