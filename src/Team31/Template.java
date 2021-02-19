@@ -57,6 +57,17 @@ public class Template
             graph.createAndShowGui();
         });
 
+        /*TODO, dailyA is having an error
+        */
+       /* dailyA.addActionListener(e -> {
+            Data Data = new Data();
+            Data.readFile(Config.CASES_FILE);
+            ArrayList<DailyDataStore> cases1 = Data.getDailyCaseArray();
+
+            Graph3 graph3 = new Graph(cases1);
+            graph3.createAndShowGui();
+        });*/
+
         panel.setPreferredSize(new Dimension(1180, 800));
         buttonPanel.setPreferredSize(new Dimension(1200, 200));
         panel.setLayout(null);
