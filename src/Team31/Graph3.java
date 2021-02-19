@@ -112,6 +112,7 @@ public class Graph3 extends JPanel {
             int ovalW = pointWidth;
             int ovalH = pointWidth;
             g3.fillOval(x, y, ovalW, ovalH);
+            g3.setColor(Color.black);
         }
 
         g3.drawString("Days After First Case", 50, 580);

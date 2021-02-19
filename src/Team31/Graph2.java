@@ -103,6 +103,7 @@ public class Graph2 extends JPanel {
             int x2 = graphPoints.get(i + 1).x;
             int y2 = graphPoints.get(i + 1).y;
             g2.drawLine(x1, y1, x2, y2);
+
         }
 
         g2.setStroke(oldStroke);
@@ -113,6 +114,7 @@ public class Graph2 extends JPanel {
             int ovalW = pointWidth;
             int ovalH = pointWidth;
             g2.fillOval(x, y, ovalW, ovalH);
+            g2.setColor(Color.black);
         }
         g2.drawString("Weeks After First Death", 50, 680);
     }

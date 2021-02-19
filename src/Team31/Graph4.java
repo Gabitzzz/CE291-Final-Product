@@ -110,6 +110,7 @@ public class Graph4 extends JPanel {
             int ovalW = pointWidth;
             int ovalH = pointWidth;
             g4.fillOval(x, y, ovalW, ovalH);
+            g4.setColor(Color.black);
         }
         g4.drawString("Days After First Death", 50, 680);
     }
