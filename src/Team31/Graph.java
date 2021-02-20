@@ -40,7 +40,6 @@ public class Graph extends JPanel {
         {
             int x1 = (int) (i * xScale + padding + labelPadding);
             int y1 = (int) ((getMaxCase() - casesArray.get(i).cumulative) * yScale + padding);
-
             graphPoints.add(new Point(x1, y1));
         }
 

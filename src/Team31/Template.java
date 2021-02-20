@@ -40,20 +40,17 @@ public class Template
 
         // Generates the detailed version of deaths graph
         deathB.addActionListener(e -> {
-            Data Data2 = new Data();
-            Data2.readFile(Config.DEATHS_FILE);
-            ArrayList<DataStore> deaths1 = Data2.getDeathsArray();
-            Graph2 graphs2 = new Graph2(deaths1);
-            graphs2.createAndShowGui();
+            Data data = new Data();
+            data.readFile(Config.DEATHS_FILE);
+            GenerateGraph graph = new GenerateGraph(1, "weekly");
+            graph.createAndShowGui();
 
         });
         // Generates the detailed version of the cases graph
         casesB.addActionListener(e -> {
-            Data Data = new Data();
-            Data.readFile(Config.CASES_FILE);
-            ArrayList<DataStore> cases1 = Data.getCasesArray();
-
-            Graph graph = new Graph(cases1);
+            Data data = new Data();
+            data.readFile(Config.CASES_FILE);
+            GenerateGraph graph = new GenerateGraph(0, "weekly");
             graph.createAndShowGui();
         });
 
@@ -90,10 +87,10 @@ public class Template
         buttonPanel.add(PredictDeaths);
 
         // Generating the smaller previews of the both graphs
-        Graph graph = new Graph(getCasesData());
-        Graph2 graph2 = new Graph2(getDeathsData());
-        Graph3 graph3 = new Graph3(getCasesData());
-        Graph4 graph4 = new Graph4(getDeathsData());
+        GenerateGraph graph = new GenerateGraph(0, "weekly");
+        GenerateGraph graph2 = new GenerateGraph(1, "weekly");
+        GenerateGraph graph3 = new GenerateGraph(0, "daily");
+        GenerateGraph graph4 = new GenerateGraph(1, "daily");
 
         // Setting the position and size of the graphs
         graph.setBounds(600, 100, 500, 300);
@@ -115,55 +112,6 @@ public class Template
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    }
-
-
-
-    private ArrayList<DataStore> getCasesData()   // Gets the original cases data
-    {
-        ArrayList<DataStore> casesArray = new ArrayList<>();
-        Data Data = new Data();
-        Data.readFile(Config.CASES_FILE);
-        ArrayList<DataStore> casesTemp = Data.getCasesArray();
-
-        // Reverting the original data
-        for (int i = 0; i < casesTemp.size(); i++)
-        {
-            int temp = (casesTemp.size() - 1) - i;
-            String date = casesTemp.get(temp).date;
-            long newToday = casesTemp.get(temp).newToday;
-            long cumulative = casesTemp.get(temp).cumulative;
-            if (temp % 7 == 0)
-            {
-                casesArray.add( new DataStore(date, newToday, cumulative));
-            }
-        }
-        return casesArray;
-    }
-
-
-
-
-    private ArrayList<DataStore> getDeathsData()   // Getting the original deaths data
-    {
-        ArrayList<DataStore> deathsArray = new ArrayList<>();
-        Data Data2 = new Data();
-        Data2.readFile(Config.DEATHS_FILE);
-        ArrayList<DataStore> deathsTemp = Data2.getDeathsArray();
-
-        // Reverting the original data
-        for (int i = 0; i < deathsTemp.size(); i++)
-        {
-            int temp = (deathsTemp.size() - 1) - i;
-            String date = deathsTemp.get(temp).date;
-            long newToday = deathsTemp.get(temp).newToday;
-            long cumulative = deathsTemp.get(temp).cumulative;
-            if (temp % 7 == 0)
-            {
-                deathsArray.add( new DataStore(date, newToday, cumulative));
-            }
-        }
-        return deathsArray;
     }
 
     // Generates and shows the graph of predicted deaths
