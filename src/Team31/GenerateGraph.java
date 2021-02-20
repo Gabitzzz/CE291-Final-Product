@@ -9,7 +9,7 @@ import javax.swing.*;
 //    Configures and Generates a Line Graph for Cases Data    //
 //------------------------------------------------------------//
 
-// t
+// te
 public class GenerateGraph extends JPanel {
 
     private static ArrayList<DataStore> casesArray;
