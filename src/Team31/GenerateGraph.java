@@ -199,10 +199,19 @@ public class GenerateGraph extends JPanel {
     public void createAndShowGui(){
         {
             ArrayList<DataStore> data = new ArrayList<>();
-            if (DataChoice == 0) {data = getCasesData();}
-            else if (DataChoice == 1) {data = getDeathsData();}
+            GenerateGraph mainGraph = new GenerateGraph(-1, "default");
+            if (DataChoice == 0)
+            {
+                data = getCasesData();
+                mainGraph = new GenerateGraph(0, "weekly");
+            }
+            else if (DataChoice == 1)
+            {
+                data = getDeathsData();
+                mainGraph = new GenerateGraph(1, "weekly");
+            }
 
-            Graph mainGraph = new Graph(data);
+
             mainGraph.setPreferredSize(new Dimension(800, 600));
             JFrame frame = new JFrame("Cases Graph");
             frame.setPreferredSize(new Dimension(1000, 800));

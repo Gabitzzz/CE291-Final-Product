@@ -7,6 +7,7 @@ import javax.swing.*;
 
 //Generate graph for daily case growth
 
+/*
 public class Graph3 extends JPanel {
 
     private static ArrayList<DataStore> dailyCaseArray;
@@ -174,3 +175,5 @@ public class Graph3 extends JPanel {
         }
     }
 }
+
+ */

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
-
+/*
 public class Graph4 extends JPanel {
 
     private static ArrayList<DataStore> dailyDeathArray;
@@ -176,3 +176,4 @@ public class Graph4 extends JPanel {
         }
     }
 }
+*/

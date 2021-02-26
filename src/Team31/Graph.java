@@ -9,7 +9,7 @@ import javax.swing.*;
 //    Configures and Generates a Line Graph for Cases Data    //
 //------------------------------------------------------------//
 
-public class Graph extends JPanel {
+/*public class Graph extends JPanel {
 
     private static ArrayList<DataStore> casesArray;
     private int padding = 25;
@@ -204,4 +204,4 @@ public class Graph extends JPanel {
 
         }
     }
-}
+}*/
