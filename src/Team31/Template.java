@@ -40,16 +40,12 @@ public class Template
 
         // Generates the detailed version of deaths graph
         deathB.addActionListener(e -> {
-            Data data = new Data();
-            data.readFile(Config.DEATHS_FILE);
             GenerateGraph graph = new GenerateGraph(1, "weekly");
             graph.createAndShowGui();
 
         });
         // Generates the detailed version of the cases graph
         casesB.addActionListener(e -> {
-            Data data = new Data();
-            data.readFile(Config.CASES_FILE);
             GenerateGraph graph = new GenerateGraph(0, "weekly");
             graph.createAndShowGui();
         });

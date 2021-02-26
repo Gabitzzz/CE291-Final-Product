@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
+import static java.awt.Color.RED;
+
 //------------------------------------------------------------//
 //    Configures and Generates a Line Graph for Cases Data    //
 //------------------------------------------------------------//
@@ -127,6 +129,8 @@ public class GenerateGraph extends JPanel {
             int y1 = graphPoints.get(i).y;
             int x2 = graphPoints.get(i + 1).x;
             int y2 = graphPoints.get(i + 1).y;
+
+            if (x1 > 31*xScale) {g3.setColor(RED);}
             g3.drawLine(x1, y1, x2, y2);
         }
 
