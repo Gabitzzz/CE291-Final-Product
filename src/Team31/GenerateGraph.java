@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
-import static java.awt.Color.RED;
-
 //------------------------------------------------------------//
 //    Configures and Generates a Line Graph for Cases Data    //
 //------------------------------------------------------------//
@@ -16,14 +14,11 @@ public class GenerateGraph extends JPanel {
 
     private static ArrayList<DataStore> casesArray;
     private static ArrayList<DataStore> deathsArray;
-    private int padding = 25;
-    private int labelPadding = 30;
     private Color lineColor = new Color(44, 102, 230, 180);
     private Color pointColor = new Color(100, 100, 100, 180);
     private Color gridColor = new Color(200, 200, 200, 200);
+    private Color forecastLine = Color.RED;
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
-    private int pointWidth = 4;
-    private int numberYDivisions = 10;
     private int DataChoice;
     private String PresentationFormat;
 
@@ -32,14 +27,14 @@ public class GenerateGraph extends JPanel {
         this.DataChoice = DataChoice;
         this.PresentationFormat = PresentationFormat;
 
-        if (DataChoice == 0){this.casesArray = getCasesData();}
-        else if (DataChoice == 1){this.deathsArray = getDeathsData();}
+        if (DataChoice == 0){ casesArray = getCasesData();}
+        else if (DataChoice == 1){ deathsArray = getDeathsData();}
     }
 
     public GenerateGraph(int DataChoice, ArrayList<DataStore> data)
     {
         this.DataChoice = DataChoice;
-        this.PresentationFormat = "weekly";
+        this.PresentationFormat = Config.WEEKLY;
 
         if (DataChoice == 0){casesArray = data;}
         else if (DataChoice == 1){deathsArray = data;}
@@ -54,10 +49,12 @@ public class GenerateGraph extends JPanel {
         g3.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == 0){graph = this.casesArray;}
-        else if (DataChoice == 1){graph = this.deathsArray;}
+        if (DataChoice == Config.CASES_FILE){graph = casesArray;}
+        else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
 
-        double xScale = (getWidth() - (2 * padding) - labelPadding) / (graph.size() - 1);
+        int padding = 25;
+        int labelPadding = 30;
+        double xScale = (float)(getWidth() - (2 * padding) - labelPadding) / (graph.size() - 1);
         double yScale = (getHeight() - 2 * padding - labelPadding) / (getMaxCase() - getMinCase());
 
         List<Point> graphPoints = new ArrayList<>();
@@ -65,8 +62,8 @@ public class GenerateGraph extends JPanel {
         {
             int x1 = (int) (i * xScale + padding + labelPadding);
             int y1 = 0;
-            if (PresentationFormat == "weekly") { y1 = (int) ((getMaxCase() - graph.get(i).cumulative) * yScale + padding); }
-            else if ( PresentationFormat == "daily"){y1 = (int) ((getMaxCase() - graph.get(i).newToday) * yScale + padding); }
+            if (PresentationFormat.equals(Config.WEEKLY)) { y1 = (int) ((getMaxCase() - graph.get(i).cumulative) * yScale + padding); }
+            else if (PresentationFormat.equals(Config.DAILY)){y1 = (int) ((getMaxCase() - graph.get(i).newToday) * yScale + padding); }
             graphPoints.add(new Point(x1, y1));
         }
 
@@ -76,15 +73,16 @@ public class GenerateGraph extends JPanel {
 
 
         // Creating Y-Axis
+        int pointWidth = 4;
+        int numberYDivisions = 10;
         for (int i = 0; i < numberYDivisions + 1; i++)
         {
             int x0 = padding + labelPadding;
             int x1 = pointWidth + padding + labelPadding;
             int y0 = getHeight() - ((i * (getHeight() - padding * 2 - labelPadding)) / numberYDivisions + padding + labelPadding);
-            int y1 = y0;
             if (graph.size() > 0) {
                 g3.setColor(gridColor);
-                g3.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
+                g3.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y0);
                 g3.setColor(Color.BLACK);
                 String yLabel = ((int) ((getMinCase() + (getMaxCase() - getMinCase()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
                 yLabel = String.valueOf(Math.round(Double.parseDouble(yLabel))); //Round the numbers to integers as they are presented to the csv
@@ -93,19 +91,18 @@ public class GenerateGraph extends JPanel {
                 int labelWidth = metrics.stringWidth(yLabel);
                 g3.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
             }
-            g3.drawLine(x0, y0, x1, y1);
+            g3.drawLine(x0, y0, x1, y0);
         }
 
         // Creating X-Axis
         for (int i = 0; i < graph.size(); i++) {
             if (graph.size() > 1) {
                 int x0 = i * (getWidth() - padding * 2 - labelPadding) / (graph.size() - 1) + padding + labelPadding;
-                int x1 = x0;
                 int y0 = getHeight() - padding - labelPadding;
                 int y1 = y0 - pointWidth;
                 if ((i % ((int) ((graph.size() / 20.0)) + 1)) == 0) {
                     g3.setColor(gridColor);
-                    g3.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
+                    g3.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x0, padding);
                     g3.setColor(Color.BLACK);
                     String xLabel = i + "";
                     //Implement X-axis numbers
@@ -113,7 +110,7 @@ public class GenerateGraph extends JPanel {
                     int labelWidth = metrics.stringWidth(xLabel);
                     g3.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
                 }
-                g.drawLine(x0, y0, x1, y1);
+                g.drawLine(x0, y0, x0, y1);
             }
         }
 
@@ -130,18 +127,16 @@ public class GenerateGraph extends JPanel {
             int x2 = graphPoints.get(i + 1).x;
             int y2 = graphPoints.get(i + 1).y;
 
-            if (x1 > 31*xScale) {g3.setColor(RED);}
+            if (x1 > 31*xScale) {g3.setColor(forecastLine);}
             g3.drawLine(x1, y1, x2, y2);
         }
 
         g3.setStroke(oldStroke);
         g3.setColor(pointColor);
-        for (int i = 0; i < graphPoints.size(); i++) {
-            int x = graphPoints.get(i).x - pointWidth / 2;
-            int y = graphPoints.get(i).y - pointWidth / 2;
-            int ovalW = pointWidth;
-            int ovalH = pointWidth;
-            g3.fillOval(x, y, ovalW, ovalH);
+        for (Point graphPoint : graphPoints) {
+            int x = graphPoint.x - pointWidth / 2;
+            int y = graphPoint.y - pointWidth / 2;
+            g3.fillOval(x, y, pointWidth, pointWidth);
             g3.setColor(Color.black);
         }
 
@@ -152,8 +147,8 @@ public class GenerateGraph extends JPanel {
     private double getMinCase() {
         int minCase = Integer.MAX_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == 0){graph = this.casesArray;}
-        else if (DataChoice == 1){graph = this.deathsArray;}
+        if (DataChoice == Config.CASES_FILE){graph = casesArray;}
+        else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
 
         for (DataStore case1 : graph) {
 
@@ -166,8 +161,8 @@ public class GenerateGraph extends JPanel {
     private int getMaxCase() {
         int maxCase = Integer.MIN_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == 0){graph = this.casesArray;}
-        else if (DataChoice == 1){graph = this.deathsArray;}
+        if (DataChoice == Config.CASES_FILE){graph = casesArray;}
+        else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
 
         for (DataStore case1 : graph) {
             maxCase = Math.max(maxCase, (int) case1.cumulative);
@@ -179,8 +174,8 @@ public class GenerateGraph extends JPanel {
     private int getMinNew() {
         int minCases = Integer.MAX_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == 0){graph = this.casesArray;}
-        else if (DataChoice == 1){graph = this.deathsArray;}
+        if (DataChoice == Config.CASES_FILE){graph = casesArray;}
+        else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
 
         for (DataStore case1 : graph) {
             minCases = Math.min(minCases, (int)case1.newToday);
@@ -191,8 +186,8 @@ public class GenerateGraph extends JPanel {
     private int getMaxNew() {
         int maxDeaths = Integer.MIN_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == 0){graph = this.casesArray;}
-        else if (DataChoice == 1){graph = this.deathsArray;}
+        if (DataChoice == Config.CASES_FILE){graph = casesArray;}
+        else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
 
         for (DataStore case1 : graph) {
             maxDeaths = Math.max(maxDeaths, (int)case1.newToday);
@@ -202,18 +197,9 @@ public class GenerateGraph extends JPanel {
 
     public void createAndShowGui(){
         {
-            ArrayList<DataStore> data = new ArrayList<>();
             GenerateGraph mainGraph = new GenerateGraph(-1, "default");
-            if (DataChoice == 0)
-            {
-                data = getCasesData();
-                mainGraph = new GenerateGraph(0, "weekly");
-            }
-            else if (DataChoice == 1)
-            {
-                data = getDeathsData();
-                mainGraph = new GenerateGraph(1, "weekly");
-            }
+            if (DataChoice == Config.CASES_FILE) { mainGraph = new GenerateGraph(0, "weekly"); }
+            else if (DataChoice == Config.DEATHS_FILE) { mainGraph = new GenerateGraph(1, "weekly"); }
 
 
             mainGraph.setPreferredSize(new Dimension(800, 600));

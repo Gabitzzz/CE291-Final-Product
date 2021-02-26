@@ -40,13 +40,13 @@ public class Template
 
         // Generates the detailed version of deaths graph
         deathB.addActionListener(e -> {
-            GenerateGraph graph = new GenerateGraph(1, "weekly");
+            GenerateGraph graph = new GenerateGraph(Config.DEATHS_FILE, Config.WEEKLY);
             graph.createAndShowGui();
 
         });
         // Generates the detailed version of the cases graph
         casesB.addActionListener(e -> {
-            GenerateGraph graph = new GenerateGraph(0, "weekly");
+            GenerateGraph graph = new GenerateGraph(Config.CASES_FILE, Config.WEEKLY);
             graph.createAndShowGui();
         });
 
@@ -83,10 +83,10 @@ public class Template
         buttonPanel.add(PredictDeaths);
 
         // Generating the smaller previews of the both graphs
-        GenerateGraph graph = new GenerateGraph(0, "weekly");
-        GenerateGraph graph2 = new GenerateGraph(1, "weekly");
-        GenerateGraph graph3 = new GenerateGraph(0, "daily");
-        GenerateGraph graph4 = new GenerateGraph(1, "daily");
+        GenerateGraph graph = new GenerateGraph(Config.CASES_FILE, Config.WEEKLY);
+        GenerateGraph graph2 = new GenerateGraph(Config.DEATHS_FILE, Config.WEEKLY);
+        GenerateGraph graph3 = new GenerateGraph(Config.CASES_FILE, Config.DAILY);
+        GenerateGraph graph4 = new GenerateGraph(Config.DEATHS_FILE, Config.DAILY);
 
         // Setting the position and size of the graphs
         graph.setBounds(600, 100, 500, 300);
