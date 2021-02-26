@@ -167,7 +167,7 @@ public class Template
         }
 
         // Making the graph and generating the frame
-        Graph2 predictedDeathGraph = new Graph2(deathsForGraph);
+        GenerateGraph predictedDeathGraph = new GenerateGraph(1, deathsForGraph);
         predictedDeathGraph.setPreferredSize(new Dimension(1000, 700));
         JFrame frame = new JFrame("Deaths Prediction");
         frame.setPreferredSize(new Dimension(1200, 900));
@@ -233,7 +233,7 @@ public class Template
             casesForGraph.add(new DataStore(date, 0, result));
         }
 
-        Graph predictedDeathGraph = new Graph(casesForGraph);
+        GenerateGraph predictedDeathGraph = new GenerateGraph(0, casesForGraph);
         predictedDeathGraph.setPreferredSize(new Dimension(800, 600));
         JFrame frame = new JFrame("Cases Prediction");
         frame.setPreferredSize(new Dimension(1000, 800));

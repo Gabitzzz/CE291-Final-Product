@@ -34,6 +34,15 @@ public class GenerateGraph extends JPanel {
         else if (DataChoice == 1){this.deathsArray = getDeathsData();}
     }
 
+    public GenerateGraph(int DataChoice, ArrayList<DataStore> data)
+    {
+        this.DataChoice = DataChoice;
+        this.PresentationFormat = "weekly";
+
+        if (DataChoice == 0){casesArray = data;}
+        else if (DataChoice == 1){deathsArray = data;}
+    }
+
 
     @Override
     protected void paintComponent(Graphics g)
