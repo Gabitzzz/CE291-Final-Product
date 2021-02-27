@@ -17,24 +17,28 @@ public class GenerateGraph extends JPanel {
     private Color lineColor = new Color(44, 102, 230, 180);
     private Color pointColor = new Color(100, 100, 100, 180);
     private Color gridColor = new Color(200, 200, 200, 200);
-    private Color forecastLine = Color.RED;
+    private Color forecastLine = new Color(255, 0, 0);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
+    private int originalSize;
     private int DataChoice;
     private String PresentationFormat;
+    private boolean isPredictionGraph = false;
 
     public GenerateGraph(int DataChoice, String PresentationFormat)
     {
         this.DataChoice = DataChoice;
         this.PresentationFormat = PresentationFormat;
 
-        if (DataChoice == 0){ casesArray = getCasesData();}
-        else if (DataChoice == 1){ deathsArray = getDeathsData();}
+        if (DataChoice == 0){ casesArray = getData(DataChoice);}
+        else if (DataChoice == 1){ deathsArray = getData(DataChoice);}
     }
 
     public GenerateGraph(int DataChoice, ArrayList<DataStore> data)
     {
         this.DataChoice = DataChoice;
         this.PresentationFormat = Config.WEEKLY;
+        originalSize = getOriginalSize(DataChoice);
+        isPredictionGraph = true;
 
         if (DataChoice == 0){casesArray = data;}
         else if (DataChoice == 1){deathsArray = data;}
@@ -127,7 +131,7 @@ public class GenerateGraph extends JPanel {
             int x2 = graphPoints.get(i + 1).x;
             int y2 = graphPoints.get(i + 1).y;
 
-            if (x1 > 31*xScale) {g3.setColor(forecastLine);}
+            if(isPredictionGraph){if (i > originalSize-1) {g3.setColor(forecastLine);}}
             g3.drawLine(x1, y1, x2, y2);
         }
 
@@ -195,6 +199,22 @@ public class GenerateGraph extends JPanel {
         return maxDeaths;
     }
 
+    private int getOriginalSize(int choice)
+    {
+        Data data = new Data();
+        int size = 0;
+        if (choice == Config.CASES_FILE)
+        {
+            data.readFile(Config.CASES_FILE);
+            size = data.getCasesArray().size();
+        }else if (choice == Config.DEATHS_FILE)
+        {
+            data.readFile(Config.DEATHS_FILE);
+            size = data.getDeathsArray().size();
+        }
+        return size/7;
+    }
+
     public void createAndShowGui(){
         {
             GenerateGraph mainGraph = new GenerateGraph(-1, "default");
@@ -230,47 +250,36 @@ public class GenerateGraph extends JPanel {
         }
     }
 
-    private ArrayList<DataStore> getCasesData()   // Gets the original cases data
+    private ArrayList<DataStore> getData (int choice)   // Getting the original data
     {
-        ArrayList<DataStore> casesArray = new ArrayList<>();
-        Data Data = new Data();
-        Data.readFile(Config.CASES_FILE);
-        ArrayList<DataStore> casesTemp = Data.getCasesArray();
-
-        // Reverting the original data
-        for (int i = 0; i < casesTemp.size(); i++)
+        ArrayList<DataStore> tempData = new ArrayList<>();
+        Data data;
+        if (choice == Config.CASES_FILE)
         {
-            int temp = (casesTemp.size() - 1) - i;
-            String date = casesTemp.get(temp).date;
-            long newToday = casesTemp.get(temp).newToday;
-            long cumulative = casesTemp.get(temp).cumulative;
+            data = new Data();
+            data.readFile(Config.CASES_FILE);
+            tempData = new ArrayList<>(data.getCasesArray());
+        }
+        else if (choice == Config.DEATHS_FILE)
+        {
+            data = new Data();
+            data.readFile(Config.DEATHS_FILE);
+            tempData = new ArrayList<>(data.getDeathsArray());
+        }
+
+        ArrayList<DataStore> currentData = new ArrayList<>();
+        // Reverting the original data
+        for (int i = 0; i < tempData.size(); i++)
+        {
+            int temp = (tempData.size() - 1) - i;
+            String date = tempData.get(temp).date;
+            long newToday = tempData.get(temp).newToday;
+            long cumulative = tempData.get(temp).cumulative;
             if (temp % 7 == 0)
             {
-                casesArray.add( new DataStore(date, newToday, cumulative));
+                currentData.add( new DataStore(date, newToday, cumulative));
             }
         }
-        return casesArray;
-    }
-
-    private ArrayList<DataStore> getDeathsData()   // Getting the original deaths data
-    {
-        ArrayList<DataStore> deathsArray = new ArrayList<>();
-        Data Data2 = new Data();
-        Data2.readFile(Config.DEATHS_FILE);
-        ArrayList<DataStore> deathsTemp = Data2.getDeathsArray();
-
-        // Reverting the original data
-        for (int i = 0; i < deathsTemp.size(); i++)
-        {
-            int temp = (deathsTemp.size() - 1) - i;
-            String date = deathsTemp.get(temp).date;
-            long newToday = deathsTemp.get(temp).newToday;
-            long cumulative = deathsTemp.get(temp).cumulative;
-            if (temp % 7 == 0)
-            {
-                deathsArray.add( new DataStore(date, newToday, cumulative));
-            }
-        }
-        return deathsArray;
+        return currentData;
     }
 }
