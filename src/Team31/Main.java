@@ -13,7 +13,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         // The GUI
-        new Template();
+        new MainFrame();
 
         // Simple report interface through the console
         System.out.println("\n");

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 //---------------------------------------------------------------------------//
 //hello
 // Template for our GUI.
-public class Template
+public class MainFrame
 {
-    public Template()
+    public MainFrame()
     {
         // Main frame and panel for the GUI.
         JFrame frame = new JFrame("Main Menu");
@@ -107,7 +107,7 @@ public class Template
 
         frame.setSize(new Dimension(1200, 740));
         scrollBar.setSize(new Dimension(1180, 560));
-        scrollBar.getVerticalScrollBar().setUnitIncrement(16);
+        scrollBar.getVerticalScrollBar().setUnitIncrement(14);
         frame.add(scrollBar);
         frame.add(buttonPanel);
 
