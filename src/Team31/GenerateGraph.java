@@ -154,9 +154,10 @@ public class GenerateGraph extends JPanel {
         if (DataChoice == Config.CASES_FILE){graph = casesArray;}
         else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
 
-        for (DataStore case1 : graph) {
-
-            minCase = Math.min(minCase, (int)case1.cumulative);
+        for (DataStore case1 : graph)
+        {
+            if (PresentationFormat.equals(Config.WEEKLY)){minCase = Math.min(minCase, (int)case1.cumulative);}
+            else if (PresentationFormat.equals(Config.DAILY)) {minCase = Math.min(minCase, (int)case1.newToday);}
 
         }
         return minCase;
@@ -169,7 +170,8 @@ public class GenerateGraph extends JPanel {
         else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
 
         for (DataStore case1 : graph) {
-            maxCase = Math.max(maxCase, (int) case1.cumulative);
+            if (PresentationFormat.equals(Config.WEEKLY)){maxCase = Math.max(maxCase, (int)case1.cumulative);}
+            else if (PresentationFormat.equals(Config.DAILY)) {maxCase = Math.max(maxCase, (int)case1.newToday);}
 
         }
         return maxCase;
