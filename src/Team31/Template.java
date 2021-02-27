@@ -20,8 +20,10 @@ public class Template
         JScrollPane scrollBar = new JScrollPane (panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         // Headings of the graphs
-        JLabel deaths = new JLabel("Deaths Graph Preview");
-        JLabel cases = new JLabel("Cases Graph Preview");
+        JLabel wDeaths = new JLabel("Weekly Deaths Graph Preview");
+        JLabel wCases = new JLabel("Weekly Cases Graph Preview");
+        JLabel dDeaths = new JLabel("Daily Deaths Graph Preview");
+        JLabel dCases = new JLabel("Daily Cases Graph Preview");
 
         // All functional buttons
         JButton deathB = new JButton("Deaths Full Report");
@@ -62,21 +64,25 @@ public class Template
         });*/
 
         panel.setPreferredSize(new Dimension(1180, 800));
-        buttonPanel.setPreferredSize(new Dimension(1200, 200));
+        buttonPanel.setPreferredSize(new Dimension(1200, 100));
         panel.setLayout(null);
         buttonPanel.setLayout(null);
 
         // Setting the position and size of the GUI elements
-        deaths.setBounds(150, 50, 200, 50);
-        cases.setBounds(700, 50, 200, 50);
-        deathB.setBounds(150, 440, 200, 50);
-        casesB.setBounds(700, 440, 200, 50);
-        PredictCases.setBounds(700, 500, 200, 50);
-        PredictDeaths.setBounds(150,500,200,50);
+        wDeaths.setBounds(150, 50, 200, 50);
+        wCases.setBounds(700, 50, 200, 50);
+        dDeaths.setBounds(150, 400, 200, 50);
+        dCases.setBounds(700, 400, 200, 50);
+        deathB.setBounds(150, 580, 200, 50);
+        casesB.setBounds(700, 580, 200, 50);
+        PredictCases.setBounds(700, 640, 200, 50);
+        PredictDeaths.setBounds(150,640,200,50);
 
         // Adding the GUI elements to the panel
-        panel.add(deaths);
-        panel.add(cases);
+        panel.add(wDeaths);
+        panel.add(wCases);
+        panel.add(dDeaths);
+        panel.add(dCases);
         buttonPanel.add(deathB);
         buttonPanel.add(casesB);
         buttonPanel.add(PredictCases);
@@ -93,15 +99,15 @@ public class Template
         panel.add(graph);
         graph2.setBounds(50, 100, 500, 300);
         panel.add(graph2);
-        graph3.setBounds(600, 420, 500, 300);
+        graph3.setBounds(600, 460, 500, 300);
         panel.add(graph3);
-        graph4.setBounds(50, 420, 500, 300);
+        graph4.setBounds(50, 460, 500, 300);
         panel.add(graph4);
 
 
-        frame.setSize(new Dimension(1200, 600));
-        scrollBar.setSize(new Dimension(1180, 420));
-        scrollBar.getVerticalScrollBar().setUnitIncrement(14);
+        frame.setSize(new Dimension(1200, 740));
+        scrollBar.setSize(new Dimension(1180, 560));
+        scrollBar.getVerticalScrollBar().setUnitIncrement(16);
         frame.add(scrollBar);
         frame.add(buttonPanel);
 
@@ -230,9 +236,9 @@ public class Template
         }
 
         GenerateGraph predictedDeathGraph = new GenerateGraph(0, casesForGraph);
-        predictedDeathGraph.setPreferredSize(new Dimension(800, 600));
+        predictedDeathGraph.setPreferredSize(new Dimension(1000, 700));
         JFrame frame = new JFrame("Cases Prediction");
-        frame.setPreferredSize(new Dimension(1000, 800));
+        frame.setPreferredSize(new Dimension(1200, 900));
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(predictedDeathGraph, BorderLayout.NORTH);

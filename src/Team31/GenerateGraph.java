@@ -222,9 +222,9 @@ public class GenerateGraph extends JPanel {
             else if (DataChoice == Config.DEATHS_FILE) { mainGraph = new GenerateGraph(1, "weekly"); }
 
 
-            mainGraph.setPreferredSize(new Dimension(800, 600));
+            mainGraph.setPreferredSize(new Dimension(1000, 700));
             JFrame frame = new JFrame("Cases Graph");
-            frame.setPreferredSize(new Dimension(1000, 800));
+            frame.setPreferredSize(new Dimension(1200, 900));
             JPanel labelPanel = new JPanel();
 
             JLabel peakCases = new JLabel("---PEAK VALUE OF CASES: " + getMaxCase() + "---");
