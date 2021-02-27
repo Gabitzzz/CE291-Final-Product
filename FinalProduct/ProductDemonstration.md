@@ -2,7 +2,7 @@
 
 The main menu of our product which the user can see the statistical reports from deaths and cases of COVID-19 Pandemic. In addition, there are prediction buttons for both cases and deaths. 
 
-## INSERT HERE Main Menu Screenshot
+##### INSERT HERE Main Menu Screenshot
 
 For the next button, “Predict Deaths”, pressed it will redirect us to a new window which, based on the report that we have on the statistic graph that we had, it will show the total number of deaths in the next 2,4,6 and 10 weeks.
 
