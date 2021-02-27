@@ -7,15 +7,15 @@ The main menu of our product which the user can see the statistical reports from
 For the next button, “Predict Deaths”, pressed it will redirect us to a new window which, based on the report that we have on the statistic graph that we had, it will show the total number of deaths in the next 2,4,6 and 10 weeks.
 
 
-## INSERT HERE Deaths Predictions Screenshot
+##### INSERT HERE Deaths Predictions Screenshot
 
 If we click on the “Cases Full Report” button it will redirect us into a new window which includes more detailed version of cases graph.
 
-## INSERT HERE Cases Graph Screenshot
+##### INSERT HERE Cases Graph Screenshot
 
 When we press the last button, “Predict Cases”, it will redirect us to a new window which, based on the report that we have on the statistic graph that we had, it will show the total number of cases in the next 2,4,6 and 10 weeks.
 
-## INSERT HERE Cases prediction Screenshot
+##### INSERT HERE Cases prediction Screenshot
 
 Features we are particularly proud of:
 
