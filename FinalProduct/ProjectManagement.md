@@ -37,7 +37,7 @@ MVP Sprint:
 ![alt text](MVP/img/mvp_sprint.png "MVP_Sprint")
 
 Extra features Sprint  
-![alt text](FinalProdcuct/img/extra-features.png "Extra-features_Sprint")
+![alt text](FinalProduct/img/extra-features.png "Extra-features_Sprint")
 
 Week 19 Sprint  
 ![alt text](FinalProduct/img/week19.png "Week19_Sprint")
