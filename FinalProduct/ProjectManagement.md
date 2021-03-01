@@ -12,6 +12,10 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;One communication issue that we had during the meetings is hardware issues such as microphone functionality. 
 
+We started using standup meetings and everyone became more organized. We were able to hear the other team members problems and try to find solutions for everyone. With the help of the standup we started knowing everyone's skills and manage to share our tasks depending on the abilities of each.  
+[Link to first standup meeting](https://cseejira.essex.ac.uk/browse/A291040-58)   
+[Link to second standup meeting](https://cseejira.essex.ac.uk/browse/A291040-66)  
+
 ### Sprint Burndown Charts
 
 Srpint 1:
@@ -31,6 +35,16 @@ Sprint 5:
 
 MVP Sprint:
 ![alt text](MVP/img/mvp_sprint.png "MVP_Sprint")
+
+Extra features Sprint  
+![alt text](FinalProduct/img/extra-features.png "Extra-features_Sprint")
+
+Week 19 Sprint  
+![alt text](FinalProduct/img/week19.png "Week19_Sprint")
+
+Week 20 Sprint  
+![alt text](FinalProduct/img/week_20.png "Week20_Sprint")
+
 
 ### Burndown-Charts Discussion
 
