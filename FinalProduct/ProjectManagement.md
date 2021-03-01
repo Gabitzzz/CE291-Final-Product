@@ -37,11 +37,13 @@ MVP Sprint:
 ![alt text](MVP/img/mvp_sprint.png "MVP_Sprint")
 
 Extra features Sprint  
-![alt text](FinalProdcut/img/extra-features.png "Extra-features_Sprint")
+![alt text](FinalProdcuct/img/extra-features.png "Extra-features_Sprint")
 
 Week 19 Sprint  
-![alt text](FinalProdcut/img/week19.png "Week19_Sprint")
+![alt text](FinalProduct/img/week19.png "Week19_Sprint")
 
+Week 20 Sprint  
+![alt text](FinalProduct/img/week_20.png "Week20_Sprint")
 
 
 ### Burndown-Charts Discussion
