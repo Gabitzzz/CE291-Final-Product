@@ -62,6 +62,7 @@ public class GenerateGraph extends JPanel {
         double xScale = (float)(getWidth() - (2 * padding) - labelPadding) / (graph.size() - 1);
         double yScale = (getHeight() - 2 * padding - labelPadding) / (getMaxCase() - getMinCase());
 
+
         List<Point> graphPoints = new ArrayList<>();
         for (int i = 0; i < graph.size(); i++)
         {
@@ -70,6 +71,8 @@ public class GenerateGraph extends JPanel {
             if (PresentationFormat.equals(Config.WEEKLY)) { y1 = (int) ((getMaxCase() - graph.get(i).cumulative) * yScale + padding); }
             else if (PresentationFormat.equals(Config.DAILY)){y1 = (int) ((getMaxCase() - graph.get(i).newToday) * yScale + padding); }
             graphPoints.add(new Point(x1, y1));
+
+
         }
 
         //Sketching the background of the graph
@@ -132,8 +135,10 @@ public class GenerateGraph extends JPanel {
             int x2 = graphPoints.get(i + 1).x;
             int y2 = graphPoints.get(i + 1).y;
 
+
             if(isPredictionGraph){if (i > originalSize-1) {g3.setColor(forecastLine);}}
             g3.drawLine(x1, y1, x2, y2);
+
         }
         if (isPredictionGraph)
         {

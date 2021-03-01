@@ -31,8 +31,7 @@ public class MainFrame
         JButton PredictCases = new JButton("Predict Cases");
         JButton PredictDeaths = new JButton("Predict Deaths");
 
-        // JButton dailyA = new JButton("Daily case Report");
-        // JButton dailyB = new JButton("Daily death Report");
+
 
         // Calls the method which creates a new frame with predicted death values
         PredictDeaths.addActionListener(e -> makePredictedDeathsGraph());
@@ -52,16 +51,7 @@ public class MainFrame
             graph.createAndShowGui();
         });
 
-        /*TODO, dailyA is having an error
-        */
-       /* dailyA.addActionListener(e -> {
-            Data Data = new Data();
-            Data.readFile(Config.CASES_FILE);
-            ArrayList<DailyDataStore> cases1 = Data.getDailyCaseArray();
 
-            Graph3 graph3 = new Graph(cases1);
-            graph3.createAndShowGui();
-        });*/
 
         panel.setPreferredSize(new Dimension(1180, 800));
         buttonPanel.setPreferredSize(new Dimension(1200, 100));
