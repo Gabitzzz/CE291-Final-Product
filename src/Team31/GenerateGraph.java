@@ -18,6 +18,7 @@ public class GenerateGraph extends JPanel {
     private Color pointColor = new Color(100, 100, 100, 180);
     private Color gridColor = new Color(200, 200, 200, 200);
     private Color forecastLine = new Color(255, 0, 0);
+    private Color modellingLine = new Color(0, 128, 0);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
     private int originalSize;
     private int DataChoice;
@@ -133,6 +134,26 @@ public class GenerateGraph extends JPanel {
 
             if(isPredictionGraph){if (i > originalSize-1) {g3.setColor(forecastLine);}}
             g3.drawLine(x1, y1, x2, y2);
+        }
+        if (isPredictionGraph)
+        {
+            g3.setColor(modellingLine);
+            int n = graphPoints.size() - 1;
+            for (int i = 1; i <= 5; i++)
+            {
+                int x1 = graphPoints.get(n - (n / i)).x;
+                int y1 = graphPoints.get(n - (n / i)).y;
+                int x2;
+                int y2;
+                if (i == 5) {
+                    x2 = graphPoints.get(n).x;
+                    y2 = graphPoints.get(n).y; }
+                else {
+                    x2 = graphPoints.get(n - (n / (i + 1))).x;
+                    y2 = graphPoints.get(n - (n / (i + 1))).y; }
+                g3.drawLine(x1 - 10, y1 - 10, x2 - 10, y2 - 10);
+                //g3.drawLine(x1, y1, x2, y2);
+            }
         }
 
         g3.setStroke(oldStroke);
