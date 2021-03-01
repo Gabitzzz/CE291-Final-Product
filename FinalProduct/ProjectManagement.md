@@ -36,6 +36,14 @@ Sprint 5:
 MVP Sprint:
 ![alt text](MVP/img/mvp_sprint.png "MVP_Sprint")
 
+Extra features Sprint  
+![alt text](FinalProdcut/img/extra-features.png "Extra-features_Sprint")
+
+Week 19 Sprint  
+![alt text](FinalProdcut/img/week19.png "Week19_Sprint")
+
+
+
 ### Burndown-Charts Discussion
 
 The burn-down charts show the amount of work that has been completed in the sprints and the work remaining.
