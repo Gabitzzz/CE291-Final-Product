@@ -12,7 +12,7 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;One communication issue that we had during the meetings is hardware issues such as microphone functionality. 
 
-We started using standup meetings and everyone became more organized. We were able to hear the other team members problems and try to find solutions for everyone. With the help of the standup we started knowing everyone's skills and manage to share our tasks depending on the abilities of each.
+We started using standup meetings and everyone became more organized. We were able to hear the other team members problems and try to find solutions for everyone. With the help of the standup we started knowing everyone's skills and manage to share our tasks depending on the abilities of each.  
 [Link to standup meeting](https://cseejira.essex.ac.uk/browse/A291040-58)
 
 ### Sprint Burndown Charts
