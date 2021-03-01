@@ -152,6 +152,8 @@ public class GenerateGraph extends JPanel {
                     x2 = graphPoints.get(n - (n / (i + 1))).x;
                     y2 = graphPoints.get(n - (n / (i + 1))).y; }
                 g3.drawLine(x1 - 10, y1 - 10, x2 - 10, y2 - 10);
+                g3.fillOval(x1 - 12, y1 - 12, pointWidth, pointWidth);
+                g3.fillOval(x2 - 12, y2 - 12, pointWidth, pointWidth);
                 //g3.drawLine(x1, y1, x2, y2);
             }
         }
