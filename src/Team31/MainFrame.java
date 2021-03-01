@@ -34,10 +34,10 @@ public class MainFrame
 
 
         // Calls the method which creates a new frame with predicted death values
-        PredictDeaths.addActionListener(e -> makePredictedDeathsGraph());
+        PredictDeaths.addActionListener(e -> makePredictedDeathsGraph(Config.DEATHS_FILE));
 
         // Calls the method which creates a new frame with predicted cases values
-        PredictCases.addActionListener(e -> makePredictedCasesGraph());
+        PredictCases.addActionListener(e -> makePredictedDeathsGraph(Config.CASES_FILE));
 
         // Generates the detailed version of deaths graph
         deathB.addActionListener(e -> {
@@ -107,46 +107,54 @@ public class MainFrame
     }
 
     // Generates and shows the graph of predicted deaths
-    private void makePredictedDeathsGraph()
+    private void makePredictedDeathsGraph(int dataChoice)
     {
+        Data data = new Data();
+        ArrayList<DataStore> array = new ArrayList<>();
+        ArrayList<DataStore> arrayForGraph = new ArrayList<>();
+
         // Getting the original deaths data
-        Data Data = new Data();
-        Data.readFile(Config.DEATHS_FILE);
-        ArrayList<DataStore> deaths = Data.getDeathsArray();
-        ArrayList<DataStore> deathsForGraph = new ArrayList<>();
+        if (dataChoice == Config.CASES_FILE)
+        {
+            data.readFile(Config.CASES_FILE);
+            array = data.getCasesArray();
+        }
+        else if (dataChoice == Config.DEATHS_FILE)
+        {
+            data.readFile(Config.DEATHS_FILE);
+            array = data.getDeathsArray();
+        }
 
         // ArrayLists for training data
         ArrayList<Integer> xTime = new ArrayList<>();
         ArrayList<Long> yDeaths = new ArrayList<>();
 
         // Reverting the original data and prepare the data for graph
-        for (int i = 0; i < deaths.size(); i++)
+        for (int i = 0; i < array.size(); i++)
         {
-            int temp = (deaths.size() - 1) - i;
-            String date = deaths.get(temp).date;
-            long newToday = deaths.get(temp).newToday;
-            long cumulative = deaths.get(temp).cumulative;
+            int temp = (array.size() - 1) - i;
+            String date = array.get(temp).date;
+            long newToday = array.get(temp).newToday;
+            long cumulative = array.get(temp).cumulative;
             if (temp % 7 == 0)
             {
-                deathsForGraph.add( new DataStore(date, newToday, cumulative));
+                arrayForGraph.add( new DataStore(date, newToday, cumulative));
             }
         }
 
         // Adding the training data.
-        for (int i = 0; i < deathsForGraph.size(); i++)
+        int n = arrayForGraph.size() - 1;
+        for (int i = 0; i < 3; i++)
         {
-            long cumulative = deathsForGraph.get(i).cumulative;
+            long cumulative = arrayForGraph.get(n - i).cumulative;
 
-            if (i >= 31)   // Training the system after week 31
-            {
-                xTime.add(i);
-                yDeaths.add(cumulative);
-            }
+            xTime.add(n - i);
+            yDeaths.add(cumulative);
         }
 
         // Calculating the predictions
         LinearRegression deathsPrediction = new LinearRegression(xTime, yDeaths);
-        long step = 34;   // Last week of the original data
+        long step = arrayForGraph.size();   // Last week of the original data
 
         // Adding prediction values to the graph data
         for (int i = 0; i < 10; i++)
@@ -155,79 +163,13 @@ public class MainFrame
             step++;
             String date = i + " weeks after last death";
 
-            deathsForGraph.add(new DataStore(date, 0, result));
+            arrayForGraph.add(new DataStore(date, 0, result));
         }
 
         // Making the graph and generating the frame
-        GenerateGraph predictedDeathGraph = new GenerateGraph(1, deathsForGraph);
+        GenerateGraph predictedDeathGraph = new GenerateGraph(dataChoice, arrayForGraph);
         predictedDeathGraph.setPreferredSize(new Dimension(1000, 700));
         JFrame frame = new JFrame("Deaths Prediction");
-        frame.setPreferredSize(new Dimension(1200, 900));
-
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.add(predictedDeathGraph, BorderLayout.NORTH);
-
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
-
-    // Generates and shows the graph of predicted cases
-    private void makePredictedCasesGraph()
-    {
-        // Getting the original deaths data
-        Data Data = new Data();
-        Data.readFile(Config.CASES_FILE);
-
-        // ArrayLists for training data
-        ArrayList<DataStore> cases = Data.getCasesArray();
-        ArrayList<DataStore> casesForGraph = new ArrayList<>();
-
-        ArrayList<Integer> xTime = new ArrayList<>();
-        ArrayList<Long> yDeaths = new ArrayList<>();
-
-        // Reverting the original data and prepare the data for graph
-        for (int i = 0; i < cases.size(); i++)
-        {
-            int temp = (cases.size() - 1) - i;
-            String date = cases.get(temp).date;
-            long newToday = cases.get(temp).newToday;
-            long cumulative = cases.get(temp).cumulative;
-            if (temp % 7 == 0)
-            {
-                casesForGraph.add( new DataStore(date, newToday, cumulative));
-            }
-        }
-
-        // Adding the training data.
-        for (int i = 0; i < casesForGraph.size(); i++)
-        {
-            long cumulative = casesForGraph.get(i).cumulative;
-
-            if (i >= 34)   // Training the system after week 34
-            {
-                xTime.add(i);
-                yDeaths.add(cumulative);
-            }
-        }
-
-        // Calculating the predictions
-        LinearRegression deathsPrediction = new LinearRegression(xTime, yDeaths);
-        long step = 39;   // Last week of the original data
-
-        // Adding prediction values to the graph data
-        for (int i = 0; i < 10; i++)
-        {
-            long result = deathsPrediction.predictCumulatives(step);
-            step++;
-            String date = i + " weeks after last death";
-
-            casesForGraph.add(new DataStore(date, 0, result));
-        }
-
-        GenerateGraph predictedDeathGraph = new GenerateGraph(0, casesForGraph);
-        predictedDeathGraph.setPreferredSize(new Dimension(1000, 700));
-        JFrame frame = new JFrame("Cases Prediction");
         frame.setPreferredSize(new Dimension(1200, 900));
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
