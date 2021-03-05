@@ -53,7 +53,7 @@ public class MainFrame
 
 
 
-        panel.setPreferredSize(new Dimension(1180, 800));
+        panel.setPreferredSize(new Dimension(1380, 800));
         buttonPanel.setPreferredSize(new Dimension(1200, 100));
         panel.setLayout(null);
         buttonPanel.setLayout(null);
@@ -64,8 +64,8 @@ public class MainFrame
         dDeaths.setBounds(150, 400, 200, 50);
         dCases.setBounds(700, 400, 200, 50);
         deathB.setBounds(150, 580, 200, 50);
-        casesB.setBounds(700, 580, 200, 50);
-        PredictCases.setBounds(700, 640, 200, 50);
+        casesB.setBounds(800, 580, 200, 50);
+        PredictCases.setBounds(800, 640, 200, 50);
         PredictDeaths.setBounds(150,640,200,50);
 
         // Adding the GUI elements to the panel
@@ -85,18 +85,18 @@ public class MainFrame
         GenerateGraph graph4 = new GenerateGraph(Config.DEATHS_FILE, Config.DAILY);
 
         // Setting the position and size of the graphs
-        graph.setBounds(600, 100, 500, 300);
+        graph.setBounds(700, 100, 600, 300);
         panel.add(graph);
-        graph2.setBounds(50, 100, 500, 300);
+        graph2.setBounds(50, 100, 600, 300);
         panel.add(graph2);
-        graph3.setBounds(600, 460, 500, 300);
+        graph3.setBounds(700, 460, 600, 300);
         panel.add(graph3);
-        graph4.setBounds(50, 460, 500, 300);
+        graph4.setBounds(50, 460, 600, 300);
         panel.add(graph4);
 
 
-        frame.setSize(new Dimension(1200, 740));
-        scrollBar.setSize(new Dimension(1180, 560));
+        frame.setSize(new Dimension(1400, 740));
+        scrollBar.setSize(new Dimension(1380, 560));
         scrollBar.getVerticalScrollBar().setUnitIncrement(14);
         frame.add(scrollBar);
         frame.add(buttonPanel);
@@ -144,7 +144,7 @@ public class MainFrame
 
         // Adding the training data.
         int n = arrayForGraph.size() - 1;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
             long cumulative = arrayForGraph.get(n - i).cumulative;
 
@@ -168,9 +168,9 @@ public class MainFrame
 
         // Making the graph and generating the frame
         GenerateGraph predictedDeathGraph = new GenerateGraph(dataChoice, arrayForGraph);
-        predictedDeathGraph.setPreferredSize(new Dimension(1000, 700));
+        predictedDeathGraph.setPreferredSize(new Dimension(1200, 700));
         JFrame frame = new JFrame("Deaths Prediction");
-        frame.setPreferredSize(new Dimension(1200, 900));
+        frame.setPreferredSize(new Dimension(1400, 900));
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(predictedDeathGraph, BorderLayout.NORTH);

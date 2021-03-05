@@ -67,12 +67,18 @@ public class GenerateGraph extends JPanel {
         for (int i = 0; i < graph.size(); i++)
         {
             int x1 = (int) (i * xScale + padding + labelPadding);
-            int y1 = 0;
-            if (PresentationFormat.equals(Config.WEEKLY)) { y1 = (int) ((getMaxCase() - graph.get(i).cumulative) * yScale + padding); }
-            else if (PresentationFormat.equals(Config.DAILY)){y1 = (int) ((getMaxCase() - graph.get(i).newToday) * yScale + padding); }
-            graphPoints.add(new Point(x1, y1));
-
-
+            int y1;
+            if (PresentationFormat.equals(Config.WEEKLY) && !isPredictionGraph)
+            {
+                if (i % 7 == 0) { y1 = (int) ((getMaxCase() - graph.get(i).cumulative) * yScale + padding); graphPoints.add(new Point(x1, y1)); }
+            }
+            else if (PresentationFormat.equals(Config.DAILY))
+            {
+                y1 = (int) ((getMaxCase() - graph.get(i).newToday) * yScale + padding); graphPoints.add(new Point(x1, y1));
+            }
+            else
+                {y1 = (int) ((getMaxCase() - graph.get(i).cumulative) * yScale + padding); graphPoints.add(new Point(x1, y1));
+                }
         }
 
         //Sketching the background of the graph
@@ -112,13 +118,16 @@ public class GenerateGraph extends JPanel {
                     g3.setColor(gridColor);
                     g3.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x0, padding);
                     g3.setColor(Color.BLACK);
-                    String xLabel = i + "";
+                    String xLabel;
+                    if (PresentationFormat.equals(Config.WEEKLY) && !isPredictionGraph) { xLabel = i / 7 + " "; }
+                    else { xLabel = i + " "; }
                     //Implement X-axis numbers
                     FontMetrics metrics = g3.getFontMetrics();
                     int labelWidth = metrics.stringWidth(xLabel);
                     g3.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
                 }
-                g.drawLine(x0, y0, x0, y1);
+                if (!isPredictionGraph) {if (i % 2 == 0)g.drawLine(x0, y0, x0, y1);}
+                else {g.drawLine(x0, y0, x0, y1);}
             }
         }
 
@@ -134,8 +143,6 @@ public class GenerateGraph extends JPanel {
             int y1 = graphPoints.get(i).y;
             int x2 = graphPoints.get(i + 1).x;
             int y2 = graphPoints.get(i + 1).y;
-
-
             if(isPredictionGraph){if (i > originalSize-1) {g3.setColor(forecastLine);}}
             g3.drawLine(x1, y1, x2, y2);
 
@@ -168,7 +175,8 @@ public class GenerateGraph extends JPanel {
         for (Point graphPoint : graphPoints) {
             int x = graphPoint.x - pointWidth / 2;
             int y = graphPoint.y - pointWidth / 2;
-            g3.fillOval(x, y, pointWidth, pointWidth);
+            if (PresentationFormat.equals(Config.DAILY)){g3.fillOval(x, y, pointWidth / 2, pointWidth / 2);}
+            else {g3.fillOval(x, y, pointWidth, pointWidth);}
             g3.setColor(Color.black);
         }
 
@@ -252,9 +260,9 @@ public class GenerateGraph extends JPanel {
             else if (DataChoice == Config.DEATHS_FILE) { mainGraph = new GenerateGraph(1, "weekly"); }
 
 
-            mainGraph.setPreferredSize(new Dimension(1000, 700));
+            mainGraph.setPreferredSize(new Dimension(1200, 700));
             JFrame frame = new JFrame("Cases Graph");
-            frame.setPreferredSize(new Dimension(1200, 900));
+            frame.setPreferredSize(new Dimension(1400, 900));
             JPanel labelPanel = new JPanel();
 
             JLabel peakCases = new JLabel("---PEAK VALUE OF CASES: " + getMaxCase() + "---");
@@ -305,10 +313,10 @@ public class GenerateGraph extends JPanel {
             String date = tempData.get(temp).date;
             long newToday = tempData.get(temp).newToday;
             long cumulative = tempData.get(temp).cumulative;
-            if (temp % 7 == 0)
-            {
+            //if (temp % 7 == 0)
+            //{
                 currentData.add( new DataStore(date, newToday, cumulative));
-            }
+            //}
         }
         return currentData;
     }
