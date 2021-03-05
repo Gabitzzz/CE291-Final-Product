@@ -79,10 +79,10 @@ public class MainFrame
         buttonPanel.add(PredictDeaths);
 
         // Generating the smaller previews of the both graphs
-        GenerateGraph graph = new GenerateGraph(Config.CASES_FILE, Config.WEEKLY);
-        GenerateGraph graph2 = new GenerateGraph(Config.DEATHS_FILE, Config.WEEKLY);
-        GenerateGraph graph3 = new GenerateGraph(Config.CASES_FILE, Config.DAILY);
-        GenerateGraph graph4 = new GenerateGraph(Config.DEATHS_FILE, Config.DAILY);
+        GeneratePreviewGraph graph = new GeneratePreviewGraph(Config.CASES_FILE, Config.WEEKLY);
+        GeneratePreviewGraph graph2 = new GeneratePreviewGraph(Config.DEATHS_FILE, Config.WEEKLY);
+        GeneratePreviewGraph graph3 = new GeneratePreviewGraph(Config.CASES_FILE, Config.DAILY);
+        GeneratePreviewGraph graph4 = new GeneratePreviewGraph(Config.DEATHS_FILE, Config.DAILY);
 
         // Setting the position and size of the graphs
         graph.setBounds(700, 100, 600, 300);
