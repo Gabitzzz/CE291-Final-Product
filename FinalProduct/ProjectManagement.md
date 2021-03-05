@@ -15,6 +15,7 @@
 We started using standup meetings and everyone became more organized. We were able to hear the other team members problems and try to find solutions for everyone. With the help of the standup we started knowing everyone's skills and manage to share our tasks depending on the abilities of each.  
 [Link to first standup meeting](https://cseejira.essex.ac.uk/browse/A291040-58)   
 [Link to second standup meeting](https://cseejira.essex.ac.uk/browse/A291040-66)  
+[Link to second standup meeting](https://https://cseejira.essex.ac.uk/browse/A291040-74)  
 
 ### Sprint Burndown Charts
 
