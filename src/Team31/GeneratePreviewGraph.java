@@ -9,12 +9,12 @@ public class GeneratePreviewGraph extends JPanel {
 
     private static ArrayList<DataStore> casesArray;
     private static ArrayList<DataStore> deathsArray;
-    private Color lineColor = new Color(44, 102, 230, 180);
-    private Color pointColor = new Color(100, 100, 100, 180);
-    private Color gridColor = new Color(200, 200, 200, 200);
+    private final Color lineColor = new Color(44, 102, 230, 180);
+    private final Color pointColor = new Color(100, 100, 100, 180);
+    private final Color gridColor = new Color(200, 200, 200, 200);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
-    private int DataChoice;
-    private String PresentationFormat;
+    private final int DataChoice;
+    private final String PresentationFormat;
 
     public GeneratePreviewGraph(int DataChoice, String PresentationFormat)
     {
@@ -105,13 +105,11 @@ public class GeneratePreviewGraph extends JPanel {
                     int labelWidth = metrics.stringWidth(xLabel);
                     g3.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
                 }
-                if (i % 2 == 0)g.drawLine(x0, y0, x0, y1);
-                else {g.drawLine(x0, y0, x0, y1);}
+                g.drawLine(x0, y0, x0, y1);
             }
         }
 
         // Creating Both AXES
-        g3.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, padding + labelPadding, padding);
         g3.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
 
         Stroke oldStroke = g3.getStroke();
