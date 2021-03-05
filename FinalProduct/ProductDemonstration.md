@@ -21,3 +21,6 @@ Features we are particularly proud of:
 
 We made some functions to represent the maximum and minimum cases and deaths below the graphs that happened in that range of weeks;
 We predicted the future cases and deaths up to 10 weeks from the present.
+
+* *Make sure this section includes any functionality/features you are particularly proud of.*
+
