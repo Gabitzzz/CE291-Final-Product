@@ -1,5 +1,6 @@
 package Team31;
 
+// constants
 public final class Config {
     static final int CASES_FILE = 0;
     static final int DEATHS_FILE = 1;

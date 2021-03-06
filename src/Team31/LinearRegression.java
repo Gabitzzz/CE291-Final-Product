@@ -7,7 +7,7 @@ import java.util.ArrayList;
 //-------------------------------------------------------------------//
 //  Predicts a new Cumulative Value According to the Value of weeks  //
 //-------------------------------------------------------------------//
-
+// o
 // Linear Regression Model.
 public class LinearRegression
 {

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 //---------------------------------------------------------------------------//
 //    Generates the Main Menu Frame and Includes the Button Functionality    //
 //---------------------------------------------------------------------------//
-//hello
+// o
 // Template for our GUI.
 public class MainFrame
 {

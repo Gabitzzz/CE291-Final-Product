@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 //    Configures and Generates a Line Graph for Cases Data    //
 //------------------------------------------------------------//
 
-// te
+// tes
 public class GenerateGraph extends JComponent {
 
     private static ArrayList<DataStore> casesArray;
