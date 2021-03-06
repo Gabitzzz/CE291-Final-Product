@@ -263,8 +263,8 @@ public class GenerateGraph extends JPanel {
 
             mainGraph.setPreferredSize(new Dimension(1200, 700));
             JFrame frame = new JFrame("Cases Graph");
-            frame.setPreferredSize(new Dimension(1400, 900));
-            EmptyBorder border1 = new EmptyBorder(25, 50, 0, 100);
+            frame.setPreferredSize(new Dimension(1400, 800));
+            EmptyBorder border1 = new EmptyBorder(-15, 50, 0, 100);
             JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 20));
             labelPanel.setBorder(border1);
             JLabel peakCases = new JLabel("PEAK VALUE OF CASES: " + getMaxCase());
@@ -275,6 +275,7 @@ public class GenerateGraph extends JPanel {
             maxNew.setFont(new Font("Helvetica", Font.BOLD, 15));
             JLabel minNew = new JLabel("MINIMUM CASES IN ONE DAY: " + getMinNew());
             minNew.setFont(new Font("Helvetica", Font.BOLD, 15));
+            frame.setResizable(false);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             labelPanel.add(peakCases);
             labelPanel.add(minCases);
