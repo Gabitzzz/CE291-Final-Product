@@ -24,6 +24,14 @@ _INCLUDE A SCREENSHOT OF DEATHS FULL REPORT BUTTON AND CASES FULL REPORT BUTTON_
 _INCLUDE A SCREENSHOT WITH THE GRAPHS THAT SHOW THE PREDICTIONS_
 
 
-5.
+5. Something that our team that we haven't include it in the main menu because we wanted to emphasize on that and show how proud our team is, we created a 2 buttons the first one is called "Select A file" that button gives you the option to add a CSV file in order to see the data in graphs, to see them you only have to click in the next button in which it's called "Preview Data" and all the statistics of Covid-19 will be appeared.
+
+_INCLUDE A SCREENSHOT OF PREVIEW DATA AND SELECT FILE BUTTONS_
+
+
+6. Lastly, we created a feature for the IT staff of NHS in which if their staff runs our program and check in the terminal a menu will be appeared to ask the user type 1 to see the cases data or type 2 to see the deaths data. The reason that is much more useful that option is because it gives even more detailed data to the users to see the dates of the new cases or deaths more clearly.
+
+
+_INCLUDE A SCREENSHOT OF THE TERMINAL_
 
 
