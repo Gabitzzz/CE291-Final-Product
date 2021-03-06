@@ -141,33 +141,31 @@ public class MainFrame
             }
             else
             {
-                try {
-                    Path file = Paths.get(filePath);
-                    Data data = new Data(file);
-                    ArrayList<DataStore> arrayForGraph = new ArrayList<>();
-                    data.readFile(Config.OTHER_FILE);
-                    ArrayList<DataStore> array = data.getOtherArray();
+                Path file = Paths.get(filePath);
+                Data data = new Data(file);
+                data.readFile(Config.OTHER_FILE);
+                ArrayList<DataStore> array = data.getOtherArray();
+                ArrayList<DataStore> arrayForGraph = new ArrayList<>();
+                if(array.isEmpty())
+                {JOptionPane.showMessageDialog(null,"Program could not read the selected file","File Not Readable", JOptionPane.ERROR_MESSAGE); return;}
 
-                    for (int i = 0; i < array.size(); i++) {
-                        int temp = (array.size() - 1) - i;
-                        String date = array.get(temp).date;
-                        long newToday = array.get(temp).newToday;
-                        long cumulative = array.get(temp).cumulative;
-                        arrayForGraph.add(new DataStore(date, newToday, cumulative));
-                    }
-
-                    GenerateGraph graph = new GenerateGraph(arrayForGraph);
-                    graph.setPreferredSize(new Dimension(1200, 700));
-                    JFrame frame = new JFrame("Selected File Preview");
-                    frame.setPreferredSize(new Dimension(1400, 900));
-                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    frame.add(graph, BorderLayout.NORTH);
-                    frame.pack();
-                    frame.setLocationRelativeTo(null);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null,"Program could not read the selected file","File Not Readable", JOptionPane.ERROR_MESSAGE);
+                for (int i = 0; i < array.size(); i++)
+                {
+                    int temp = (array.size() - 1) - i;
+                    String date = array.get(temp).date;
+                    long newToday = array.get(temp).newToday;
+                    long cumulative = array.get(temp).cumulative;
+                    arrayForGraph.add(new DataStore(date, newToday, cumulative));
                 }
+                GenerateGraph graph = new GenerateGraph(arrayForGraph);
+                graph.setPreferredSize(new Dimension(1200, 700));
+                JFrame frame = new JFrame("Selected File Preview");
+                frame.setPreferredSize(new Dimension(1400, 900));
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.add(graph, BorderLayout.NORTH);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
             }
         }
     }
