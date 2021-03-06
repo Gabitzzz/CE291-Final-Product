@@ -8,4 +8,4 @@ There is some market competition to something like this, but it is mostly compri
 
 **Marketing strategy**
 
-The primary source for knowing about this program would be word of mouth/testomonies from people who already have access to it and can attest to it's usefulness. As mentioned before, the primary target 'market' for this software would be medical professionals who need it to tackle against Covid-19, although it would still be openly available to anyone who requested for something like this.
+The primary source for knowing about this program would be word of mouth/testomonies from people who already have access to it and can attest to it's usefulness. As mentioned before, the primary target 'market' for this software would be medical professionals who need it to tackle against Covid-19, although it would still be openly available to anyone who requested for it.
