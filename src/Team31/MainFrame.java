@@ -170,13 +170,15 @@ public class MainFrame
         GenerateGraph predictedDeathGraph = new GenerateGraph(dataChoice, arrayForGraph);
         predictedDeathGraph.setPreferredSize(new Dimension(1200, 700));
         JFrame frame = new JFrame("Deaths Prediction");
-        frame.setPreferredSize(new Dimension(1400, 900));
+        frame.setPreferredSize(new Dimension(1400, 800));
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(predictedDeathGraph, BorderLayout.NORTH);
 
         frame.pack();
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 }
+
