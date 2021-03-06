@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 //------------------------------------------------------------//
 //    Configures and Generates a Line Graph for Cases Data    //
@@ -263,16 +264,17 @@ public class GenerateGraph extends JPanel {
             mainGraph.setPreferredSize(new Dimension(1200, 700));
             JFrame frame = new JFrame("Cases Graph");
             frame.setPreferredSize(new Dimension(1400, 900));
-            JPanel labelPanel = new JPanel();
-
-            JLabel peakCases = new JLabel("---PEAK VALUE OF CASES: " + getMaxCase() + "---");
-            JLabel minCases = new JLabel("---MINIMUM VALUE OF CASES: " + getMinCase() + "---");
-
-            JLabel maxNew = new JLabel("---MAXIMUM CASES IN ONE DAY: " + getMaxNew() + "---");
-            peakCases.setBounds(100, 300, 10, 10);
-            JLabel minNew = new JLabel("---MINIMUM CASES IN ONE DAY: " + getMinNew() + "---");
-            minCases.setBounds(100, 400, 10, 10);
-
+            EmptyBorder border1 = new EmptyBorder(25, 50, 0, 100);
+            JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 20));
+            labelPanel.setBorder(border1);
+            JLabel peakCases = new JLabel("PEAK VALUE OF CASES: " + getMaxCase());
+            peakCases.setFont(new Font("Helvetica", Font.BOLD, 15));
+            JLabel minCases = new JLabel("LOWEST VALUE OF CASES: " + getMinCase());
+            minCases.setFont(new Font("Helvetica", Font.BOLD, 15));
+            JLabel maxNew = new JLabel("MAXIMUM CASES IN ONE DAY: " + getMaxNew());
+            maxNew.setFont(new Font("Helvetica", Font.BOLD, 15));
+            JLabel minNew = new JLabel("MINIMUM CASES IN ONE DAY: " + getMinNew());
+            minNew.setFont(new Font("Helvetica", Font.BOLD, 15));
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             labelPanel.add(peakCases);
             labelPanel.add(minCases);
