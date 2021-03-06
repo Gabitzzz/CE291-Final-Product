@@ -29,7 +29,7 @@ _INCLUDE A SCREENSHOT WITH THE GRAPHS THAT SHOW THE PREDICTIONS_
 _INCLUDE A SCREENSHOT OF PREVIEW DATA AND SELECT FILE BUTTONS_
 
 
-6. Lastly, we created a feature for the IT staff of NHS in which if their staff runs our program and check in the terminal a menu will be appeared to ask the user type 1 to see the cases data or type 2 to see the deaths data. The reason that is much more useful that option is because it gives even more detailed data to the users to see the dates of the new cases or deaths more clearly.
+6. Lastly, we created a feature for the IT staff of NHS in which if their staff runs our program and check in the terminal a menu will be appeared to ask the user type 1 to see the cases data or type 2 to see the deaths data. The reason that is much more useful that option is because it gives even more detailed data to the users to see the dates of the new cases or deaths more clearly. These feature is created in the Main class in which we are calling the variables that we want and the output will be the data that we called and the result is what we want.
 
 
 _INCLUDE A SCREENSHOT OF THE TERMINAL_
