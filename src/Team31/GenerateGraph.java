@@ -11,10 +11,11 @@ import javax.swing.border.EmptyBorder;
 //------------------------------------------------------------//
 
 // te
-public class GenerateGraph extends JPanel {
+public class GenerateGraph extends JComponent {
 
     private static ArrayList<DataStore> casesArray;
     private static ArrayList<DataStore> deathsArray;
+    private static ArrayList<DataStore> otherArray;
     private Color lineColor = new Color(44, 102, 230, 180);
     private Color pointColor = new Color(100, 100, 100, 180);
     private Color gridColor = new Color(200, 200, 200, 200);
@@ -41,9 +42,18 @@ public class GenerateGraph extends JPanel {
         this.PresentationFormat = Config.WEEKLY;
         originalSize = getOriginalSize(DataChoice);
         isPredictionGraph = true;
+        otherArray = data;
 
-        if (DataChoice == 0){casesArray = data;}
-        else if (DataChoice == 1){deathsArray = data;}
+        //if (DataChoice == 0){casesArray = data;}
+        //else if (DataChoice == 1){deathsArray = data;}
+    }
+
+    public GenerateGraph(ArrayList<DataStore> data)
+    {
+        otherArray = data;
+        DataChoice = Config.OTHER_FILE;
+        PresentationFormat = Config.WEEKLY;
+        isPredictionGraph = false;
     }
 
 
@@ -55,8 +65,9 @@ public class GenerateGraph extends JPanel {
         g3.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == Config.CASES_FILE){graph = casesArray;}
-        else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
+        if (DataChoice == Config.CASES_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = casesArray;}}
+        else if (DataChoice == Config.DEATHS_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = deathsArray;}}
+        else if (DataChoice == Config.OTHER_FILE){graph = otherArray;}
 
         int padding = 25;
         int labelPadding = 30;
@@ -78,8 +89,7 @@ public class GenerateGraph extends JPanel {
                 y1 = (int) ((getMaxCase() - graph.get(i).newToday) * yScale + padding); graphPoints.add(new Point(x1, y1));
             }
             else
-                {y1 = (int) ((getMaxCase() - graph.get(i).cumulative) * yScale + padding); graphPoints.add(new Point(x1, y1));
-                }
+                {y1 = (int) ((getMaxCase() - graph.get(i).cumulative) * yScale + padding); graphPoints.add(new Point(x1, y1)); }
         }
 
         //Sketching the background of the graph
@@ -188,8 +198,9 @@ public class GenerateGraph extends JPanel {
     private double getMinCase() {
         int minCase = Integer.MAX_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == Config.CASES_FILE){graph = casesArray;}
-        else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
+        if (DataChoice == Config.CASES_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = casesArray;}}
+        else if (DataChoice == Config.DEATHS_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = deathsArray;}}
+        else if (DataChoice == Config.OTHER_FILE){graph = otherArray;}
 
         for (DataStore case1 : graph)
         {
@@ -203,8 +214,9 @@ public class GenerateGraph extends JPanel {
     private int getMaxCase() {
         int maxCase = Integer.MIN_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == Config.CASES_FILE){graph = casesArray;}
-        else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
+        if (DataChoice == Config.CASES_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = casesArray;}}
+        else if (DataChoice == Config.DEATHS_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = deathsArray;}}
+        else if (DataChoice == Config.OTHER_FILE){graph = otherArray;}
 
         for (DataStore case1 : graph) {
             if (PresentationFormat.equals(Config.WEEKLY)){maxCase = Math.max(maxCase, (int)case1.cumulative);}
@@ -217,8 +229,9 @@ public class GenerateGraph extends JPanel {
     private int getMinNew() {
         int minCases = Integer.MAX_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == Config.CASES_FILE){graph = casesArray;}
-        else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
+        if (DataChoice == Config.CASES_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = casesArray;}}
+        else if (DataChoice == Config.DEATHS_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = deathsArray;}}
+        else if (DataChoice == Config.OTHER_FILE){graph = otherArray;}
 
         for (DataStore case1 : graph) {
             minCases = Math.min(minCases, (int)case1.newToday);
@@ -229,8 +242,9 @@ public class GenerateGraph extends JPanel {
     private int getMaxNew() {
         int maxDeaths = Integer.MIN_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == Config.CASES_FILE){graph = casesArray;}
-        else if (DataChoice == Config.DEATHS_FILE){graph = deathsArray;}
+        if (DataChoice == Config.CASES_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = casesArray;}}
+        else if (DataChoice == Config.DEATHS_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = deathsArray;}}
+        else if (DataChoice == Config.OTHER_FILE){graph = otherArray;}
 
         for (DataStore case1 : graph) {
             maxDeaths = Math.max(maxDeaths, (int)case1.newToday);

@@ -1,5 +1,7 @@
 package Team31;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 //-------------------------------------------------------------------//
@@ -19,6 +21,8 @@ public class LinearRegression
         this.xTime = xTime;
         this.yCumulative = yDeaths;
     }
+
+    public LinearRegression(){}
 
     // Calculating the mean of the x-axis
     public long getXmean(){
@@ -62,5 +66,79 @@ public class LinearRegression
         long lineslope = getGradient(Xmean, Ymean, x1,y1);
         long YIntercept = getYIntercept(Xmean,Ymean,lineslope);
         return (lineslope * input) + YIntercept;
+    }
+
+    // Generates and shows the graph of predicted deaths
+    public void makePredictedGraph(int dataChoice)
+    {
+        Data data = new Data();
+        ArrayList<DataStore> array = new ArrayList<>();
+        ArrayList<DataStore> arrayForGraph = new ArrayList<>();
+
+        // Getting the original deaths data
+        if (dataChoice == Config.CASES_FILE)
+        {
+            data.readFile(Config.CASES_FILE);
+            array = data.getCasesArray();
+        }
+        else if (dataChoice == Config.DEATHS_FILE)
+        {
+            data.readFile(Config.DEATHS_FILE);
+            array = data.getDeathsArray();
+        }
+
+        // ArrayLists for training data
+        ArrayList<Integer> xTime = new ArrayList<>();
+        ArrayList<Long> yDeaths = new ArrayList<>();
+
+        // Reverting the original data and prepare the data for graph
+        for (int i = 0; i < array.size(); i++)
+        {
+            int temp = (array.size() - 1) - i;
+            String date = array.get(temp).date;
+            long newToday = array.get(temp).newToday;
+            long cumulative = array.get(temp).cumulative;
+            if (temp % 7 == 0)
+            {
+                arrayForGraph.add( new DataStore(date, newToday, cumulative));
+            }
+        }
+
+        // Adding the training data.
+        int n = arrayForGraph.size() - 1;
+        for (int i = 0; i < 5; i++)
+        {
+            long cumulative = arrayForGraph.get(n - i).cumulative;
+
+            xTime.add(n - i);
+            yDeaths.add(cumulative);
+        }
+
+        // Calculating the predictions
+        LinearRegression deathsPrediction = new LinearRegression(xTime, yDeaths);
+        long step = arrayForGraph.size();   // Last week of the original data
+
+        // Adding prediction values to the graph data
+        for (int i = 0; i < 10; i++)
+        {
+            long result = deathsPrediction.predictCumulatives(step);
+            step++;
+            String date = i + " weeks after last death";
+
+            arrayForGraph.add(new DataStore(date, 0, result));
+        }
+
+        // Making the graph and generating the frame
+        GenerateGraph predictedDeathGraph = new GenerateGraph(dataChoice, arrayForGraph);
+        predictedDeathGraph.setPreferredSize(new Dimension(1200, 700));
+        JFrame frame = new JFrame("Deaths Prediction");
+        frame.setPreferredSize(new Dimension(1400, 900));
+
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.add(predictedDeathGraph, BorderLayout.NORTH);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }
