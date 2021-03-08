@@ -73,7 +73,7 @@ public class Data {
                     firstLine = false; // sets variable to false after the first loop, therefore skipping first line
                 }
             }
-        } catch (IOException e) { // catches exception so program don't crash
+        } catch (IOException | IndexOutOfBoundsException e) { // catches exception so program don't crash
             JOptionPane.showMessageDialog(null,"Selected file may be deleted or removed from the original path.","File Not Found", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -81,7 +81,7 @@ public class Data {
     public void saveAsImage(JFrame frame)
     {
         Path file;
-        JOptionPane.showMessageDialog(null,"Please select a folder and type the name of the file without any file extensions.","INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,"Please select a path and type the name of the file without any file extensions.","INFORMATION", JOptionPane.INFORMATION_MESSAGE);
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         int r = j.showOpenDialog(null);
 
@@ -109,11 +109,6 @@ public class Data {
                 }
             }
         }
-        else
-            {
-                JOptionPane.showMessageDialog(null,"Process Cancelled","ALERT", JOptionPane.INFORMATION_MESSAGE);
-            }
-
     }
 
     public ArrayList<DataStore> getDeathsArray() { return deathsArray; }

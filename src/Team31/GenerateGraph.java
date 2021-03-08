@@ -292,7 +292,7 @@ public class GenerateGraph extends JComponent {
                 secondGraph = new GenerateGraph(1, "daily"); secondGraph.setPreferredSize(new Dimension(1400, 700));
             }
             JFrame frame = new JFrame(data + " GRAPH");
-            frame.setPreferredSize(new Dimension(1600, 900));
+            frame.setPreferredSize(new Dimension(1500, 900));
             JPanel main = new JPanel(); main.add(mainGraph);
             JPanel second = new JPanel(); second.add(secondGraph);
             JPanel labelPanel = new JPanel(new GridLayout(2, 3, 10, 10));

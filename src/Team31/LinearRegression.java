@@ -1,6 +1,7 @@
 package Team31;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -14,6 +15,10 @@ public class LinearRegression
     // ArrayList for holding the training data
     private ArrayList<Integer> xTime ;
     private ArrayList<Long> yCumulative;
+
+    private Color lineColor = new Color(44, 102, 230, 180);
+    private Color forecastLine = new Color(255, 0, 0);
+    private Color modellingLine = new Color(0, 128, 0);
 
     // Constructor to add the training data
     public LinearRegression(ArrayList<Integer> xTime, ArrayList<Long> yDeaths)
@@ -128,15 +133,40 @@ public class LinearRegression
             arrayForGraph.add(new DataStore(date, 0, result));
         }
 
+        int size = arrayForGraph.size() - 1;
+        int duration = 10;
+        long increase = arrayForGraph.get(size).cumulative - arrayForGraph.get(size - duration).cumulative;
+        String label; if (dataChoice == Config.CASES_FILE) label = "CASES"; else label = "DEATHS";
+
+        JLabel blue = new JLabel("BLUE LINE REPRESENTS ORIGINAL DATA");
+        blue.setFont(new Font("Helvetica", Font.BOLD, 15));
+        blue.setForeground(lineColor);
+        JLabel red = new JLabel("RED LINE REPRESENTS FUTURE DATA");
+        red.setFont(new Font("Helvetica", Font.BOLD, 15));
+        red.setForeground(forecastLine);
+        JLabel green = new JLabel("GREEN LINE REPRESENTS MODELLING LINE");
+        green.setFont(new Font("Helvetica", Font.BOLD, 15));
+        green.setForeground(modellingLine);
+        JLabel pre = new JLabel("PREDICTED " + increase + " INCREASE IN " + label + " IN DURATION OF " + duration + " WEEKS");
+        pre.setFont(new Font("Helvetica", Font.BOLD, 15));
+
         // Making the graph and generating the frame
         GenerateGraph predictedDeathGraph = new GenerateGraph(dataChoice, arrayForGraph);
         predictedDeathGraph.setPreferredSize(new Dimension(1200, 700));
         JFrame frame = new JFrame("Deaths Prediction");
-        frame.setPreferredSize(new Dimension(1400, 900));
+        JPanel labeling = new JPanel( new GridLayout(2, 2, 10, 10));
+        EmptyBorder border1 = new EmptyBorder(10, 40, 0, 20);
 
+        labeling.setBorder(border1);
+        labeling.add(blue);
+        labeling.add(red);
+        labeling.add(green);
+        labeling.add(pre);
+
+        frame.setPreferredSize(new Dimension(1600, 900));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(predictedDeathGraph, BorderLayout.NORTH);
-
+        frame.add(labeling, BorderLayout.CENTER);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
