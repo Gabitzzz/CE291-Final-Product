@@ -15,4 +15,4 @@ Class Diagram: FinalProduct/img/ClassDiagram.png
 
 
 
-Known Issues
+**Known Issues**
