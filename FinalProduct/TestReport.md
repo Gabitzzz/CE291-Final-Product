@@ -7,7 +7,7 @@ Our task was to design a machine learning model in which will give an overview o
 
 1. **MAIN MENU TESTING**__
 
- In the picture below you will see our main menu program. The design in our program will be find in the GenerateGraph and MainFrame classes, there is our styling and how we designed the graphs, you will see also the buttons in which we will show in the next points how they were created and how useful can be for the user. 
+ In the picture below you will see our main menu program. Our aim was to create a main menu in which there will show first some basic functionalities, where this was done with great success. The design in our program will be find in the GenerateGraph and MainFrame classes, there is our styling and how we designed the graphs, you will see also the buttons in which we will show in the next points how they were created and how useful can be for the user. 
 
 _INCLUDE SCREENSHOT WITH THE MAIN MENU_
 
