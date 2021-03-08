@@ -1,8 +1,8 @@
+**Class Diagram: **
+FinalProduct/img/ClassDiagram.png
 
 **Technical Description**
-Class Diagram: FinalProduct/img/ClassDiagram.png
 
-**General Implementation**
 
 Primarily, before implementing any algorithms or data structures, a language and a development area should be chosen. Java is selected as the programming language for development of the product. Although there are some claims about Integrated Development Environments that they are not good to improve coding skills, as a team it is the upmost necessity to choose an IDE as it is crucial to manage the whole development and speed the process up. In fact, IntelliJ is chosen for our team since it is one of the most advanced IDEs for standard Java application development and GitLab is used to manage all of the changes in code. In addition, Java Swing libraries are used for Graphical User Interface of the product. All APIs used in the development phase of the product are built-in APIs in Java standard libraries included in Java JDK version 15. Furthermore, there is not any dependencies for the products software to run.
 
