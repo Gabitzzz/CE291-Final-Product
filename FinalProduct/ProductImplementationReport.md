@@ -1,5 +1,4 @@
 
-
 **Technical Description**
 Class Diagram: FinalProduct/img/ClassDiagram.png
 
@@ -32,11 +31,23 @@ Linear regression is machine learning model that calculates a y value given an x
 
 _Y = X \* M + C_
 
-
-
 **Imported Libraries**
 
+List of all libraries imported:
 
+- Java awt
+- Javax (swing and imageio)
+- Java nio (file.path and file.paths)
+- Java util (ArrayList and Scanner)
+
+Specific purposes:
+
+- Custom data structures
+- UI generation and manipulation
+- File reading and importing
+- Image exporting
 
 
 **Known Issues**
+
+The only issue with the product is about the modelling line which could not evenly generated given the time left before the delivery date of the product. The other features are functioning as wanted within the normal parameters.
