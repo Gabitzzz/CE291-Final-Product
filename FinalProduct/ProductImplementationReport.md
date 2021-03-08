@@ -1,6 +1,6 @@
 **Class Diagram:**
 
-FinalProduct/img/ClassDiagram.png
+FinalProduct\img\ClassDiagram.png
 
 **Technical Description**
 
@@ -37,14 +37,14 @@ _Y = X \* M + C_
 List of all libraries imported:
 
 - Java awt
-- Javax (swing and imageio)
-- Java nio (file.path and file.paths)
 - Java util (ArrayList and Scanner)
+- Java nio (file.path and file.paths)
+- Javax (swing and imageio)
 
 Specific purposes:
 
-- Custom data structures
 - UI generation and manipulation
+- Custom data structures
 - File reading and importing
 - Image exporting
 
