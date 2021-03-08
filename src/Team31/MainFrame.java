@@ -66,13 +66,13 @@ public class MainFrame
         wCases.setBounds(700, 50, 200, 50);
         dDeaths.setBounds(150, 400, 200, 50);
         dCases.setBounds(700, 400, 200, 50);
-        deathB.setBounds(200, 550, 200, 40);
-        casesB.setBounds(800, 550, 200, 40);
-        PredictCases.setBounds(800, 600, 200, 40);
-        PredictDeaths.setBounds(200,600,200,40);
-        selectFileButton.setBounds(400, 660, 150, 25);
-        previewSelectedFile.setBounds(550,660,150,25);
-        fileSelected.setBounds(720,660,800,25);
+        deathB.setBounds(200, 610, 200, 40);
+        casesB.setBounds(800, 610, 200, 40);
+        PredictCases.setBounds(800, 660, 200, 40);
+        PredictDeaths.setBounds(200,660,200,40);
+        selectFileButton.setBounds(400, 720, 150, 25);
+        previewSelectedFile.setBounds(550,720,150,25);
+        fileSelected.setBounds(720,720,800,25);
 
         // Adding the GUI elements to the panel
         panel.add(wDeaths);
@@ -104,8 +104,8 @@ public class MainFrame
         panel.add(graph4);
 
 
-        frame.setSize(new Dimension(1400, 740));
-        scrollBar.setSize(new Dimension(1380, 540));
+        frame.setSize(new Dimension(1400, 800));
+        scrollBar.setSize(new Dimension(1380, 600));
         scrollBar.getVerticalScrollBar().setUnitIncrement(14);
         frame.add(scrollBar);
         frame.add(buttonPanel);
@@ -158,6 +158,7 @@ public class MainFrame
                     arrayForGraph.add(new DataStore(date, newToday, cumulative));
                 }
                 GenerateGraph graph = new GenerateGraph(arrayForGraph);
+                //graph.createAndShowGui("INPUTTED DATA");
                 graph.setPreferredSize(new Dimension(1200, 700));
                 JFrame frame = new JFrame("Selected File Preview");
                 frame.setPreferredSize(new Dimension(1400, 900));

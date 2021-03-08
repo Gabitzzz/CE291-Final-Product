@@ -1,8 +1,6 @@
 package Team31;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -19,6 +17,7 @@ public class GenerateGraph extends JComponent {
     private static ArrayList<DataStore> deathsArray;
     private static ArrayList<DataStore> otherArray;
     private static ArrayList<DataStore> currentArray;
+    private static String label;
 
     private Color lineColor = new Color(44, 102, 230, 180);
     private Color pointColor = new Color(100, 100, 100, 180);
@@ -31,15 +30,14 @@ public class GenerateGraph extends JComponent {
     private int DataChoice;
     private String PresentationFormat;
     private boolean isPredictionGraph = false;
-    JComboBox<String> cb;
 
     public GenerateGraph(int DataChoice, String PresentationFormat)
     {
         this.DataChoice = DataChoice;
         this.PresentationFormat = PresentationFormat;
 
-        if (DataChoice == 0){ casesArray = currentArray = getData(DataChoice);}
-        else if (DataChoice == 1){ deathsArray = currentArray = getData(DataChoice);}
+        if (DataChoice == 0){ casesArray = currentArray = getData(DataChoice); label = "Cases";}
+        else if (DataChoice == 1){ deathsArray = currentArray = getData(DataChoice); label = "Deaths";}
     }
 
     public GenerateGraph(int DataChoice, ArrayList<DataStore> data)
@@ -49,6 +47,9 @@ public class GenerateGraph extends JComponent {
         originalSize = getOriginalSize(DataChoice);
         isPredictionGraph = true;
         otherArray = data;
+
+        if (DataChoice == 0){label = "Cases";}
+        else if (DataChoice == 1){label = "Deaths";}
     }
 
     public GenerateGraph(ArrayList<DataStore> data)
@@ -194,7 +195,8 @@ public class GenerateGraph extends JComponent {
             g3.setColor(Color.black);
         }
 
-        g3.drawString("Weeks After First Case", 50, 580);
+        g3.drawString("Time", 80, 680);
+        g3.drawString(label, 0, 620);
     }
     //Using functions to be displayed below the graphs to show a better statistic report
     //For example it will be displayed the minimum of cases that were on that range of days.
@@ -227,19 +229,6 @@ public class GenerateGraph extends JComponent {
 
         }
         return maxCase;
-    }
-
-    private int getMinNew() {
-        int minCases = Integer.MAX_VALUE;
-        ArrayList<DataStore> graph = new ArrayList<>();
-        if (DataChoice == Config.CASES_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = casesArray;}}
-        else if (DataChoice == Config.DEATHS_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = deathsArray;}}
-        else if (DataChoice == Config.OTHER_FILE){graph = otherArray;}
-
-        for (DataStore case1 : graph) {
-            minCases = Math.min(minCases, (int)case1.newToday);
-        }
-        return minCases;
     }
 
     private int getMaxNew() {
@@ -323,6 +312,7 @@ public class GenerateGraph extends JComponent {
             String[] country ={"Weekly Graph", "Daily Graph"};
             JComboBox<String> cb = new JComboBox<>(country);
             JButton show = new JButton("SHOW SELECTION");
+            show.setFont(new Font("Helvetica", Font.BOLD, 15));
             panel.add(cb);
             panel.add(show);
             show.addActionListener(e ->
@@ -335,11 +325,20 @@ public class GenerateGraph extends JComponent {
                 frame.repaint();
             });
 
+            JButton save = new JButton("SAVE PAGE AS .PNG");
+            save.setFont(new Font("Helvetica", Font.BOLD, 15));
+            save.addActionListener(e ->
+            {
+                Data saveFrame = new Data();
+                saveFrame.saveAsImage(frame);
+            });
+
             labelPanel.add(peakCases);
             labelPanel.add(date1);
             labelPanel.add(panel);
             labelPanel.add(peakNew);
             labelPanel.add(date2);
+            labelPanel.add(save);
 
             frame.setResizable(false);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

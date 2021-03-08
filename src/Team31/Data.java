@@ -1,6 +1,10 @@
 package Team31;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -72,6 +76,44 @@ public class Data {
         } catch (IOException e) { // catches exception so program don't crash
             JOptionPane.showMessageDialog(null,"Selected file may be deleted or removed from the original path.","File Not Found", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void saveAsImage(JFrame frame)
+    {
+        Path file;
+        JOptionPane.showMessageDialog(null,"Please select a folder and type the name of the file without any file extensions.","INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        int r = j.showOpenDialog(null);
+
+        if (r == JFileChooser.APPROVE_OPTION)
+        {
+            file = j.getSelectedFile().toPath();
+            System.out.println(file);
+
+            int a=JOptionPane.showConfirmDialog(null,"Graph will be saved as image to path: " + file.toString() + ".png");
+            if(a==JOptionPane.YES_OPTION)
+            {
+                Dimension size = frame.getSize();
+                BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+                Graphics2D g2 = image.createGraphics();
+                frame.paint(g2);
+                try
+                {
+                    ImageIO.write(image, "png", new File(file + ".png"));
+                    System.out.println("Frame Saved");
+                }
+                catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(null,"Program could not save the graph as image.","An Error Occurred", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
+                }
+            }
+        }
+        else
+            {
+                JOptionPane.showMessageDialog(null,"Process Cancelled","ALERT", JOptionPane.INFORMATION_MESSAGE);
+            }
+
     }
 
     public ArrayList<DataStore> getDeathsArray() { return deathsArray; }
