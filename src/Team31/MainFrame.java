@@ -45,10 +45,10 @@ public class MainFrame
         PredictCases.addActionListener(e -> { LinearRegression prediction = new LinearRegression(); prediction.makePredictedGraph(Config.CASES_FILE); });
 
         // Generates the detailed version of deaths graph
-        deathB.addActionListener(e -> { GenerateGraph graph = new GenerateGraph(Config.DEATHS_FILE, Config.WEEKLY);graph.createAndShowGui(); });
+        deathB.addActionListener(e -> { GenerateGraph graph = new GenerateGraph(Config.DEATHS_FILE, Config.WEEKLY);graph.createAndShowGui("DEATHS"); });
 
         // Generates the detailed version of the cases graph
-        casesB.addActionListener(e -> { GenerateGraph graph = new GenerateGraph(Config.CASES_FILE, Config.WEEKLY);graph.createAndShowGui(); });
+        casesB.addActionListener(e -> { GenerateGraph graph = new GenerateGraph(Config.CASES_FILE, Config.WEEKLY);graph.createAndShowGui("CASES"); });
 
         // Generates the detailed version of deaths graph
         selectFileButton.addActionListener(e -> fileSelection(Config.OPEN_COMMAND, fileSelected));

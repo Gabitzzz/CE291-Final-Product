@@ -1,6 +1,8 @@
 package Team31;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -16,24 +18,28 @@ public class GenerateGraph extends JComponent {
     private static ArrayList<DataStore> casesArray;
     private static ArrayList<DataStore> deathsArray;
     private static ArrayList<DataStore> otherArray;
+    private static ArrayList<DataStore> currentArray;
+
     private Color lineColor = new Color(44, 102, 230, 180);
     private Color pointColor = new Color(100, 100, 100, 180);
     private Color gridColor = new Color(200, 200, 200, 200);
     private Color forecastLine = new Color(255, 0, 0);
     private Color modellingLine = new Color(0, 128, 0);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
+
     private int originalSize;
     private int DataChoice;
     private String PresentationFormat;
     private boolean isPredictionGraph = false;
+    JComboBox<String> cb;
 
     public GenerateGraph(int DataChoice, String PresentationFormat)
     {
         this.DataChoice = DataChoice;
         this.PresentationFormat = PresentationFormat;
 
-        if (DataChoice == 0){ casesArray = getData(DataChoice);}
-        else if (DataChoice == 1){ deathsArray = getData(DataChoice);}
+        if (DataChoice == 0){ casesArray = currentArray = getData(DataChoice);}
+        else if (DataChoice == 1){ deathsArray = currentArray = getData(DataChoice);}
     }
 
     public GenerateGraph(int DataChoice, ArrayList<DataStore> data)
@@ -43,9 +49,6 @@ public class GenerateGraph extends JComponent {
         originalSize = getOriginalSize(DataChoice);
         isPredictionGraph = true;
         otherArray = data;
-
-        //if (DataChoice == 0){casesArray = data;}
-        //else if (DataChoice == 1){deathsArray = data;}
     }
 
     public GenerateGraph(ArrayList<DataStore> data)
@@ -268,40 +271,83 @@ public class GenerateGraph extends JComponent {
         return size/7;
     }
 
-    public void createAndShowGui(){
+    public int findItem(long item)
+    {
+        int max = currentArray.size() -1;
+        int descCnt = max;
+
+        for(int cnt = 0; cnt <= max/2; cnt++)
+        {
+            if(currentArray.get(cnt).cumulative == item) return cnt/7;
+            if(currentArray.get(descCnt).cumulative == item) return descCnt/7;
+            if(currentArray.get(cnt).newToday == item) return cnt/7;
+            if(currentArray.get(descCnt).newToday == item) return descCnt/7;
+            --descCnt;
+        }
+        return -1;
+    }
+
+    public void createAndShowGui(String data){
         {
             GenerateGraph mainGraph = new GenerateGraph(-1, "default");
-            if (DataChoice == Config.CASES_FILE) { mainGraph = new GenerateGraph(0, "weekly"); }
-            else if (DataChoice == Config.DEATHS_FILE) { mainGraph = new GenerateGraph(1, "weekly"); }
+            GenerateGraph secondGraph = new GenerateGraph(-1, "default");
 
+            if (DataChoice == Config.CASES_FILE)
+            {
+                mainGraph = new GenerateGraph(0, "weekly"); mainGraph.setPreferredSize(new Dimension(1400, 700));
+                secondGraph = new GenerateGraph(0, "daily"); secondGraph.setPreferredSize(new Dimension(1400, 700));
+            }
+            else if (DataChoice == Config.DEATHS_FILE)
+            {
+                mainGraph = new GenerateGraph(1, "weekly"); mainGraph.setPreferredSize(new Dimension(1400, 700));
+                secondGraph = new GenerateGraph(1, "daily"); secondGraph.setPreferredSize(new Dimension(1400, 700));
+            }
+            JFrame frame = new JFrame(data + " GRAPH");
+            frame.setPreferredSize(new Dimension(1600, 900));
+            JPanel main = new JPanel(); main.add(mainGraph);
+            JPanel second = new JPanel(); second.add(secondGraph);
+            JPanel labelPanel = new JPanel(new GridLayout(2, 3, 10, 10));
+            JPanel panel = new JPanel(new GridLayout(2, 1, 10, 10));
 
-            mainGraph.setPreferredSize(new Dimension(1200, 700));
-            JFrame frame = new JFrame("Cases Graph");
-            frame.setPreferredSize(new Dimension(1400, 800));
-            EmptyBorder border1 = new EmptyBorder(-15, 50, 0, 100);
-            JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 60, 20));
+            EmptyBorder border1 = new EmptyBorder(10, 40, 0, 20);
             labelPanel.setBorder(border1);
-            JLabel peakCases = new JLabel("PEAK VALUE OF CASES: " + getMaxCase());
+            JLabel peakCases = new JLabel("PEAK VALUE OF " + data + ": " + getMaxCase());
             peakCases.setFont(new Font("Helvetica", Font.BOLD, 15));
-            JLabel minCases = new JLabel("LOWEST VALUE OF CASES: " + getMinCase());
-            minCases.setFont(new Font("Helvetica", Font.BOLD, 15));
-            JLabel maxNew = new JLabel("MAXIMUM CASES IN ONE DAY: " + getMaxNew());
-            maxNew.setFont(new Font("Helvetica", Font.BOLD, 15));
-            JLabel minNew = new JLabel("MINIMUM CASES IN ONE DAY: " + getMinNew());
-            minNew.setFont(new Font("Helvetica", Font.BOLD, 15));
+            JLabel peakNew = new JLabel("MAXIMUM " + data + " IN ONE DAY: " + getMaxNew());
+            peakNew.setFont(new Font("Helvetica", Font.BOLD, 15));
+            JLabel date1 = new JLabel("OCCURRED IN: WEEK " + findItem(getMaxCase()) + " | DATE: " + currentArray.get(findItem(getMaxCase())).date);
+            date1.setFont(new Font("Helvetica", Font.BOLD, 15));
+            JLabel date2 = new JLabel("OCCURRED IN: WEEK " + findItem(getMaxNew()) + " | DATE: " + currentArray.get(findItem(getMaxNew())).date);
+            date2.setFont(new Font("Helvetica", Font.BOLD, 15));
+
+            String[] country ={"Weekly Graph", "Daily Graph"};
+            JComboBox<String> cb = new JComboBox<>(country);
+            JButton show = new JButton("SHOW SELECTION");
+            panel.add(cb);
+            panel.add(show);
+            show.addActionListener(e ->
+            {
+                String selection = (String) cb.getSelectedItem();
+                assert selection != null;
+                if (selection.equals("Weekly Graph")) { frame.remove(second); frame.add(main); }
+                else if (selection.equals("Daily Graph")) { frame.remove(main); frame.add(second); }
+                frame.revalidate();
+                frame.repaint();
+            });
+
+            labelPanel.add(peakCases);
+            labelPanel.add(date1);
+            labelPanel.add(panel);
+            labelPanel.add(peakNew);
+            labelPanel.add(date2);
+
             frame.setResizable(false);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            labelPanel.add(peakCases);
-            labelPanel.add(minCases);
-            labelPanel.add(maxNew);
-            labelPanel.add(minNew);
-            frame.add(mainGraph, BorderLayout.NORTH);
+            frame.add(main, BorderLayout.NORTH);
             frame.add(labelPanel, FlowLayout.CENTER);
-
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
-
         }
     }
 
@@ -338,3 +384,7 @@ public class GenerateGraph extends JComponent {
         return currentData;
     }
 }
+
+    /*String selection = (String) cb.getSelectedItem();
+                assert selection != null;
+                        if (selection.equals("Weekly")) { frame.remove(secondGraph); }*/
