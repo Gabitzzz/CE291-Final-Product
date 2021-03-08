@@ -1,4 +1,5 @@
-**Class Diagram: **
+**Class Diagram:**
+
 FinalProduct/img/ClassDiagram.png
 
 **Technical Description**
