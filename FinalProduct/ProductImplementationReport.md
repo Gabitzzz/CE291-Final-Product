@@ -1,6 +1,6 @@
 **Class Diagram:**
 
-FinalProduct\img\ClassDiagram.png
+FinalProduct/img/ClassDiagram.png
 
 **Technical Description**
 
