@@ -257,6 +257,11 @@ public class GenerateGraph extends JComponent {
         {
             data.readFile(Config.DEATHS_FILE);
             size = data.getDeathsArray().size();
+        }else if (choice == Config.OTHER_FILE)
+        {
+            data = new Data(Config.OTHER_FILE_PATH);
+            data.readFile(Config.OTHER_FILE);
+            size = data.getOtherArray().size();
         }
 
         return size/7;
