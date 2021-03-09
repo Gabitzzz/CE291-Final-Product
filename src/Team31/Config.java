@@ -12,8 +12,8 @@ public final class Config {
     static final String OPEN_COMMAND = "open";
     static final String PREVIEW_COMMAND = "preview";
 
-    static final String CASES_FILEPATH = "cases_data_2020-Oct-30.csv"; // path to cases csv
-    static final String DEATHS_FILEPATH = "deaths_data_2020-Oct-30.csv"; // path to deaths csv
+    static final String CASES_FILEPATH = "cases_data_2021-Mar-09.csv"; // path to cases csv
+    static final String DEATHS_FILEPATH = "deaths_data_2021-Mar-09.csv"; // path to deaths csv
     static final String FILE_DELIMITER = ","; // delimiter in the csv files
     static Path OTHER_FILE_PATH = null;
 }
