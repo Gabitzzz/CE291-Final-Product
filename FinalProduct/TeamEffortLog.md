@@ -19,6 +19,13 @@ https://cseejira.essex.ac.uk/browse/A291040-33
 - MVP Sprint (Weeks 8 & 9) - Fixed the line graphs for the cases/deaths data so that it was accurately displayed, as well as collaborated with the group to try and implement linear regression.  
 https://cseejira.essex.ac.uk/browse/A291040-40
 
+- Extra features and Correctness Sprint - As I user I want to add a forecast line based on the model that we are using, so we can have a visualization of how our model and line is predicting based on the statistics.
+https://cseejira.essex.ac.uk/browse/A291040-47
+
+- Week 19 Sprint - Worked on the Forecast Line containing different colors depending on the statistics.
+https://cseejira.essex.ac.uk/browse/A291040-55
+
+
 ----
 
 2. Cemoglu, Ferhat
@@ -39,6 +46,12 @@ https://cseejira.essex.ac.uk/browse/A291040-30
 
 - MVP Sprint (Weeks 8 & 9) - Implemented the linear regression model, fixed the encountered errors and partially finished implementing it with the original data.  
 https://cseejira.essex.ac.uk/browse/A291040-40
+
+- Extra features and Correctness Sprint - Can use drop down menu to show different graphs.
+https://cseejira.essex.ac.uk/browse/A291040-48
+
+- Week 19 Sprint - Created the daily graph and made the window scroll bar
+https://cseejira.essex.ac.uk/browse/A291040-53
 
 ----
 
@@ -62,6 +75,12 @@ https://cseejira.essex.ac.uk/browse/A291040-34
 - MVP Sprint (Weeks 8 & 9) - Contributed to create the linear regression model so our system could make a prediction, also I added some extra features which could be useful for a customer to see it.  
   https://cseejira.essex.ac.uk/browse/A291040-38
 
+- Extra features and Correctness Sprint - Tested Window of Cases&Deaths again after the demonstration and it was working properly.
+https://cseejira.essex.ac.uk/browse/A291040-44
+
+- Week 19 Sprint - Worked on the Forecast Line containing different colors depending on the statistics.
+https://cseejira.essex.ac.uk/browse/A291040-51
+
   ----
 
 4. Litcan, Nicolae-Gabriel
@@ -81,6 +100,12 @@ https://cseejira.essex.ac.uk/browse/A291040-21
 - MVP Sprint (Weeks 8 & 9) - Wrote the technical documentation for the MVP.  
 https://cseejira.essex.ac.uk/browse/A291040-39
 
+- Extra features and Correctness Sprint - As a user I want to search about new features and how we can implement them in our product.
+https://cseejira.essex.ac.uk/browse/A291040-49
+
+- Week 19 Sprint - - Week 19 Sprint - Worked on the Forecast Line containing different colors depending on the statistics.
+https://cseejira.essex.ac.uk/browse/A291040-52
+
 ----
 
 5. McDuff, Calum 
@@ -96,6 +121,12 @@ https://cseejira.essex.ac.uk/browse/A291040-39
 - Sprint 5 (Week 7) - Absent due to heavy working for other 3 assignments.
 
 - MVP Sprint (Weeks 8 & 9) - Largely absent due to personal matters, however did modify the csv files storage classes to create a more effecient method of requesting the data and storing the data. (merged the Deaths and Cases class in to one class), and allowed the parsing of the data in to the graphs classes for its graphing. https://cseejira.essex.ac.uk/browse/A291040-36
+
+- Extra features and Correctness Sprint - Done some research regarding some extra features and discussed them in our meetings.
+https://cseejira.essex.ac.uk/browse/A291040-50
+
+- Week 19 Sprint -  As a user I want to search about new features and how we can implement them in our product.
+https://cseejira.essex.ac.uk/browse/A291040-57
 
 ----
 
@@ -117,4 +148,10 @@ https://cseejira.essex.ac.uk/browse/A291040-31
 
 - MVP Sprint (Weeks 8 & 9) - The lines for cumulative total cases line chart was horizontally lined above the highest y value, having worked through, it shows correctly the cumulative values for both charts.   
 https://cseejira.essex.ac.uk/browse/A291040-37
+
+- Extra features and Correctness Sprint - As a user try to fix the problem when you are adjusting the window size to not changing the values of the axes.
+https://cseejira.essex.ac.uk/browse/A291040-45
+
+- Week 19 Sprint - Worked on the implementation of the daily graph.
+https://cseejira.essex.ac.uk/browse/A291040-56
 
