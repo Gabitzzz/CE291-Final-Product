@@ -142,6 +142,7 @@ public class MainFrame
             else
             {
                 Path file = Paths.get(filePath);
+                Config.OTHER_FILE_PATH = file;
                 Data data = new Data(file);
                 data.readFile(Config.OTHER_FILE);
                 ArrayList<DataStore> array = data.getOtherArray();
@@ -158,15 +159,7 @@ public class MainFrame
                     arrayForGraph.add(new DataStore(date, newToday, cumulative));
                 }
                 GenerateGraph graph = new GenerateGraph(arrayForGraph);
-                //graph.createAndShowGui("INPUTTED DATA");
-                graph.setPreferredSize(new Dimension(1200, 700));
-                JFrame frame = new JFrame("Selected File Preview");
-                frame.setPreferredSize(new Dimension(1400, 900));
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.add(graph, BorderLayout.NORTH);
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                graph.createAndShowGui("INPUTTED DATA");
             }
         }
     }

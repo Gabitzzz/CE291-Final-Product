@@ -91,6 +91,12 @@ public class LinearRegression
             data.readFile(Config.DEATHS_FILE);
             array = data.getDeathsArray();
         }
+        else if (dataChoice == Config.OTHER_FILE)
+        {
+            data = new Data(Config.OTHER_FILE_PATH);
+            data.readFile(Config.OTHER_FILE);
+            array = data.getOtherArray();
+        }
 
         // ArrayLists for training data
         ArrayList<Integer> xTime = new ArrayList<>();
@@ -136,7 +142,7 @@ public class LinearRegression
         int size = arrayForGraph.size() - 1;
         int duration = 10;
         long increase = arrayForGraph.get(size).cumulative - arrayForGraph.get(size - duration).cumulative;
-        String label; if (dataChoice == Config.CASES_FILE) label = "CASES"; else label = "DEATHS";
+        String label; if (dataChoice == Config.CASES_FILE) label = "CASES"; else if (dataChoice == Config.DEATHS_FILE) label = "DEATHS"; else label = "INPUTTED DATA";
 
         JLabel blue = new JLabel("BLUE LINE REPRESENTS ORIGINAL DATA");
         blue.setFont(new Font("Helvetica", Font.BOLD, 15));

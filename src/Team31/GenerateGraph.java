@@ -54,10 +54,11 @@ public class GenerateGraph extends JComponent {
 
     public GenerateGraph(ArrayList<DataStore> data)
     {
-        otherArray = data;
+        otherArray = currentArray = data;
         DataChoice = Config.OTHER_FILE;
         PresentationFormat = Config.WEEKLY;
         isPredictionGraph = false;
+        label = "Data";
     }
 
 
@@ -257,6 +258,7 @@ public class GenerateGraph extends JComponent {
             data.readFile(Config.DEATHS_FILE);
             size = data.getDeathsArray().size();
         }
+
         return size/7;
     }
 
@@ -291,12 +293,18 @@ public class GenerateGraph extends JComponent {
                 mainGraph = new GenerateGraph(1, "weekly"); mainGraph.setPreferredSize(new Dimension(1400, 700));
                 secondGraph = new GenerateGraph(1, "daily"); secondGraph.setPreferredSize(new Dimension(1400, 700));
             }
+            else if (DataChoice == Config.OTHER_FILE)
+            {
+                mainGraph = new GenerateGraph(DataChoice, "weekly"); mainGraph.setPreferredSize(new Dimension(1400, 700));
+                secondGraph = new GenerateGraph(DataChoice, "daily"); secondGraph.setPreferredSize(new Dimension(1400, 700));
+            }
             JFrame frame = new JFrame(data + " GRAPH");
             frame.setPreferredSize(new Dimension(1500, 900));
             JPanel main = new JPanel(); main.add(mainGraph);
             JPanel second = new JPanel(); second.add(secondGraph);
             JPanel labelPanel = new JPanel(new GridLayout(2, 3, 10, 10));
             JPanel panel = new JPanel(new GridLayout(2, 1, 10, 10));
+            JPanel butPanel = new JPanel(new GridLayout(2, 1, 10, 10));
 
             EmptyBorder border1 = new EmptyBorder(10, 40, 0, 20);
             labelPanel.setBorder(border1);
@@ -327,18 +335,18 @@ public class GenerateGraph extends JComponent {
 
             JButton save = new JButton("SAVE PAGE AS .PNG");
             save.setFont(new Font("Helvetica", Font.BOLD, 15));
-            save.addActionListener(e ->
-            {
-                Data saveFrame = new Data();
-                saveFrame.saveAsImage(frame);
-            });
+            save.addActionListener(e -> { Data saveFrame = new Data(); saveFrame.saveAsImage(frame); });
+            JButton predict = new JButton("PREDICT FUTURE DATA");
+            predict.setFont(new Font("Helvetica", Font.BOLD, 15));
+            predict.addActionListener(e -> { LinearRegression showPrediction = new LinearRegression(); showPrediction.makePredictedGraph(DataChoice); });
+            butPanel.add(save); butPanel.add(predict);
 
             labelPanel.add(peakCases);
             labelPanel.add(date1);
             labelPanel.add(panel);
             labelPanel.add(peakNew);
             labelPanel.add(date2);
-            labelPanel.add(save);
+            labelPanel.add(butPanel);
 
             frame.setResizable(false);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
