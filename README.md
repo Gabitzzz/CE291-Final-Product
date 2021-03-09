@@ -37,4 +37,5 @@ The jar can be found [here](https://cseegit.essex.ac.uk/2020_ce291/ce291_team31/
 
 **4. Known issues / bugs**
 
-Currently there is no known issues.
+- Predictions are implemented incorrectly as they are segmented ununiformly.
+- The prediction model is only trained on a subset of the data (previous 5 weeks of data).
