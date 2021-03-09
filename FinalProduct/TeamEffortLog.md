@@ -25,6 +25,13 @@ https://cseejira.essex.ac.uk/browse/A291040-47
 - Week 19 Sprint - Worked on the Forecast Line containing different colors depending on the statistics.
 https://cseejira.essex.ac.uk/browse/A291040-55
 
+- Week 20 Sprint -  Figured with my team how to show the forecast line but we are on the process how to place them correctly on the right value.
+https://cseejira.essex.ac.uk/browse/A291040-60
+
+- Week 21 Sprint - Check the bugs of the program, fixing y-axis of the daily graphs so the values are representing the newtoday variable and not the cumulative and started working on Marketing Plan for Technical Documentation.
+https://cseejira.essex.ac.uk/browse/A291040-67  
+https://cseejira.essex.ac.uk/browse/A291040-71
+
 
 ----
 
@@ -52,6 +59,12 @@ https://cseejira.essex.ac.uk/browse/A291040-48
 
 - Week 19 Sprint - Created the daily graph and made the window scroll bar
 https://cseejira.essex.ac.uk/browse/A291040-53
+
+- Week 20 Sprint - Tried to fix the daily graphs so the line will be appeared correctly.
+https://cseejira.essex.ac.uk/browse/A291040-62
+
+- Week 21 Sprint - Based on prediction show how Linear Regression is working for the predictions.  
+https://cseejira.essex.ac.uk/browse/A291040-70
 
 ----
 
@@ -81,6 +94,14 @@ https://cseejira.essex.ac.uk/browse/A291040-44
 - Week 19 Sprint - Worked on the Forecast Line containing different colors depending on the statistics.
 https://cseejira.essex.ac.uk/browse/A291040-51
 
+- Week 20 Sprint - Figured with my team how to show the forecast line but we are on the process how to place them correctly on the right value.
+https://cseejira.essex.ac.uk/browse/A291040-59
+
+- Week 21 Sprint - Started technical documentation about covering Health and Safety, Legal and Ethical concerns.  Also, worked on modelling line on graphs.
+https://cseejira.essex.ac.uk/browse/A291040-69  
+https://cseejira.essex.ac.uk/browse/A291040-72
+
+
   ----
 
 4. Litcan, Nicolae-Gabriel
@@ -103,8 +124,14 @@ https://cseejira.essex.ac.uk/browse/A291040-39
 - Extra features and Correctness Sprint - As a user I want to search about new features and how we can implement them in our product.
 https://cseejira.essex.ac.uk/browse/A291040-49
 
-- Week 19 Sprint - - Week 19 Sprint - Worked on the Forecast Line containing different colors depending on the statistics.
+- Week 19 Sprint - Worked on the Forecast Line containing different colors depending on the statistics.
 https://cseejira.essex.ac.uk/browse/A291040-52
+
+- Week 20 Sprint - Tried and implemented a forecast line on the prediction button.
+https://cseejira.essex.ac.uk/browse/A291040-63
+
+- Week 21 Sprint - Started Project Management from Technical Documentation.  
+https://cseejira.essex.ac.uk/browse/A291040-73
 
 ----
 
@@ -120,13 +147,19 @@ https://cseejira.essex.ac.uk/browse/A291040-52
 
 - Sprint 5 (Week 7) - Absent due to heavy working for other 3 assignments.
 
-- MVP Sprint (Weeks 8 & 9) - Largely absent due to personal matters, however did modify the csv files storage classes to create a more effecient method of requesting the data and storing the data. (merged the Deaths and Cases class in to one class), and allowed the parsing of the data in to the graphs classes for its graphing. https://cseejira.essex.ac.uk/browse/A291040-36
+- MVP Sprint (Weeks 8 & 9) - Largely absent due to personal matters, however did modify the csv files storage classes to create a more effecient method of requesting the data and storing the data. (merged the Deaths and Cases class in to one class), and allowed the parsing of the data in to the graphs classes for its graphing. 
+https://cseejira.essex.ac.uk/browse/A291040-36
 
 - Extra features and Correctness Sprint - Done some research regarding some extra features and discussed them in our meetings.
 https://cseejira.essex.ac.uk/browse/A291040-50
 
 - Week 19 Sprint -  As a user I want to search about new features and how we can implement them in our product.
 https://cseejira.essex.ac.uk/browse/A291040-57
+
+- Week 20 Sprint - Tried and implemented a forecast line on the prediction button.
+https://cseejira.essex.ac.uk/browse/A291040-65
+
+- Week 21 Sprint - 
 
 ----
 
@@ -155,3 +188,8 @@ https://cseejira.essex.ac.uk/browse/A291040-45
 - Week 19 Sprint - Worked on the implementation of the daily graph.
 https://cseejira.essex.ac.uk/browse/A291040-56
 
+- Week 20 Sprint - Tried to fix the daily graphs so the line will be appeared correctly.
+https://cseejira.essex.ac.uk/browse/A291040-61
+
+- Week 21 Sprint - Started making process of the class diagrams for the technical documentation.
+https://cseejira.essex.ac.uk/browse/A291040-68
