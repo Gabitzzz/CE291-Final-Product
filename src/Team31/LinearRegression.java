@@ -41,7 +41,7 @@ public class LinearRegression
     }
 
     // Calculating the mean of the y-axis
-    public  long getYmean(){
+    public long getYmean(){
         long result2 = 0;
         for (Long aLong : yCumulative) {
             result2 = result2 + aLong;

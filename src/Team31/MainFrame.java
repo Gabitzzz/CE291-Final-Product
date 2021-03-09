@@ -10,14 +10,13 @@ import java.util.ArrayList;
 //---------------------------------------------------------------------------//
 //    Generates the Main Menu Frame and Includes the Button Functionality    //
 //---------------------------------------------------------------------------//
-// o
 // Template for our GUI.
 public class MainFrame
 {
     public MainFrame()
     {
         // Main frame and panel for the GUI.
-        JFrame frame = new JFrame("Main Menu");
+        JFrame frame = new JFrame("Analytic System");
         JPanel panel = new JPanel();
         JPanel buttonPanel = new JPanel();
         JScrollPane scrollBar = new JScrollPane (panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -28,6 +27,9 @@ public class MainFrame
         JLabel dDeaths = new JLabel("Daily Deaths Graph Preview");
         JLabel dCases = new JLabel("Daily Cases Graph Preview");
         JLabel fileSelected = new JLabel("No File Selected");
+        JLabel region = new JLabel("UK COVID-19 data analyse, please select different files for different regions.");
+
+
 
         // All functional buttons
         JButton deathB = new JButton("Deaths Full Report");
@@ -62,23 +64,35 @@ public class MainFrame
         buttonPanel.setLayout(null);
 
         // Setting the position and size of the GUI elements
-        wDeaths.setBounds(150, 50, 200, 50);
-        wCases.setBounds(700, 50, 200, 50);
-        dDeaths.setBounds(150, 400, 200, 50);
-        dCases.setBounds(700, 400, 200, 50);
-        deathB.setBounds(200, 610, 200, 40);
-        casesB.setBounds(800, 610, 200, 40);
+        wDeaths.setBounds(150, 75, 200, 50);
+        wCases.setBounds(800, 75, 200, 50);
+        dDeaths.setBounds(150, 450, 200, 50);
+        dCases.setBounds(800, 450, 200, 50);
         PredictCases.setBounds(800, 660, 200, 40);
+        casesB.setBounds(800, 610, 200, 40);
         PredictDeaths.setBounds(200,660,200,40);
+        deathB.setBounds(200, 610, 200, 40);
         selectFileButton.setBounds(400, 720, 150, 25);
         previewSelectedFile.setBounds(550,720,150,25);
         fileSelected.setBounds(720,720,800,25);
+        region.setBounds(325, 0, 700, 100);
+
+        //Decorating
+        region.setForeground(Color.DARK_GRAY);
+        region.setFont(new Font("Serif", Font.BOLD, 18));
+        wDeaths.setFont(new Font("Serif", Font.ITALIC, 16));
+        wCases.setFont(new Font("Serif", Font.ITALIC, 16));
+        dDeaths.setFont(new Font("Serif", Font.ITALIC, 16));
+        dCases.setFont(new Font("Serif", Font.ITALIC, 16));
+
+
 
         // Adding the GUI elements to the panel
         panel.add(wDeaths);
         panel.add(wCases);
         panel.add(dDeaths);
         panel.add(dCases);
+        panel.add(region);
         buttonPanel.add(deathB);
         buttonPanel.add(casesB);
         buttonPanel.add(PredictCases);
