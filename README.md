@@ -1,6 +1,6 @@
 **1. How to compile and run our code**
 
-First of all we must download the src folder from our GitLab. We then navigate to this folder within the command prompt and then run the following command.
+First of all we must navigate to the src folder from within GitLab and then download the src folder. After the foler is downloaded and extracted we then navigate to this folder from within the command prompt and then run the following command.
 
 ```javac Team31\*.java```
 
