@@ -167,22 +167,22 @@ public class GenerateGraph extends JComponent {
         {
             g3.setColor(modellingLine);
             int n = graphPoints.size() - 1;
-            for (int i = 1; i <= 5; i++)
+            for (int i = 1; i < graphPoints.size()/5; i++)
             {
-                int x1 = graphPoints.get(n - (n / i)).x;
-                int y1 = graphPoints.get(n - (n / i)).y;
+                int i2 = i * 5;
+                int x1 = graphPoints.get((i2-5)+1).x;
+                int y1 = graphPoints.get((i2-5)+1).y;
                 int x2;
                 int y2;
-                if (i == 5) {
+                if (i == (graphPoints.size() / 5) - 1) {
                     x2 = graphPoints.get(n).x;
                     y2 = graphPoints.get(n).y; }
                 else {
-                    x2 = graphPoints.get(n - (n / (i + 1))).x;
-                    y2 = graphPoints.get(n - (n / (i + 1))).y; }
+                    x2 = graphPoints.get(i2 + 1).x;
+                    y2 = graphPoints.get(i2 + 1).y; }
                 g3.drawLine(x1 - 10, y1 - 10, x2 - 10, y2 - 10);
                 g3.fillOval(x1 - 12, y1 - 12, pointWidth, pointWidth);
                 g3.fillOval(x2 - 12, y2 - 12, pointWidth, pointWidth);
-                //g3.drawLine(x1, y1, x2, y2);
             }
         }
 
