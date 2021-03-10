@@ -1,6 +1,8 @@
 **Class Diagram:**
 
-FinalProduct/img/ClassDiagram.png
+Below diagram shows all of the classes and relationships between them.
+
+![alt text](FinalProduct/img/ClassDiagram.png)
 
 **Technical Description**
 
@@ -51,4 +53,4 @@ Specific purposes:
 
 **Known Issues**
 
-The only issue with the product is about the modelling line which could not evenly generated given the time left before the delivery date of the product. The other features are functioning as wanted within the normal parameters.
+The only issue with the program is that the model is trained with last 5 weeks of data becaus of the mathematical limitations of linear regression. The other features are functioning as wanted within the normal parameters.
