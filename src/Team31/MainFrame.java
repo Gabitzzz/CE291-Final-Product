@@ -11,13 +11,13 @@ import java.util.ArrayList;
 //---------------------------------------------------------------------------//
 //    Generates the Main Menu Frame and Includes the Button Functionality    //
 //---------------------------------------------------------------------------//
-// Template for our GUI.
+
 public class MainFrame
 {
+    private JFrame frame = new JFrame("Analytic System For COVID Data");
     public MainFrame()
     {
         // Main frame and panel for the GUI.
-        JFrame frame = new JFrame("Analytic System");
         JPanel panel = new JPanel();
         JPanel buttonPanel = new JPanel();
         JScrollPane scrollBar = new JScrollPane (panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -28,7 +28,7 @@ public class MainFrame
         JLabel dDeaths = new JLabel("Daily Deaths Graph Preview");
         JLabel dCases = new JLabel("Daily Cases Graph Preview");
         JLabel fileSelected = new JLabel("No File Selected");
-        JLabel region = new JLabel("UK COVID-19 data analyse, please select different files for different regions.");
+        JLabel region = new JLabel("UK COVID-19 March Data Analyse, Please Select Different Files For Different Regions Or Different Time Frames.");
 
 
 
@@ -76,7 +76,7 @@ public class MainFrame
         selectFileButton.setBounds(400, 720, 150, 25);
         previewSelectedFile.setBounds(550,720,150,25);
         fileSelected.setBounds(720,720,800,25);
-        region.setBounds(325, 0, 700, 100);
+        region.setBounds(260, 0, 1000, 100);
 
         //Decorating
         region.setForeground(Color.DARK_GRAY);
@@ -118,51 +118,56 @@ public class MainFrame
         graph4.setBounds(50, 460, 600, 300);
         panel.add(graph4);
 
-
+        // setting up the frame
         frame.setSize(new Dimension(1400, 800));
         scrollBar.setSize(new Dimension(1380, 600));
         scrollBar.getVerticalScrollBar().setUnitIncrement(14);
         frame.add(scrollBar);
         frame.add(buttonPanel);
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-    private void fileSelection(String command, JLabel label) {
-        if (command.equals(Config.OPEN_COMMAND))
+    private void fileSelection(String command, JLabel label)   // method for file selection option
+    {
+        if (command.equals(Config.OPEN_COMMAND))   // opens the dialog
         {
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Files", ".csv");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Files", "csv");
             JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
             j.setFileFilter(filter);
 
             int r = j.showOpenDialog(null);
 
-            if (r == JFileChooser.APPROVE_OPTION) {
+            if (r == JFileChooser.APPROVE_OPTION)   // selects the file
+            {
+                // checking if the selected file is valid
                 try {
-                    if (!j.getSelectedFile().toPath().endsWith(".csv")) {
-                        throw new InvalidFileExtensionException(j.getSelectedFile().toPath().toString());
-                    }
+                    if (!j.getSelectedFile().getAbsolutePath().endsWith(".csv")) { throw new InvalidFileExtensionException(j.getSelectedFile().toPath().toString()); }
+
                     label.setText(j.getSelectedFile().getAbsolutePath());
                     Path file = j.getSelectedFile().toPath();
                     System.out.println(file);
-                } catch (InvalidFileExtensionException e) {
+                } catch (InvalidFileExtensionException e)
+                {
+                    // error message to prevent program to crush
                     e.printStackTrace();
+                    JOptionPane.showMessageDialog(frame,"Program could not read the selected file. Can only read .csv files.","Unsupported File", JOptionPane.ERROR_MESSAGE);
                 }
             }
             else
                 label.setText("Selection Cancelled");
         }
-        else if (command.equals(Config.PREVIEW_COMMAND))
+        else if (command.equals(Config.PREVIEW_COMMAND))   // generates graph of selected file
         {
             String filePath = label.getText();
-            if (filePath.equals("Selection Cancelled") || filePath.equals("No File Selected"))
+            if (filePath.equals("Selection Cancelled") || filePath.equals("No File Selected"))   // error message if the user did not select a file
             {
-                JOptionPane.showMessageDialog(null,"You haven't selected a file yet.","Select A File", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(frame,"You haven't selected a file yet.","Select A File", JOptionPane.INFORMATION_MESSAGE);
             }
             else
             {
+                // accessing the selected file and configuring the array list
                 Path file = Paths.get(filePath);
                 Config.OTHER_FILE_PATH = file;
                 Data data = new Data(file);
@@ -170,9 +175,9 @@ public class MainFrame
                 ArrayList<DataStore> array = data.getOtherArray();
                 ArrayList<DataStore> arrayForGraph = new ArrayList<>();
                 if(array.isEmpty())
-                {JOptionPane.showMessageDialog(null,"Program could not read the selected file","File Not Readable", JOptionPane.ERROR_MESSAGE); return;}
+                {JOptionPane.showMessageDialog(frame,"Program could not read the selected file","File Not Readable", JOptionPane.ERROR_MESSAGE); return;}
 
-                for (int i = 0; i < array.size(); i++)
+                for (int i = 0; i < array.size(); i++)   // reversing the data
                 {
                     int temp = (array.size() - 1) - i;
                     String date = array.get(temp).date;
@@ -180,6 +185,7 @@ public class MainFrame
                     long cumulative = array.get(temp).cumulative;
                     arrayForGraph.add(new DataStore(date, newToday, cumulative));
                 }
+                // generates the frame
                 GenerateGraph graph = new GenerateGraph(arrayForGraph);
                 graph.createAndShowGui("INPUTTED DATA");
             }

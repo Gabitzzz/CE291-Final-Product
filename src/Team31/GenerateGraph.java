@@ -7,18 +7,20 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 //------------------------------------------------------------//
-//    Configures and Generates a Line Graph for Cases Data    //
+//   Configures and Generates a Line Graph for Several Inputs //
 //------------------------------------------------------------//
 
-// tes
+
 public class GenerateGraph extends JComponent {
 
+    // arrays to store several data
     private static ArrayList<DataStore> casesArray;
     private static ArrayList<DataStore> deathsArray;
     private static ArrayList<DataStore> otherArray;
     private static ArrayList<DataStore> currentArray;
     private static String label;
 
+    // configurations for graph
     private Color lineColor = new Color(44, 102, 230, 180);
     private Color pointColor = new Color(100, 100, 100, 180);
     private Color gridColor = new Color(200, 200, 200, 200);
@@ -26,12 +28,13 @@ public class GenerateGraph extends JComponent {
     private Color modellingLine = new Color(0, 128, 0);
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
 
+    // configurations for different selections
     private int originalSize;
     private int DataChoice;
     private String PresentationFormat;
     private boolean isPredictionGraph = false;
 
-    public GenerateGraph(int DataChoice, String PresentationFormat)
+    public GenerateGraph(int DataChoice, String PresentationFormat)   // constructor for pre-selected data
     {
         this.DataChoice = DataChoice;
         this.PresentationFormat = PresentationFormat;
@@ -40,7 +43,7 @@ public class GenerateGraph extends JComponent {
         else if (DataChoice == 1){ deathsArray = currentArray = getData(DataChoice); label = "Deaths";}
     }
 
-    public GenerateGraph(int DataChoice, ArrayList<DataStore> data)
+    public GenerateGraph(int DataChoice, ArrayList<DataStore> data)   // constructor for prediction graphs
     {
         this.DataChoice = DataChoice;
         this.PresentationFormat = Config.WEEKLY;
@@ -52,7 +55,7 @@ public class GenerateGraph extends JComponent {
         else if (DataChoice == 1){label = "Deaths";}
     }
 
-    public GenerateGraph(ArrayList<DataStore> data)
+    public GenerateGraph(ArrayList<DataStore> data)   // constructor for selected data
     {
         otherArray = currentArray = data;
         DataChoice = Config.OTHER_FILE;
@@ -63,12 +66,13 @@ public class GenerateGraph extends JComponent {
 
 
     @Override
-    protected void paintComponent(Graphics g)
+    protected void paintComponent(Graphics g)   // draws the graph
     {
         super.paintComponent(g);
         Graphics2D g3 = (Graphics2D) g;
         g3.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+        // gets the data
         ArrayList<DataStore> graph = new ArrayList<>();
         if (DataChoice == Config.CASES_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = casesArray;}}
         else if (DataChoice == Config.DEATHS_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = deathsArray;}}
@@ -79,7 +83,7 @@ public class GenerateGraph extends JComponent {
         double xScale = (float)(getWidth() - (2 * padding) - labelPadding) / (graph.size() - 1);
         double yScale = (getHeight() - 2 * padding - labelPadding) / (getMaxCase() - getMinCase());
 
-
+        // adds data to graph coordinates
         List<Point> graphPoints = new ArrayList<>();
         for (int i = 0; i < graph.size(); i++)
         {
@@ -97,12 +101,11 @@ public class GenerateGraph extends JComponent {
                 {y1 = (int) ((getMaxCase() - graph.get(i).cumulative) * yScale + padding); graphPoints.add(new Point(x1, y1)); }
         }
 
-        //Sketching the background of the graph
+        // drawing the background
         g3.setColor(Color.WHITE);
         g3.fillRect(padding + labelPadding, padding, getWidth() - (2 * padding) - labelPadding, getHeight() - 2 * padding - labelPadding);
 
-
-        // Creating Y-Axis
+        // creating Y-Axis
         int pointWidth = 4;
         int numberYDivisions = 10;
         for (int i = 0; i < numberYDivisions + 1; i++)
@@ -124,7 +127,7 @@ public class GenerateGraph extends JComponent {
             g3.drawLine(x0, y0, x1, y0);
         }
 
-        // Creating X-Axis
+        // creating X-Axis
         for (int i = 0; i < graph.size(); i++) {
             if (graph.size() > 1) {
                 int x0 = i * (getWidth() - padding * 2 - labelPadding) / (graph.size() - 1) + padding + labelPadding;
@@ -147,7 +150,7 @@ public class GenerateGraph extends JComponent {
             }
         }
 
-        // Creating Both AXES
+        // creating both axes
         g3.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, padding + labelPadding, padding);
         g3.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
 
@@ -163,6 +166,8 @@ public class GenerateGraph extends JComponent {
             g3.drawLine(x1, y1, x2, y2);
 
         }
+
+        // drawing modelling line for prediction graphs
         if (isPredictionGraph)
         {
             g3.setColor(modellingLine);
@@ -186,6 +191,7 @@ public class GenerateGraph extends JComponent {
             }
         }
 
+        // drawing the line
         g3.setStroke(oldStroke);
         g3.setColor(pointColor);
         for (Point graphPoint : graphPoints) {
@@ -199,9 +205,12 @@ public class GenerateGraph extends JComponent {
         g3.drawString("Time", 80, 680);
         g3.drawString(label, 0, 620);
     }
-    //Using functions to be displayed below the graphs to show a better statistic report
-    //For example it will be displayed the minimum of cases that were on that range of days.
-    private double getMinCase() {
+
+    // using methods to be displayed below the graphs to show a better statistic report
+    // for example it will be displayed the minimum of cases that were on that range of the time frame.
+    // gets minimum cases
+    private double getMinCase()
+    {
         int minCase = Integer.MAX_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
         if (DataChoice == Config.CASES_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = casesArray;}}
@@ -217,7 +226,9 @@ public class GenerateGraph extends JComponent {
         return minCase;
     }
 
-    private int getMaxCase() {
+    // gets maximum cases
+    private int getMaxCase()
+    {
         int maxCase = Integer.MIN_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
         if (DataChoice == Config.CASES_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = casesArray;}}
@@ -232,7 +243,9 @@ public class GenerateGraph extends JComponent {
         return maxCase;
     }
 
-    private int getMaxNew() {
+    // gets maximum new cases in one day
+    private int getMaxNew()
+    {
         int maxDeaths = Integer.MIN_VALUE;
         ArrayList<DataStore> graph = new ArrayList<>();
         if (DataChoice == Config.CASES_FILE){if (isPredictionGraph){graph = otherArray;}else {graph = casesArray;}}
@@ -245,6 +258,7 @@ public class GenerateGraph extends JComponent {
         return maxDeaths;
     }
 
+    // this method is for calculating original size of the predicted data to draw forecast line
     private int getOriginalSize(int choice)
     {
         Data data = new Data();
@@ -267,6 +281,7 @@ public class GenerateGraph extends JComponent {
         return size/7;
     }
 
+    // finds index of a given item
     public int findItem(long item)
     {
         int max = currentArray.size() -1;
@@ -283,11 +298,13 @@ public class GenerateGraph extends JComponent {
         return -1;
     }
 
+    // generates new frame and displays it
     public void createAndShowGui(String data){
         {
             GenerateGraph mainGraph = new GenerateGraph(-1, "default");
             GenerateGraph secondGraph = new GenerateGraph(-1, "default");
 
+            // generates the graphs
             if (DataChoice == Config.CASES_FILE)
             {
                 mainGraph = new GenerateGraph(0, "weekly"); mainGraph.setPreferredSize(new Dimension(1400, 700));
@@ -303,6 +320,8 @@ public class GenerateGraph extends JComponent {
                 mainGraph = new GenerateGraph(DataChoice, "weekly"); mainGraph.setPreferredSize(new Dimension(1400, 700));
                 secondGraph = new GenerateGraph(DataChoice, "daily"); secondGraph.setPreferredSize(new Dimension(1400, 700));
             }
+
+            // frame and panel configurations
             JFrame frame = new JFrame(data + " GRAPH");
             frame.setPreferredSize(new Dimension(1500, 900));
             JPanel main = new JPanel(); main.add(mainGraph);
@@ -311,6 +330,7 @@ public class GenerateGraph extends JComponent {
             JPanel panel = new JPanel(new GridLayout(2, 1, 10, 10));
             JPanel butPanel = new JPanel(new GridLayout(2, 1, 10, 10));
 
+            // label configurations
             EmptyBorder border1 = new EmptyBorder(10, 40, 0, 20);
             labelPanel.setBorder(border1);
             JLabel peakCases = new JLabel("PEAK VALUE OF " + data + ": " + getMaxCase());
@@ -322,6 +342,7 @@ public class GenerateGraph extends JComponent {
             JLabel date2 = new JLabel("OCCURRED IN: WEEK " + findItem(getMaxNew()) + " | DATE: " + currentArray.get(findItem(getMaxNew())).date);
             date2.setFont(new Font("Helvetica", Font.BOLD, 15));
 
+            // option pane to display other version of the data
             String[] country ={"Weekly Graph", "Daily Graph"};
             JComboBox<String> cb = new JComboBox<>(country);
             JButton show = new JButton("SHOW SELECTION");
@@ -338,6 +359,7 @@ public class GenerateGraph extends JComponent {
                 frame.repaint();
             });
 
+            // other buttons for different functionalities
             JButton save = new JButton("SAVE PAGE AS .PNG");
             save.setFont(new Font("Helvetica", Font.BOLD, 15));
             save.addActionListener(e -> { Data saveFrame = new Data(); saveFrame.saveAsImage(frame); });
@@ -346,6 +368,7 @@ public class GenerateGraph extends JComponent {
             predict.addActionListener(e -> { LinearRegression showPrediction = new LinearRegression(); showPrediction.makePredictedGraph(DataChoice); });
             butPanel.add(save); butPanel.add(predict);
 
+            // setting up the panels
             labelPanel.add(peakCases);
             labelPanel.add(date1);
             labelPanel.add(panel);
@@ -353,6 +376,7 @@ public class GenerateGraph extends JComponent {
             labelPanel.add(date2);
             labelPanel.add(butPanel);
 
+            // setting up the frame
             frame.setResizable(false);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.add(main, BorderLayout.NORTH);
@@ -363,7 +387,7 @@ public class GenerateGraph extends JComponent {
         }
     }
 
-    private ArrayList<DataStore> getData (int choice)   // Getting the original data
+    private ArrayList<DataStore> getData (int choice)   // getting the original data
     {
         ArrayList<DataStore> tempData = new ArrayList<>();
         Data data;
@@ -381,22 +405,15 @@ public class GenerateGraph extends JComponent {
         }
 
         ArrayList<DataStore> currentData = new ArrayList<>();
-        // Reverting the original data
+        // Reversing the original data
         for (int i = 0; i < tempData.size(); i++)
         {
             int temp = (tempData.size() - 1) - i;
             String date = tempData.get(temp).date;
             long newToday = tempData.get(temp).newToday;
             long cumulative = tempData.get(temp).cumulative;
-            //if (temp % 7 == 0)
-            //{
-                currentData.add( new DataStore(date, newToday, cumulative));
-            //}
+            currentData.add( new DataStore(date, newToday, cumulative));
         }
         return currentData;
     }
 }
-
-    /*String selection = (String) cb.getSelectedItem();
-                assert selection != null;
-                        if (selection.equals("Weekly")) { frame.remove(secondGraph); }*/

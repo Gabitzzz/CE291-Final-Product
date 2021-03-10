@@ -98,46 +98,51 @@ public class Data {
            e.printStackTrace();
        } catch (InvalidFileExtensionException e) {
            e.printStackTrace();
-           System.exit(0);
+           JOptionPane.showMessageDialog(null,"Program could not read the selected file. Can only read .csv files.","Unsupported File", JOptionPane.ERROR_MESSAGE);
        }
     }
 
-    public void saveAsImage(JFrame frame)
+    public void saveAsImage(JFrame frame)  // saves the current frame as an image in a selected directory
     {
+        // opens the dialogs
         Path file;
-        JOptionPane.showMessageDialog(null,"Please select a path and type the name of the file without any file extensions.","INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame,"Please select a path and type the name of the file without any file extensions.","INFORMATION", JOptionPane.INFORMATION_MESSAGE);
         JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-        int r = j.showOpenDialog(null);
+        int r = j.showOpenDialog(frame);
 
-        if (r == JFileChooser.APPROVE_OPTION)
+        if (r == JFileChooser.APPROVE_OPTION)   // selects the file
         {
             file = j.getSelectedFile().toPath();
             System.out.println(file);
 
-            int a=JOptionPane.showConfirmDialog(null,"Graph will be saved as image to path: " + file.toString() + ".png");
+            // asks if the user is sure
+            int a=JOptionPane.showConfirmDialog(frame,"Page will be saved as image to path: " + file.toString() + ".png");
             if(a==JOptionPane.YES_OPTION)
             {
+                // configurations
                 Dimension size = frame.getSize();
                 BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
                 Graphics2D g2 = image.createGraphics();
                 frame.paint(g2);
                 try
                 {
+                    // saves the frame
                     ImageIO.write(image, "png", new File(file + ".png"));
+                    JOptionPane.showMessageDialog(frame,"Frame saved successfully.","INFORMATION", JOptionPane.INFORMATION_MESSAGE);
                     System.out.println("Frame Saved");
                 }
                 catch(Exception e)
                 {
-                    JOptionPane.showMessageDialog(null,"Program could not save the graph as image.","An Error Occurred", JOptionPane.ERROR_MESSAGE);
+                    // error message to prevent program to crush
+                    JOptionPane.showMessageDialog(frame,"Program could not save the page as image.","An Error Occurred", JOptionPane.ERROR_MESSAGE);
                     e.printStackTrace();
                 }
             }
         }
     }
 
+    // getter methods
     public ArrayList<DataStore> getDeathsArray() { return deathsArray; }
-
     public ArrayList<DataStore> getCasesArray() { return casesArray; }
-
     public ArrayList<DataStore> getOtherArray() { return otherArray; }
 }

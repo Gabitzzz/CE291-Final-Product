@@ -8,7 +8,7 @@ import java.util.ArrayList;
 //-------------------------------------------------------------------//
 //  Predicts a new Cumulative Value According to the Value of weeks  //
 //-------------------------------------------------------------------//
-// o
+
 // Linear Regression Model.
 public class LinearRegression
 {
@@ -144,6 +144,7 @@ public class LinearRegression
         long increase = arrayForGraph.get(size).cumulative - arrayForGraph.get(size - duration).cumulative;
         String label; if (dataChoice == Config.CASES_FILE) label = "CASES"; else if (dataChoice == Config.DEATHS_FILE) label = "DEATHS"; else label = "INPUTTED DATA";
 
+        // labelings
         JLabel blue = new JLabel("BLUE LINE REPRESENTS ORIGINAL DATA");
         blue.setFont(new Font("Helvetica", Font.BOLD, 15));
         blue.setForeground(lineColor);
