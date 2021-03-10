@@ -27,15 +27,15 @@ In order to ensure our code runs you should ensure that the provided csv files a
 
 **3. How to run the provided .jar executable**
 
-Navigate to the folder containing the .jar file we provided and then run the following command.
+First, download the .jar file provided by our team. Then navigate to the folder within the command prompt containing the downloaded 
+.jar file and then run the following command.
 
 ```
 java -jar ce291_team31.jar
 ```
 
-The jar can be found [here](https://cseegit.essex.ac.uk/2020_ce291/ce291_team31/-/blob/master/FinalProduct/ce291_team31.jar).
+The .jar file can be found [here](https://cseegit.essex.ac.uk/2020_ce291/ce291_team31/-/blob/master/FinalProduct/ce291_team31.jar).
 
 **4. Known issues / bugs**
 
-- Predictions are implemented incorrectly as they are segmented ununiformly.
 - The prediction model is only trained on a subset of the data (previous 5 weeks of data).
