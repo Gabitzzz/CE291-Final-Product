@@ -176,8 +176,8 @@ public class GenerateGraph extends JComponent {
                 int y2;
                 if (i == (graphPoints.size() / 5) - 1) {
                     x2 = graphPoints.get(n).x;
-                    y2 = graphPoints.get(n).y; }
-                else {
+                    y2 = graphPoints.get(n).y;
+                } else {
                     x2 = graphPoints.get(i2 + 1).x;
                     y2 = graphPoints.get(i2 + 1).y; }
                 g3.drawLine(x1 - 10, y1 - 10, x2 - 10, y2 - 10);

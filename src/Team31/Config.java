@@ -16,4 +16,6 @@ public final class Config {
     static final String DEATHS_FILEPATH = "deaths_data_2021-Mar-09.csv"; // path to deaths csv
     static final String FILE_DELIMITER = ","; // delimiter in the csv files
     static Path OTHER_FILE_PATH = null;
+
+    static final String INVALID_FILE = "Files with the provided file extension are unsupported.";
 }

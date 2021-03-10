@@ -48,6 +48,11 @@ public class Data {
                casesArray = new ArrayList<>(); // ensures the array is empty before manipulation
            } else if (file == Config.OTHER_FILE) {
                filePath = path.toString();
+
+               if (!filePath.endsWith(".csv")) {
+                   throw new InvalidFileExtensionException(filePath);
+               }
+
                br = new BufferedReader(new FileReader(filePath));
 
                otherArray = new ArrayList<>(); // ensures the array is empty before manipulation
@@ -91,6 +96,9 @@ public class Data {
            }
        } catch (IOException e) {
            e.printStackTrace();
+       } catch (InvalidFileExtensionException e) {
+           e.printStackTrace();
+           System.exit(0);
        }
     }
 

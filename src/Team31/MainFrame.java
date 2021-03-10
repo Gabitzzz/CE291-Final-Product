@@ -1,6 +1,7 @@
 package Team31;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.nio.file.Path;
@@ -129,19 +130,26 @@ public class MainFrame
         frame.setVisible(true);
     }
 
-    private void fileSelection(String command, JLabel label)
-    {
+    private void fileSelection(String command, JLabel label) {
         if (command.equals(Config.OPEN_COMMAND))
         {
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Files", ".csv");
             JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            j.setFileFilter(filter);
+
             int r = j.showOpenDialog(null);
 
-            if (r == JFileChooser.APPROVE_OPTION)
-
-            {
-                label.setText(j.getSelectedFile().getAbsolutePath());
-                Path file = j.getSelectedFile().toPath();
-                System.out.println(file);
+            if (r == JFileChooser.APPROVE_OPTION) {
+                try {
+                    if (!j.getSelectedFile().toPath().endsWith(".csv")) {
+                        throw new InvalidFileExtensionException(j.getSelectedFile().toPath().toString());
+                    }
+                    label.setText(j.getSelectedFile().getAbsolutePath());
+                    Path file = j.getSelectedFile().toPath();
+                    System.out.println(file);
+                } catch (InvalidFileExtensionException e) {
+                    e.printStackTrace();
+                }
             }
             else
                 label.setText("Selection Cancelled");
