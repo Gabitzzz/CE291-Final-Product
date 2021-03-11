@@ -23,10 +23,16 @@ Next part, that we will mention is about the graphs. Our aim was to create 4 gra
 
 3. **Deaths Full Report & Cases Full Report buttons TESTING**__
 
-Since we implemented the graphs, we had to implement the CSV files of the goverment so our graphs could be realistic. In order to do that we created the DataStore, Data and Config classes. Those 3 classes were used in order to choose which variables we wanted to use from the CSV files and also in order to make it more easy to us to call our functions to the graphs. But, what we want to show is that we created 2 more buttons  in which they show in a bigger screen how the pandemic is spreading in the UK. Lastly, when the user open the graphs it will see below some useful information in which we are showing in to the user the peaks and minimum numbers of cases or deaths in these period of time. In order to see that the user has to click in "Deaths Full Report" OR "Cases Full Report" buttons. 
+Since we implemented the graphs, we had to implement the CSV files of the goverment so our graphs could be realistic. In order to do that we created the DataStore, Data and Config classes. Those 3 classes were used in order to choose which variables we wanted to use from the CSV files and also in order to make it more easy to us to call our functions to the graphs. But, what we want to show is that we created 2 more buttons  in which they show in a bigger screen how the pandemic is spreading in the UK. Lastly, when the user open the graphs it will see below some useful information in which we are showing in to the user the peaks and minimum numbers of cases or deaths in these period of time. In order to see that the user has to click in "Deaths Full Report" OR "Cases Full Report" buttons. Something very important that we want to mention is that when the user open the full graphs data it will see another 3 new buttons. The first one is the "SHOW SELECTION", that button is used when the user chooses above from this button if is wishing to see the data daily or weekly after that click what it wants the user has to click the "SHOW SELECTION" button to see the difference. Also, we provide to the user to save the graph as a .PNG on it's laptop in case the user wants to have it for example analyzing. To do that the user needs to click the "SAVE PAGE AS .PNG" button.
 
 ![alt text](FinalProduct/img/CasesFullGraph.png)
 ![alt text](FinalProduct/img/FullDeathsGraph.png)
+
+In this picture below as you can see we are showing an example to be more understood to the user. After that the user click's in one of the 2 buttons to see the full graph data(cases OR deaths), there is an icon above from the "SHOW SELECTION" button to choose the data that wants, for example weekly data or daily data, since in the picture below the user chooses the daily data the only thing that has to do is to click the "SHOW SELECTION" button to see the data. Now the next step is to click the "SAVE PAGE AS .PNG" if we condider the user wants to save it for personal use.
+
+![alt text](FinalProduct/img/Filters_INFULLGRAPH.png)
+
+
 
 4. **Predict Deaths & Predict Cases buttons TESTING**__
 
