@@ -191,5 +191,5 @@ https://cseejira.essex.ac.uk/browse/A291040-56
 - Week 20 Sprint - Tried to fix the daily graphs so the line will be appeared correctly.
 https://cseejira.essex.ac.uk/browse/A291040-61
 
-- Week 21 Sprint - Started making process of the class diagrams for the technical documentation.
+- Week 21 Sprint - Started making process of the class diagrams for the technical documentation, decorated the interface a bit so it looks better.
 https://cseejira.essex.ac.uk/browse/A291040-68
