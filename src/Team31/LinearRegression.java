@@ -160,7 +160,7 @@ public class LinearRegression
         // Making the graph and generating the frame
         GenerateGraph predictedDeathGraph = new GenerateGraph(dataChoice, arrayForGraph);
         predictedDeathGraph.setPreferredSize(new Dimension(1200, 700));
-        JFrame frame = new JFrame("Deaths Prediction");
+        JFrame frame = new JFrame(label + " Prediction");
         JPanel labeling = new JPanel( new GridLayout(2, 2, 10, 10));
         EmptyBorder border1 = new EmptyBorder(10, 40, 0, 20);
 
